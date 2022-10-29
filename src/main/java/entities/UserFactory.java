@@ -1,7 +1,5 @@
 package entities;
 
-// Entity layer
-
 import java.util.List;
 
 public class UserFactory {
