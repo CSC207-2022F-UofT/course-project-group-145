@@ -3,6 +3,7 @@ package entities;
 import java.util.List;
 
 class User {
+
     private static int numUsers = 0;
 
     private int userId;
@@ -73,6 +74,14 @@ class User {
 
     public void setListOfFeedIds(List<Integer> listOfFeedIds) {
         this.listOfFeedIds = listOfFeedIds;
+    }
+
+    public static int getNumUsers() {
+        return numUsers;
+    }
+
+    public static void setNumUsers(int numUsers) {
+        User.numUsers = numUsers;
     }
 
     public void deleteChat(int chatId) {
