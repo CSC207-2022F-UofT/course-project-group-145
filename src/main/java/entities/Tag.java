@@ -14,10 +14,10 @@ public class Tag {
     @Override
     public boolean equals(Object obj){
         if (obj instanceof Tag){
-
+            return ((Tag) obj).desc.equals(this.desc);
         }
         else if (obj instanceof String){
-
+            return this.desc.equals((String)obj);
         }
         else{
             return false;
