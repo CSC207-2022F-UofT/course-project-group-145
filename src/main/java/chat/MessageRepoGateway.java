@@ -1,0 +1,19 @@
+package chat;
+
+import java.io.IOException;
+import java.util.List;
+
+public interface MessageRepoGateway {
+
+    void save(MessageRepoRequestModel requestModel) throws IOException;
+
+    void delete(int messageId) throws IOException;
+
+    void edit(int messageId, String content) throws IOException;
+
+    void addReply(MessageRepoRequestModel reply, int replyToMessage) throws IOException;
+
+    int getNumMessages();
+
+    List<MessageRepoRequestModel> getMessages(List<Integer> messageIds);
+}
