@@ -2,7 +2,7 @@ package entities;
 
 import java.util.List;
 
-class User {
+public class User {
 
     private static int numUsers = 0;
 
