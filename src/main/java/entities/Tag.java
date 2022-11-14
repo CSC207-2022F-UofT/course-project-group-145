@@ -1,10 +1,16 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tag {
-    private String desc;
+
+    public static List<Tag> tags = new ArrayList<>();
+    private final String desc;
 
     public Tag (String tag){
         this.desc = tag;
+        tags.add(this);
     }
 
     public String getDesc(){
