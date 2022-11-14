@@ -27,6 +27,9 @@ public class CodeSnippet {
         this.isPublished = false;
     }
 
+    public int getUserId() {
+        return this.userId;
+    }
 
     public void setTag(List<String> tags) {
         this.tags = tags;
