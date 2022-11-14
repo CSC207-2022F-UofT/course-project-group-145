@@ -1,4 +1,4 @@
-package entities;
+spackage entities;
 
 import jdk.jshell.Snippet;
 
