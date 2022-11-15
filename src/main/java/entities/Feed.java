@@ -1,6 +1,4 @@
-spackage entities;
-
-import jdk.jshell.Snippet;
+package entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,22 +10,22 @@ public class Feed implements Iterable{
 
     private String id;
     private List<Tag> tags;
-    private List<Snippet> snippets;
-    private List<Snippet> matched;
+    private List<CodeSnippet> snippets;
+    private List<CodeSnippet> matched;
 
-    public Feed(List<Snippet> lst, List<Tag> tags){
+    public Feed(List<CodeSnippet> lst, List<Tag> tags){
         this.snippets = lst;
         this.tags = tags;
         this.matched = new ArrayList<>();
     }
 
-    public Feed(List<Snippet> snippets, List<Tag> tags, List<Snippet> matched){
+    public Feed(List<CodeSnippet> snippets, List<Tag> tags, List<CodeSnippet> matched){
         this.matched = matched;
         this.tags = tags;
         this.snippets = snippets;
     }
 
-    protected void setSnippets(List<Snippet> snippets){
+    protected void setSnippets(List<CodeSnippet> snippets){
         this.snippets = snippets;
     }
 
@@ -58,22 +56,14 @@ public class Feed implements Iterable{
         }
 
         @Override
-        public Snippet next() {
+        public CodeSnippet next() {
             return snippets.get(curr++);
         }
 
-        public User match(){
-            // TODO: make it actually return something
-            // Adds current code snippet to matched, and returns the user of the snippet
-            matched.add(snippets.get(curr));
-            return null;
-        }
-
-        public int matchCurr(){
-            // TODO: make it actually return something
+        public int match(){
             //Adds the code snippet at the ith index to matched, and returns the userID of the snippet
             matched.add(snippets.get(curr));
-            return snippets.get(curr).getUserID();
+            return snippets.get(curr).getUserId();
         }
     }
 
