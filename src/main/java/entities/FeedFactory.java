@@ -24,6 +24,4 @@ public class FeedFactory {
         feed.setSnippets(rawSnippets.subList(0, length));
         return null;
     }
-
-
 }
