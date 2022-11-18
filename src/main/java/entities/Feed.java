@@ -60,6 +60,13 @@ public class Feed implements Iterable{
             return snippets.get(curr++);
         }
 
+        public int getCurr(){
+            return curr;
+        }
+        public void setCurr(int curr){
+            this.curr = curr;
+        }
+
         public int match(){
             //Adds the code snippet at the ith index to matched, and returns the userID of the snippet
             matched.add(snippets.get(curr));
