@@ -2,6 +2,7 @@ package chat;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface MessageRepoGateway {
 
@@ -16,4 +17,6 @@ public interface MessageRepoGateway {
     int getNumMessages();
 
     List<MessageRepoRequestModel> getMessages(List<Integer> messageIds);
+
+    Map<Integer, MessageRepoRequestModel> getAllMessages();
 }

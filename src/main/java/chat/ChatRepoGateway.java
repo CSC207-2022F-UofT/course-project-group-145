@@ -1,6 +1,7 @@
 package chat;
 
 import java.io.IOException;
+import java.util.Map;
 
 public interface ChatRepoGateway {
 
@@ -9,4 +10,6 @@ public interface ChatRepoGateway {
     void addMessage(int chatId, int messageId) throws IOException;
 
     void save(ChatRepoRequestModel requestModel) throws IOException;
+
+    Map<Integer, ChatRepoRequestModel> getAllChats();
 }

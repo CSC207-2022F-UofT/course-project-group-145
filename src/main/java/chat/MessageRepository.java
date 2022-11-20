@@ -8,9 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class MessageRepository implements MessageRepoGateway{
 
-    private final File JSONFile;
-
-    private String filePath;
+    private final String filePath;
 
     private Map<Integer, MessageRepoRequestModel> messages = new HashMap<>();
 
@@ -18,7 +16,7 @@ public class MessageRepository implements MessageRepoGateway{
 
     public MessageRepository(String filePath) throws IOException {
         this.filePath = filePath;
-        JSONFile = new File(filePath);
+        File JSONFile = new File(filePath);
         this.numMessages = 0;
         if (JSONFile.length() > 0) {
             FileReader reader = new FileReader(JSONFile);
@@ -80,9 +78,9 @@ public class MessageRepository implements MessageRepoGateway{
     @Override
     public void addReply(MessageRepoRequestModel reply, int replyToMessage) throws IOException {
         MessageRepoRequestModel message = messages.remove(replyToMessage);
-        message.setReplyId(reply.getReplyId());
+        message.setReplyId(reply.getMessageId());
         messages.put(replyToMessage, message);
-        messages.put(reply.getReplyId(), reply);
+        messages.put(reply.getMessageId(), reply);
         this.numMessages = this.numMessages + 1;
         saveJSON();
     }
@@ -94,6 +92,12 @@ public class MessageRepository implements MessageRepoGateway{
         writer.close();
     }
 
+
+    /**
+     * Returns the total number of messages in the repository
+     *
+     * @return the total number of messages
+     */
     @Override
     public int getNumMessages(){
         return this.numMessages;
@@ -114,11 +118,13 @@ public class MessageRepository implements MessageRepoGateway{
         return messages;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    /**
+     * Returns the map of all message ids to messages in the repository
+     *
+     * @return the map of all message ids to messages
+     */
+    @Override
+    public Map<Integer, MessageRepoRequestModel> getAllMessages() {
+        return this.messages;
     }
 }

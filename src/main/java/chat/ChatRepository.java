@@ -14,9 +14,7 @@ import java.util.Map;
 
 public class ChatRepository implements ChatRepoGateway {
 
-    private final File JSONFile;
-
-    private String filePath;
+    private final String filePath;
 
     private Map<Integer, ChatRepoRequestModel> chats = new HashMap<>();
 
@@ -24,7 +22,7 @@ public class ChatRepository implements ChatRepoGateway {
 
     public ChatRepository(String filePath) throws IOException {
         this.filePath = filePath;
-        JSONFile = new File(filePath);
+        File JSONFile = new File(filePath);
         this.numChats = 0;
         if (JSONFile.length() > 0) {
             FileReader reader = new FileReader(JSONFile);
@@ -35,6 +33,11 @@ public class ChatRepository implements ChatRepoGateway {
         }
     }
 
+    /**
+     * Returns the total number of chats in the repository
+     *
+     * @return the total number of chats
+     */
     @Override
     public int getNumChats(){
         return numChats;
@@ -74,5 +77,15 @@ public class ChatRepository implements ChatRepoGateway {
         Gson gson = new GsonBuilder().create();
         gson.toJson(chats, writer);
         writer.close();
+    }
+
+    /**
+     * Returns the map of all chat ids to chats in repository
+     *
+     * @return the map of all chat ids to chats
+     */
+    @Override
+    public Map<Integer, ChatRepoRequestModel> getAllChats() {
+        return this.chats;
     }
 }
