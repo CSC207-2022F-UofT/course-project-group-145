@@ -1,51 +1,42 @@
-package entities;
+package chat;
 
 import java.util.Date;
 
-public class Message {
-
-    private static int numMessages = 0;
+public class MessageRepoRequestModel {
 
     private int messageId;
 
     private String content;
 
-    private Date sendTime;
-
-    private Date lastEditTime;
-
     private int author;
 
     private int receiver;
 
+    private Date sendTime;
+
+    private Date lastEditTime;
+
     private boolean isMessageSeen;
-
-    private int replyId;
-
-    private boolean isEdited;
 
     private boolean isDeleted;
 
-    Message(String content, Date sendTime, int authorId, int receiverId) {
-        this.messageId = numMessages;
+    private boolean isEdited;
+
+    private int replyId;
+
+    public MessageRepoRequestModel(int messageId, String content, int author, int receiver, Date sendTime,
+                                   Date lastEditTime, boolean isMessageSeen, boolean isDeleted, boolean isEdited,
+                                   int replyId) {
+        this.messageId = messageId;
         this.content = content;
+        this.author = author;
+        this.receiver = receiver;
         this.sendTime = sendTime;
-        this.author = authorId;
-        this.receiver = receiverId;
-        this.lastEditTime = sendTime;
-        this.isMessageSeen = false;
-        this.isEdited = false;
-        this.replyId = -1;              // initialize to an invalid id to indicate there is no reply
-        this.isDeleted = false;
-        numMessages = numMessages + 1;
-    }
-
-    public static int getNumMessages() {
-        return numMessages;
-    }
-
-    public static void setNumMessages(int numMessages) {
-        Message.numMessages = numMessages;
+        this.lastEditTime = lastEditTime;
+        this.isMessageSeen = isMessageSeen;
+        this.isDeleted = isDeleted;
+        this.isEdited = isEdited;
+        this.replyId = replyId;
     }
 
     public int getMessageId() {
@@ -64,14 +55,6 @@ public class Message {
         this.content = content;
     }
 
-    public Date getSendTime() {
-        return sendTime;
-    }
-
-    public void setSendTime(Date sendTime) {
-        this.sendTime = sendTime;
-    }
-
     public int getAuthor() {
         return author;
     }
@@ -88,12 +71,28 @@ public class Message {
         this.receiver = receiver;
     }
 
+    public Date getSendTime() {
+        return sendTime;
+    }
+
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
+    }
+
     public boolean isMessageSeen() {
         return isMessageSeen;
     }
 
     public void setMessageSeen(boolean messageSeen) {
         isMessageSeen = messageSeen;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public boolean isEdited() {
@@ -110,14 +109,6 @@ public class Message {
 
     public void setReplyId(int replyId) {
         this.replyId = replyId;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
     }
 
     public Date getLastEditTime() {
