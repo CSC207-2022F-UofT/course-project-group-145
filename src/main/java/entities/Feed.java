@@ -9,6 +9,11 @@ public class Feed implements Iterable{
     //TODO: Add import for Snippets once that's done
 
     private String id;
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
     private List<Tag> tags;
     private List<CodeSnippet> snippets;
     private List<CodeSnippet> matched;
@@ -36,6 +41,14 @@ public class Feed implements Iterable{
     public void setId(String id) {
         this.id = id;
     }
+
+    //TODO: Implement this
+//    public List<String> getSnippetIDs(){
+//        ArrayList<String> snippetIDs = new ArrayList<>();
+//        for (CodeSnippet snippet: snippets){
+//            snippetIDs.add(snippet.)
+//        }
+//    }
 
 
 
