@@ -1,17 +1,17 @@
-package chatUseCases;
+package chat_use_case;
 
+import chat.ChatRepoGateway;
 import chat_for_deletion.ChatDeletionOutputBoundary;
-import chat_for_deletion.ChatDeletionGateway;
 
 import java.io.IOException;
 
 public class DeleteChat implements DeleteChatInputBoundary {
     private final ChatDeletionOutputBoundary chatDeletionOutputBoundary;
-    private final ChatDeletionGateway chatDeletionGateway;
+    private final ChatRepoGateway chatRepoGateway;
 
-    public DeleteChat(ChatDeletionOutputBoundary chatDeletionOutputBoundary, ChatDeletionGateway chatDeletionGateway) {
+    public DeleteChat(ChatDeletionOutputBoundary chatDeletionOutputBoundary, ChatRepoGateway chatRepoGateway) {
         this.chatDeletionOutputBoundary = chatDeletionOutputBoundary;
-        this.chatDeletionGateway = chatDeletionGateway;
+        this.chatRepoGateway = chatRepoGateway;
     }
 
     /**
@@ -21,7 +21,7 @@ public class DeleteChat implements DeleteChatInputBoundary {
      */
     @Override
     public void delete(int chatId) throws IOException {
-        chatDeletionGateway.delete(chatId);
+        chatRepoGateway.delete(chatId);
         // TODO: add success view
         // chatOutputBoundary.successView();
     }
