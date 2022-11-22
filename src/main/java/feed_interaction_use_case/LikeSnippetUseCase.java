@@ -16,7 +16,6 @@ public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
         this.feedFactory = feedFactory;
     }
 
-
     @Override
     public void like(String snippetID, LikeSnippetUseCaseRequestModel likeSnippetUseCaseRequestModel) {
         // obtain code snippets to create a list of CodeSnippet objects to them pass into the FeedFactory
