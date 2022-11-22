@@ -1,1 +1,3 @@
-User can send a message with the created chat. Just simply open the Main.java file and run, and an UI will open with a message box where you can send messages
+User can send a message with the created chat. Just simply open the Main.java file and run, and an UI will open with a message box where you can send messages.
+
+The send message use case is as follows: The ChatView takes the message sent and passes it to the ChatController, which then calls the SendMessageInputBondary to call the SendMessage use case which calls the MessageRepoGateway to save it to the MessageRepository and the JSON file, and also the ChatRepoGateway to save it to the ChatRepository and JSON file. The use case then calls the ChatOutputBoundary to use the ChatPresenter to update the UI to show the new message sent.
