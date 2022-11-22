@@ -12,11 +12,14 @@ public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
 
     final LikeSnippetOutputBoundary outputBoundary;
 
+//    final CodeSnippetRepoGateway snippetRepoGateway;
+
     public LikeSnippetUseCase(FeedDSRepository feedDSRepository, FeedFactory feedFactory,
                               LikeSnippetOutputBoundary outputBoundary) {
         this.feedDSRepository = feedDSRepository;
         this.feedFactory = feedFactory;
         this.outputBoundary = outputBoundary;
+//        this.snippetRepoGateway = snippetRepoGateway;
     }
 
     @Override
@@ -24,9 +27,13 @@ public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
         // obtain code snippets to create a list of CodeSnippet objects to them pass into the FeedFactory
         // obtain matched code snippets to create a list of matched CodeSnippets
 
+//        List<CodeSnippetResponseModel> snippetsInFeed snippetRepoGateway.getCodeSnippets(likeSnippetRequestModel.getSnippetIDs());
+
+
         List<String> newMatched = new ArrayList<>(likeSnippetRequestModel.getMatchedIDs());
         newMatched.add(snippetID);
         // get list of matched code snippets
+//        List<CodeSnippetResponseModel> matchedSnippets = snippetRepoGateway.getCodeSnippets(newMatched);
 
         // generate new feed
         // Feed newFeed = feedFactory.generateFeed()

@@ -29,14 +29,14 @@ public class FeedRepository implements FeedDSRepository{
     }
     @Override
     public void save(FeedGatewayRequestModel requestModel) throws IOException {
-        if(feeds.containsKey(requestModel.getId())){
-            feeds.remove(requestModel.getId());
-            feeds.put(requestModel.getId(), requestModel);
-            return;
-        }
-        feeds.put(requestModel.getId(), requestModel);
-        numFeeds += 1;
-        saveJSON();
+//        if(feeds.containsKey(requestModel.getId())){
+//            feeds.remove(requestModel.getId());
+//            feeds.put(requestModel.getId(), requestModel);
+//            return;
+//        }
+//        feeds.put(requestModel.getId(), requestModel);
+//        numFeeds += 1;
+//        saveJSON();
     }
 
     @Override
