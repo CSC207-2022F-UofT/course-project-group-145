@@ -2,14 +2,14 @@ package feed_interaction_use_case;
 
 import java.util.List;
 
-public class NextSnippetUseCaseRequestModel {
+public class LikeSnippetRequestModel {
 
     private List<String> snippetIDs;
     private List<String> matchedIDs;
     private List<String> tags;
     private int curr;
 
-    public NextSnippetUseCaseRequestModel(List<String> snippetIDs, List<String> matchedIDs, List<String> tags, int curr){
+    public LikeSnippetRequestModel(List<String> snippetIDs, List<String> matchedIDs, List<String> tags, int curr){
         this.snippetIDs = snippetIDs;
         this.matchedIDs = matchedIDs;
         this.tags = tags;
