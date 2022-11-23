@@ -15,6 +15,8 @@ public class CodeSnippetResponseModel {
         return title;
     }
 
+    public String getFileUrl() { return fileUrl; }
+
     public String getCreationTime() {
         return creationTime;
     }

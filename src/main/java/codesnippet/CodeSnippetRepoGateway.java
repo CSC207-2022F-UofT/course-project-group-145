@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface CodeSnippetRepoGateway {
+    int getNumCodeSnippets() throws IOException;
+
     void save(CodeSnippetRequestModel requestModel) throws IOException;
 
     CodeSnippetResponseModel retrieve (int codeSnippetId) throws IOException;

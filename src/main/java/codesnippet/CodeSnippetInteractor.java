@@ -17,8 +17,8 @@ public class CodeSnippetInteractor implements CodeSnippetInputBoundary {
 
     @Override
     public CodeSnippetResponseModel create(CodeSnippetRequestModel requestModel) throws IOException {
-
-        CodeSnippet codeSnippet = codeSnippetFactory.create(requestModel.getTitle(), requestModel.getUserId(), requestModel.getFileUrl());
+        int nextId = codeSnippetGateway.getNumCodeSnippets() + 1;
+        CodeSnippet codeSnippet = codeSnippetFactory.create(nextId, requestModel.getTitle(), requestModel.getUserId(), requestModel.getFileUrl());
 
         LocalDateTime now = LocalDateTime.now();
         CodeSnippetRequestModel codeSnippetModel = new CodeSnippetRequestModel(codeSnippet.getTitle(), codeSnippet.getUserId(), codeSnippet.getFileUrl(), now);

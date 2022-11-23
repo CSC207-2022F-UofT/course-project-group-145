@@ -34,6 +34,11 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
     }
 
     @Override
+    public int getNumCodeSnippets() throws IOException {
+        return 0;
+    }
+
+    @Override
     public void save(CodeSnippetRequestModel requestModel) throws IOException {
         codeSnippets.put(requestModel.getCodeSnippetId(), requestModel);
         this.numCodeSnippets = numCodeSnippets + 1;

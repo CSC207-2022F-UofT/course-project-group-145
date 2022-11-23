@@ -2,6 +2,9 @@ package codesnippet;
 
 import entities.CodeSnippet;
 
-public interface CodeSnippetFactory {
-    CodeSnippet create(String title, int userId, String fileUrl);
+public class CodeSnippetFactory {
+    public CodeSnippet create(int id, String title, int userId, String fileUrl) {
+
+        return new CodeSnippet(id, userId, title, fileUrl);
+    }
 }

@@ -16,7 +16,7 @@ public class CodeSnippet {
     private Boolean isPublished;
 
 
-    CodeSnippet(int id, int userId, String title, String fileUrl) {
+    public CodeSnippet(int id, int userId, String title, String fileUrl) {
         this.id = id;
         this.userId = userId;
         this.title = title;
