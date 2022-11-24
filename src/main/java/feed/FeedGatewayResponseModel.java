@@ -8,12 +8,15 @@ public class FeedGatewayResponseModel {
     private List<String> matchedIDs;
     private List<String> tags;
     private int curr;
+    private int userId;
 
-    public FeedGatewayResponseModel(List<String> snippetIDs, List<String> matchedIDs, List<String> tags, int curr){
+    public FeedGatewayResponseModel(List<String> snippetIDs, List<String> matchedIDs, List<String> tags, int curr,
+                                    int userId){
         this.snippetIDs = snippetIDs;
         this.matchedIDs = matchedIDs;
         this.tags = tags;
         this.curr = curr;
+        this.userId = userId;
     }
 
     public List<String> getMatchedIDs() {
@@ -31,4 +34,6 @@ public class FeedGatewayResponseModel {
     public List<String> getSnippetIDs() {
         return snippetIDs;
     }
+
+    public int getUserId(){return this.userId;}
 }
