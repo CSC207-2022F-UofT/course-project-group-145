@@ -20,20 +20,25 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         this.feedFactory = feedFactory;
     }
 
+    /**
+     * Creates a new feed of the given size with snippets of the given tags, sorted from most relevant to the least relevant
+     * Then assigns the newly created feed to the user specified
+     * @param userID
+     * @param tags
+     * @param size
+     */
     @Override
-    public void createFeed(List<String> tags, int size) {
-        //Create tags from tags
+    public void createFeed(int userID, List<String> tags, int size) {
+        //Create tags objects from tags
         List<Tag> tagList = new ArrayList<>();
         for (String tag: tags){
             // tag object .equals can match to strings
             tagList.add(this.tagFactory.createTag(tag));
         }
-        //TODO: Get snippets list from snippet repository
+
+        //TODO: Get snippets list from snippet repository and sort the snippets by tags
         List<CodeSnippet> allSnippets = new ArrayList<>();
-
-        //TODO: Sort the snippets by tags
         allSnippets.sort(new TagComparator(tagList));
-
 
         //Create a feed using feedFactory
         Feed feed = this.feedFactory.create(allSnippets.subList(0, size), tagList);
@@ -58,16 +63,20 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         }
         successView();
     }
+    /**
+     * Creates a new feed of size 30 with snippets of the given tags, sorted from most relevant to the least relevant
+     *
+     * @param tags
+     */
+    @Override
+    public void createFeed(int userID, List<String> tags) {
+        createFeed(userID, tags, 30);
+    }
 
     public void successView(){
         //TODO:
     }
     public void failView(){
         //TODO:
-    }
-
-    @Override
-    public void createFeed(List<String> tags) {
-        createFeed(tags, 30);
     }
 }

@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface CreateFeedUseCaseInputBoundary {
 
-    void createFeed(List<String> tags, int size);
-    void createFeed(List<String> tags);
+    void createFeed(int userID, List<String> tags, int size);
+    void createFeed(int userID, List<String> tags);
 }
