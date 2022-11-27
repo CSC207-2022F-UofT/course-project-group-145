@@ -3,6 +3,7 @@ package feed_use_case;
 import entities.*;
 import feed.FeedDSRepository;
 import feed.FeedGatewayRequestModel;
+import feed.CreateFeedOutputBoundary;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +15,10 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
     private TagFactory tagFactory;
     private FeedFactory feedFactory;
 
-    public CreateFeedUseCase(FeedDSRepository repo, TagFactory tagFactory, FeedFactory feedFactory){
+    private CreateFeedOutputBoundary presenter;
+
+    public CreateFeedUseCase(CreateFeedOutputBoundary presenter, FeedDSRepository repo, TagFactory tagFactory, FeedFactory feedFactory){
+        this.presenter = presenter;
         this.feedRepo = repo;
         this.tagFactory = tagFactory;
         this.feedFactory = feedFactory;
@@ -59,7 +63,7 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
             feedRepo.save(model);
         }
         catch (IOException e){
-            failView();
+            failView(e);
         }
         successView();
     }
@@ -73,10 +77,10 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         createFeed(userID, tags, 30);
     }
 
-    public void successView(){
-        //TODO:
+    private void successView(){
+        presenter.successView();
     }
-    public void failView(){
-        //TODO:
+    private void failView(IOException e){
+        presenter.failView(e.toString());
     }
 }
