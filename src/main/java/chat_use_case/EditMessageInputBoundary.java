@@ -5,5 +5,5 @@ import chat.ChatRequestModel;
 import java.io.IOException;
 
 public interface EditMessageInputBoundary {
-    void edit(int messageId, ChatRequestModel requestModel) throws IOException;
+    void edit(int messageId, String content) throws IOException;
 }

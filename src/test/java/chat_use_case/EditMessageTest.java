@@ -44,7 +44,17 @@ class EditMessageTest {
         ChatRequestModel requestModel = new ChatRequestModel(-1, "hello there", -1, -2, new Date());
         class fakePresenter implements ChatOutputBoundary {
             @Override
-            public void successView(ChatResponseModel responseModel) {
+            public void addMessage(ChatResponseModel responseModel) {
+
+            }
+
+            @Override
+            public void deleteMessage(int messageId) {
+
+            }
+
+            @Override
+            public void openChat(int chatId, int userId, int otherUser) {
 
             }
 
@@ -54,7 +64,7 @@ class EditMessageTest {
             }
         }
         EditMessageInputBoundary editMessage = new EditMessage(new fakePresenter(), messageRepoGateway);
-        editMessage.edit(-1, requestModel);
+        editMessage.edit(-1, requestModel.getContent());
 
         // Check if content for message has changed
         String actual = messageRepoGateway.getAllMessages().get(-1).getContent();

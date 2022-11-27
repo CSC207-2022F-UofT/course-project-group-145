@@ -22,11 +22,11 @@ public class EditMessage implements EditMessageInputBoundary {
      * output boundary to prepare the UI to present
      *
      * @param messageId the id of the message being edited
-     * @param requestModel the request model created from controller with the message being edited
+     * @param content the message
      */
     @Override
-    public void edit(int messageId, ChatRequestModel requestModel) throws IOException {
-        messageRepoGateway.edit(messageId, requestModel.getContent());
+    public void edit(int messageId, String content) throws IOException {
+        messageRepoGateway.edit(messageId, content);
 
         // TODO: prepare success view
     }

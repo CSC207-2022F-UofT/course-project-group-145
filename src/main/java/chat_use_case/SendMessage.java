@@ -35,11 +35,11 @@ public class SendMessage implements SendMessageInputBoundary {
         MessageRepoRequestModel messageRepoRequestModel = getMessageRepoRequestModel(requestModel);
         messageRepoGateway.save(messageRepoRequestModel);
         chatRepoGateway.addMessage(requestModel.getChatId(), messageRepoRequestModel.getMessageId());
-        ChatResponseModel responseModel = new ChatResponseModel(messageRepoRequestModel.getContent(),
-                messageRepoRequestModel.getAuthor(), messageRepoRequestModel.getReceiver(),
-                messageRepoRequestModel.getSendTime());
+        ChatResponseModel responseModel = new ChatResponseModel(messageRepoRequestModel.getMessageId(),
+                messageRepoRequestModel.getContent(), messageRepoRequestModel.getAuthor(),
+                messageRepoRequestModel.getReceiver(), messageRepoRequestModel.getSendTime());
 
-        chatOutputBoundary.successView(responseModel);
+        chatOutputBoundary.addMessage(responseModel);
     }
 
     /**

@@ -42,23 +42,11 @@ public class ChatRequestModel {
         return author;
     }
 
-    public void setAuthor(int author) {
-        this.author = author;
-    }
-
     public int getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(int receiver) {
-        this.receiver = receiver;
-    }
-
     public Date getSendTime() {
         return sendTime;
-    }
-
-    public void setSendTime(Date sendTime) {
-        this.sendTime = sendTime;
     }
 }

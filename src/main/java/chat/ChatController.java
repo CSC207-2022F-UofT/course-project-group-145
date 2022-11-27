@@ -26,4 +26,12 @@ public class ChatController {
         ChatRequestModel requestModel = new ChatRequestModel(chatId, content, sender, receiver, new Date());
         this.sendMessageInputBoundary.send(requestModel);
     }
+
+    public void deleteMessage(int messageId) throws IOException{
+        this.deleteMessageInputBoundary.delete(messageId);
+    }
+
+    public void editMessage(int messageId, String content) throws IOException{
+        this.editMessageInputBoundary.edit(messageId, content);
+    }
 }

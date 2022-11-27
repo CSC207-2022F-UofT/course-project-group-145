@@ -3,7 +3,13 @@ package chat;
 import java.util.List;
 
 public interface ChatViewInterface {
-    void addMessages(List<MessageRepoRequestModel> messages);
 
     void addMessage(ChatResponseModel responseModel);
+
+    void deleteMessage(int messageId);
+
+    void openChat(int chatId, int userId, int otherUser, List<MessageRepoRequestModel> messages);
+
+    void addReply(ChatResponseModel responseModel, int replyToId);
+
 }

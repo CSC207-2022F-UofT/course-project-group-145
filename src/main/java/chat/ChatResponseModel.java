@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class ChatResponseModel {
 
+    private int messageId;
+
     private String content;
 
     private int author;
@@ -12,7 +14,8 @@ public class ChatResponseModel {
 
     private Date sendTime;
 
-    public ChatResponseModel(String content, int author, int receiver, Date sendTime) {
+    public ChatResponseModel(int messageId, String content, int author, int receiver, Date sendTime) {
+        this.messageId = messageId;
         this.content = content;
         this.author = author;
         this.receiver = receiver;
@@ -49,5 +52,13 @@ public class ChatResponseModel {
 
     public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
+    }
+
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
     }
 }

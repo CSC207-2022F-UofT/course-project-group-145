@@ -102,4 +102,9 @@ public class ChatRepository implements ChatRepoGateway {
     public Map<Integer, ChatRepoRequestModel> getAllChats() {
         return this.chats;
     }
+
+    public List<Integer> getMessagesOfChat(int chatId) {
+        ChatRepoRequestModel chat = this.chats.get(chatId);
+        return chat.getMessageIds();
+    }
 }

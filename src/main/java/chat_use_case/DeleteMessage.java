@@ -24,7 +24,6 @@ public class DeleteMessage implements DeleteMessageInputBoundary{
     @Override
     public void delete(int messageId) throws IOException {
         messageRepoGateway.delete(messageId);
-        // TODO: add success view
-        // chatOutputBoundary.successView();
+        chatOutputBoundary.deleteMessage(messageId);
     }
 }

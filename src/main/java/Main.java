@@ -26,14 +26,15 @@ public class Main {
         chat.save(new ChatRepoRequestModel(0, ids, false));
         JFrame application = new JFrame("Chat");
         application.setSize(600, 600);
+        application.setPreferredSize(new Dimension(600, 600));
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
         application.add(screens);
 
         ChatView view = new ChatView();
-        ChatOutputBoundary presenter = new ChatPresenter(view);
         MessageRepoGateway messageRepoGateway = new MessageRepository("message.json");
         ChatRepoGateway chatRepoGateway = new ChatRepository("chat.json");
+        ChatOutputBoundary presenter = new ChatPresenter(view, chatRepoGateway, messageRepoGateway);
         Map<Integer, ChatRepoRequestModel> chats = chatRepoGateway.getAllChats();
         MessageFactory factory = new MessageFactory();
         DeleteMessageInputBoundary delete = new DeleteMessage(presenter, messageRepoGateway);
@@ -47,11 +48,11 @@ public class Main {
 //        ids.add(2);
 ////        ids.add(3);
 ////        ids.add(4);
-        List<MessageRepoRequestModel> messages = messageRepoGateway.getMessages(chats.get(0).getMessageIds());
-        view.addMessages(messages);
-        view.setChatId(0);
+        List<MessageRepoRequestModel> messages = messageRepoGateway.getMessages(chats.get(1).getMessageIds());
+        view.setChatId(1);
         view.setUserId(1);
         view.setOtherUser(2);
+        view.addMessages(messages);
 
 
         screens.add(view, "Chat");

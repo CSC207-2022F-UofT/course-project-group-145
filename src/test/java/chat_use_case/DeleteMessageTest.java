@@ -42,7 +42,17 @@ class DeleteMessageTest {
         MessageRepoGateway messageRepoGateway = new MessageRepository("message.json");
         class fakePresenter implements ChatOutputBoundary {
             @Override
-            public void successView(ChatResponseModel responseModel) {
+            public void addMessage(ChatResponseModel responseModel) {
+
+            }
+
+            @Override
+            public void deleteMessage(int messageId) {
+
+            }
+
+            @Override
+            public void openChat(int chatId, int userId, int otherUser) {
 
             }
 
