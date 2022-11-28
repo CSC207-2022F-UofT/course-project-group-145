@@ -1,7 +1,11 @@
 package feed_interaction_use_case;
 
+import entities.Feed;
 import entities.FeedFactory;
 import feed.FeedDSRepository;
+import feed.FeedGatewayResponseModel;
+
+import java.io.IOException;
 
 public class NextSnippetUseCase implements NextSnippetInputBoundary{
     final FeedDSRepository feedDSRepository;
@@ -16,14 +20,14 @@ public class NextSnippetUseCase implements NextSnippetInputBoundary{
     }
 
     @Override
-    public void next(NextSnippetRequestModel nextSnippetRequestModel){
-        // create a new FeedGatewayRequestModel with info from nextSnippetUseCaseRequestModel
-        // save this new object into the repository
-        // feedDSRepository.save()
-        if(nextSnippetRequestModel.getCurr() < nextSnippetRequestModel.getSnippetIDs().size()-1) {
-            int curr = nextSnippetRequestModel.getCurr();
-            String nextSnippetId = nextSnippetRequestModel.getSnippetIDs().get(curr + 1);
+    public void next(NextSnippetRequestModel nextSnippetRequestModel) throws IOException {
+        FeedGatewayResponseModel feed = feedDSRepository.load(nextSnippetRequestModel.getFeedId());
+
+        if(feed.getCurr() < (feed.getSnippetIDs().size()-1)) {
+            int curr = feed.getCurr();
+            String nextSnippetId = feed.getSnippetIDs().get(curr + 1);
             NextSnippetResponseModel responseModel = new NextSnippetResponseModel(nextSnippetId);
+            feedDSRepository.advanceFeed(nextSnippetRequestModel.getFeedId());
             outputBoundary.showNextSnippet(responseModel);
         } else {
             outputBoundary.prepareFailView("You have scrolled through all code snippets in the feed.");

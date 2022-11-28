@@ -4,47 +4,13 @@ import java.util.List;
 
 public class LikeSnippetRequestModel {
 
-    private List<String> snippetIDs;
-    private List<String> matchedIDs;
-    private List<String> tags;
-    private int curr;
+    private String feedId;
 
-    public LikeSnippetRequestModel(List<String> snippetIDs, List<String> matchedIDs, List<String> tags, int curr){
-        this.snippetIDs = snippetIDs;
-        this.matchedIDs = matchedIDs;
-        this.tags = tags;
-        this.curr = curr;
+    public LikeSnippetRequestModel(String feedId){
+        this.feedId = feedId;
     }
 
-    public List<String> getMatchedIDs() {
-        return matchedIDs;
-    }
+    public String getFeedId(){return this.feedId;}
 
-    public void setMatchedIDs(List<String> matchedIDs) {
-        this.matchedIDs = matchedIDs;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public int getCurr() {
-        return curr;
-    }
-
-    public void setCurr(int curr) {
-        this.curr = curr;
-    }
-
-    public List<String> getSnippetIDs() {
-        return snippetIDs;
-    }
-
-    public void setSnippetIDs(List<String> snippetIDs) {
-        this.snippetIDs = snippetIDs;
-    }
+    public void setFeedId(String feedId){this.feedId = feedId;}
 }

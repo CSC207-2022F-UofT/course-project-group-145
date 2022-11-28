@@ -4,6 +4,7 @@ public class NextSnippetPresenter implements NextSnippetOutputBoundary{
 
     @Override
     public NextSnippetResponseModel showNextSnippet(NextSnippetResponseModel responseModel) {
+        // go into the code snippet repo and find the code snippet
         return null;
     }
 
