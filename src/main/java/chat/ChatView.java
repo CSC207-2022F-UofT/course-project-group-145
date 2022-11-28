@@ -14,9 +14,9 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
 
     private ChatController controller;
 
-    private JPanel messages = new JPanel();
+    private final JPanel messages = new JPanel();
 
-    private JScrollPane scroll = new JScrollPane(messages, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    private final JScrollPane scroll = new JScrollPane(messages, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     private int chatId;
 
@@ -46,6 +46,11 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
         this.add(buttons);
     }
 
+    /**
+     * React to button presses
+     *
+     * @param evt the event to be processed
+     */
     public void actionPerformed(ActionEvent evt) {
         try {
             if (!textArea.getText().equals("") && evt.getActionCommand().equals("Send")) {
@@ -62,16 +67,28 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
                 scroll.revalidate();
                 this.revalidate();
             } else if(!textArea.getText().equals("") && evt.getActionCommand().startsWith("Reply")) {
-
-            } else if(evt.getActionCommand().startsWith("Edit")) {
-
+                String[] s = evt.getActionCommand().split("\\s");
+                int messageId = Integer.parseInt(s[1]);
+                this.controller.replyMessage(this.chatId, textArea.getText(), this.userId, this.otherUser, messageId);
+                this.textArea.setText("");
+                messages.revalidate();
+                scroll.revalidate();
+                this.revalidate();
+            } else if(!textArea.getText().equals("") && evt.getActionCommand().startsWith("Edit")) {
+                String[] s = evt.getActionCommand().split("\\s");
+                int messageId = Integer.parseInt(s[1]);
+                this.controller.editMessage(messageId, textArea.getText());
+                this.textArea.setText("");
+                messages.revalidate();
+                scroll.revalidate();
+                this.revalidate();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-
+    // should be private but in order for demonstration to currently work, it is public
     public void addMessages(List<MessageRepoRequestModel> messages) {
         List<Integer> list = new ArrayList<>();
         for(MessageRepoRequestModel message: messages) {
@@ -81,11 +98,7 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
                     addMessage(message.getMessageId(), message.getContent(), message.getAuthor(), true);
                     for(MessageRepoRequestModel m: messages) {
                         if(!m.isDeleted() && m.getMessageId() == message.getReplyId()){
-                            if(m.getReplyId() != -1) {
-                                addMessage(m.getMessageId(), m.getContent(), m.getAuthor(), true);
-                            } else {
-                                addMessage(m.getMessageId(), m.getContent(), m.getAuthor(), false);
-                            }
+                            addMessage(m.getMessageId(), m.getContent(), m.getAuthor(), m.getReplyId() != -1);
                         }
                     }
                 } else {
@@ -101,8 +114,8 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
         messageArea.add(messageText);
         messageArea.add(new JLabel("from " + author));
         messageArea.setName(String.valueOf(messageId));
+        messageText.setEditable(false);
         if (author != this.userId) {
-            messageText.setEditable(false);
             if (!hasReply) {
                 JButton reply = new JButton("Reply");
                 reply.addActionListener(this);
@@ -130,6 +143,7 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
         Component[] components = messages.getComponents();
         for(int i = 0; i < components.length; i++){
             if(components[i].getName().equals(String.valueOf(replyToId))) {
+                ((JPanel)components[i]).remove(2);
                 messages.add(messageArea, i + 1);
             }
         }
@@ -137,10 +151,33 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
     }
 
     @Override
+    public void editMessage(int messageId, String content) {
+        Component[] components = messages.getComponents();
+        for(Component c: components) {
+            if(c.getName().equals(String.valueOf(messageId))){
+                JTextArea messageText = new JTextArea(content);
+                messageText.setEditable(false);
+                ((JPanel)c).remove(0);
+                ((JPanel)c).add(messageText,0);
+            }
+        }
+    }
+
+    /**
+     * Add a message to the UI
+     *
+     * @param responseModel the given response model containing the message to be added
+     */
+    @Override
     public void addMessage(ChatResponseModel responseModel) {
         addMessage(responseModel.getMessageId(), responseModel.getContent(), responseModel.getAuthor(), false);
     }
 
+    /**
+     * Delete a message from the UI
+     *
+     * @param messageId the id of the message to be deleted
+     */
     @Override
     public void deleteMessage(int messageId) {
         Component[] components = messages.getComponents();
@@ -159,6 +196,14 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
         numMessages += 1;
     }
 
+    /**
+     * Open a chat with given messages and ids
+     *
+     * @param chatId the id of the chat that is being opened
+     * @param userId the id of the current user
+     * @param otherUser the id of the other user of the chat
+     * @param messages the list of messages of the chat to add to the UI
+     */
     @Override
     public void openChat(int chatId, int userId, int otherUser, List<MessageRepoRequestModel> messages) {
         this.setUserId(userId);

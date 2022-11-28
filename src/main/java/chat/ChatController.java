@@ -34,4 +34,9 @@ public class ChatController {
     public void editMessage(int messageId, String content) throws IOException{
         this.editMessageInputBoundary.edit(messageId, content);
     }
+
+    public void replyMessage(int chatId, String content, int sender, int receiver, int replyToId) throws IOException {
+        ChatRequestModel requestModel = new ChatRequestModel(chatId, content, sender, receiver, new Date());
+        this.sendMessageInputBoundary.reply(requestModel, replyToId);
+    }
 }

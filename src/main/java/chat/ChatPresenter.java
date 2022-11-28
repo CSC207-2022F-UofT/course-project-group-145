@@ -1,7 +1,6 @@
 package chat;
 
 import java.util.List;
-import java.util.Map;
 
 public class ChatPresenter implements ChatOutputBoundary{
 
@@ -18,6 +17,11 @@ public class ChatPresenter implements ChatOutputBoundary{
         this.messageRepoGateway = messageRepoGateway;
     }
 
+    /**
+     * Passes the message to be added onto the view to add to UI
+     *
+     * @param responseModel the response model containing the message to be added to the view
+     */
     @Override
     public void addMessage(ChatResponseModel responseModel){
         chatViewInterface.addMessage(responseModel);
@@ -27,6 +31,16 @@ public class ChatPresenter implements ChatOutputBoundary{
     @Override
     public void deleteMessage(int messageId) {
         chatViewInterface.deleteMessage(messageId);
+    }
+
+    @Override
+    public void replyMessage(ChatResponseModel responseModel, int replyToId) {
+        chatViewInterface.addReply(responseModel, replyToId);
+    }
+
+    @Override
+    public void editMessage(int messageId, String content){
+        chatViewInterface.editMessage(messageId, content);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package chat_use_case;
 
 import chat.ChatOutputBoundary;
-import chat.ChatRequestModel;
 import chat.MessageRepoGateway;
 
 import java.io.IOException;
@@ -28,6 +27,6 @@ public class EditMessage implements EditMessageInputBoundary {
     public void edit(int messageId, String content) throws IOException {
         messageRepoGateway.edit(messageId, content);
 
-        // TODO: prepare success view
+        chatOutputBoundary.editMessage(messageId, content);
     }
 }

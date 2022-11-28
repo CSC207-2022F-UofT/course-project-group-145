@@ -12,4 +12,6 @@ public interface ChatViewInterface {
 
     void addReply(ChatResponseModel responseModel, int replyToId);
 
+    void editMessage(int messageId, String content);
+
 }

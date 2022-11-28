@@ -54,11 +54,12 @@ public class SendMessage implements SendMessageInputBoundary {
         MessageRepoRequestModel messageRepoRequestModel = getMessageRepoRequestModel(requestModel);
         messageRepoGateway.addReply(messageRepoRequestModel, replyToMessageId);
         chatRepoGateway.addMessage(requestModel.getChatId(), messageRepoRequestModel.getMessageId());
-        // TODO: add success view
 
-        // move to another use case called replymessage or something
+        ChatResponseModel responseModel = new ChatResponseModel(messageRepoRequestModel.getMessageId(),
+                messageRepoRequestModel.getContent(), messageRepoRequestModel.getAuthor(),
+                messageRepoRequestModel.getReceiver(), messageRepoRequestModel.getSendTime());
 
-        // chatOutputBoundary.successView();
+        chatOutputBoundary.replyMessage(responseModel, replyToMessageId);
     }
 
     private MessageRepoRequestModel getMessageRepoRequestModel(ChatRequestModel requestModel) {
