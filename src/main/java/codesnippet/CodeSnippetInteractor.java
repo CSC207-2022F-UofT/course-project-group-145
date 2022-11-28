@@ -27,14 +27,4 @@ public class CodeSnippetInteractor implements CodeSnippetInputBoundary {
         CodeSnippetResponseModel codeSnippetResponseModel = new CodeSnippetResponseModel(codeSnippet.getTitle(), codeSnippet.getFileUrl(), now.toString());
         return codeSnippetResponseModel;
     }
-
-    @Override
-    public CodeSnippetResponseModel update(int codeSnippetId, CodeSnippetRequestModel requestModel) throws IOException {
-        return null;
-    }
-
-    @Override
-    public void delete(int codeSnippetId) throws IOException {
-
-    }
 }

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import entities.CodeSnippet;
-import entities.CodeSnippetFactory;
 
 import java.io.File;
 import java.io.FileReader;
@@ -33,8 +32,15 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
         }
     }
 
+    private void saveJSON() throws IOException {
+        FileWriter writer = new FileWriter(filePath);
+        Gson gson = new GsonBuilder().create();
+        gson.toJson(codeSnippets, writer);
+        writer.close();
+    }
+
     @Override
-    public int getNumCodeSnippets() throws IOException {
+    public int getNumCodeSnippets() {
         return 0;
     }
 
@@ -45,25 +51,14 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
         saveJSON();
     }
 
-    private void saveJSON() throws IOException {
-        FileWriter writer = new FileWriter(filePath);
-        Gson gson = new GsonBuilder().create();
-        gson.toJson(codeSnippets, writer);
-        writer.close();
+    @Override
+    public CodeSnippetRequestModel retrieve(int codeSnippetId) {
+        return this.codeSnippets.get(codeSnippetId);
     }
 
-    @Override
-    public CodeSnippetResponseModel retrieve(int codeSnippetId) throws IOException {
-        return null;
-    }
 
     @Override
-    public List<CodeSnippetResponseModel> getCodeSnippets(List<Integer> codeSnippetIds) throws IOException {
-        return null;
-    }
-
-    @Override
-    public Map<Integer, CodeSnippetResponseModel> getAllCodeSnippets() throws IOException {
-        return null;
+    public Map<Integer, CodeSnippetRequestModel> getAllCodeSnippets() {
+        return this.codeSnippets;
     }
 }
