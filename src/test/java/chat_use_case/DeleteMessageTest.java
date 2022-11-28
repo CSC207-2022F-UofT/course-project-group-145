@@ -52,6 +52,16 @@ class DeleteMessageTest {
             }
 
             @Override
+            public void editMessage(int messageId, String content) {
+
+            }
+
+            @Override
+            public void replyMessage(ChatResponseModel responseModel, int replyToMessageId) {
+
+            }
+
+            @Override
             public void openChat(int chatId, int userId, int otherUser) {
 
             }
