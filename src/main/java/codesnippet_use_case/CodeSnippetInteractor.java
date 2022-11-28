@@ -1,5 +1,9 @@
-package codesnippet;
+package codesnippet_use_case;
 
+import codesnippet.CodeSnippetFactory;
+import codesnippet.CodeSnippetRepoGateway;
+import codesnippet.CodeSnippetRequestModel;
+import codesnippet.CodeSnippetResponseModel;
 import entities.CodeSnippet;
 
 import java.io.IOException;
@@ -21,7 +25,7 @@ public class CodeSnippetInteractor implements CodeSnippetInputBoundary {
         CodeSnippet codeSnippet = codeSnippetFactory.create(nextId, requestModel.getTitle(), requestModel.getUserId(), requestModel.getFileUrl());
 
         LocalDateTime now = LocalDateTime.now();
-        CodeSnippetRequestModel codeSnippetModel = new CodeSnippetRequestModel(codeSnippet.getTitle(), codeSnippet.getUserId(), codeSnippet.getFileUrl(), now);
+        CodeSnippetRequestModel codeSnippetModel = new CodeSnippetRequestModel(codeSnippet.getId(), codeSnippet.getTitle(), codeSnippet.getUserId(), codeSnippet.getFileUrl(), now);
         codeSnippetGateway.save(codeSnippetModel);
 
         CodeSnippetResponseModel codeSnippetResponseModel = new CodeSnippetResponseModel(codeSnippet.getTitle(), codeSnippet.getFileUrl(), now.toString());

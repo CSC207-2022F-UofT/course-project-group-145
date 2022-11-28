@@ -46,7 +46,7 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
 
     @Override
     public void save(CodeSnippetRequestModel requestModel) throws IOException {
-        codeSnippets.put(requestModel.getCodeSnippetId(), requestModel);
+        codeSnippets.put(requestModel.getId(), requestModel);
         this.numCodeSnippets = numCodeSnippets + 1;
         saveJSON();
     }

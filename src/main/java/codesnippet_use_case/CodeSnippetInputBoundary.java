@@ -1,4 +1,7 @@
-package codesnippet;
+package codesnippet_use_case;
+
+import codesnippet.CodeSnippetRequestModel;
+import codesnippet.CodeSnippetResponseModel;
 
 import java.io.IOException;
 
