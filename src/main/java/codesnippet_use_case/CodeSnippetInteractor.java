@@ -28,7 +28,7 @@ public class CodeSnippetInteractor implements CodeSnippetInputBoundary {
         CodeSnippetRequestModel codeSnippetModel = new CodeSnippetRequestModel(codeSnippet.getId(), codeSnippet.getTitle(), codeSnippet.getUserId(), codeSnippet.getFileUrl(), now);
         codeSnippetGateway.save(codeSnippetModel);
 
-        CodeSnippetResponseModel codeSnippetResponseModel = new CodeSnippetResponseModel(codeSnippet.getTitle(), codeSnippet.getFileUrl(), now.toString());
+        CodeSnippetResponseModel codeSnippetResponseModel = new CodeSnippetResponseModel(codeSnippet.getId(), codeSnippet.getTitle(), codeSnippet.getFileUrl(), codeSnippet.getUserId(), codeSnippet.getCreationTime());
         return codeSnippetResponseModel;
     }
 }

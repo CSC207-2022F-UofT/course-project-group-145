@@ -56,7 +56,6 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
         return this.codeSnippets.get(codeSnippetId);
     }
 
-
     @Override
     public Map<Integer, CodeSnippetRequestModel> getAllCodeSnippets() {
         return this.codeSnippets;

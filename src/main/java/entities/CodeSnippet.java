@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ public class CodeSnippet {
     private int userId;
     private String title;
     private String fileUrl;
-    private String gistUrl;
+    private LocalDateTime creationTime;
     private List<String> tags;
     private List<String> languages;
     private Boolean isDrafted;
@@ -39,6 +40,11 @@ public class CodeSnippet {
     public String getFileUrl() {
         return this.fileUrl;
     }
+
+    public LocalDateTime getCreationTime() {
+        return this.creationTime;
+    }
+
 
     public void setTag(List<String> tags) {
         this.tags = tags;
