@@ -2,7 +2,7 @@ package feed;
 
 public interface CreateFeedOutputBoundary {
 
-    void successView(CreateFeedResponseModel model);
+    void successView();
 
     void failView(String errDesc);
 }

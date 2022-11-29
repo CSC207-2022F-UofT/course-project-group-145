@@ -1,6 +1,7 @@
 package feed_use_case;
 
 import entities.*;
+import feed.CreateFeedResponseModel;
 import feed.FeedDSRepository;
 import feed.FeedGatewayRequestModel;
 import feed.CreateFeedOutputBoundary;
@@ -27,9 +28,9 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
     /**
      * Creates a new feed of the given size with snippets of the given tags, sorted from most relevant to the least relevant
      * Then assigns the newly created feed to the user specified
-     * @param userID
-     * @param tags
-     * @param size
+     * @param userID the ID of the current user
+     * @param tags a list of strings that represents the tags to search for
+     * @param size the size of the feed to generate
      */
     @Override
     public void createFeed(int userID, List<String> tags, int size) {
@@ -69,8 +70,8 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
     }
     /**
      * Creates a new feed of size 30 with snippets of the given tags, sorted from most relevant to the least relevant
-     *
-     * @param tags
+     * @param userID the ID of the user
+     * @param tags a list of strings that represents the tags to search for
      */
     @Override
     public void createFeed(int userID, List<String> tags) {
@@ -78,6 +79,7 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
     }
 
     private void successView(){
+        CreateFeedResponseModel model = new CreateFeedResponseModel();
         presenter.successView();
     }
     private void failView(IOException e){
