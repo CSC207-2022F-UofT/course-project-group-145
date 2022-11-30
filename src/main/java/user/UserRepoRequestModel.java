@@ -1,12 +1,13 @@
-package entities;
+package user;
+
+import entities.User;
 
 import java.util.List;
 import java.util.Map;
 
-public class User {
+public class UserRepoRequestModel {
 
     private static int numUsers = 0;
-
     private int userId;
 
     private String username;
@@ -19,16 +20,15 @@ public class User {
 
     private List<Integer> listOfFeedIds;
 
-    User(String username, String password, String email, Map<Integer, Integer> chats, List<Integer> feeds){
+    public UserRepoRequestModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.mapOfChatToOtherUser = chats;
-        this.listOfFeedIds = feeds;
-        this.userId = numUsers;
-        numUsers = numUsers + 1;
-    }
+        this.mapOfChatToOtherUser = mapOfChatToOtherUser;
+        this.listOfFeedIds = listOfFeedIds;
 
+    }
     public int getUserId() {
         return userId;
     }
@@ -61,9 +61,7 @@ public class User {
         this.email = email;
     }
 
-    public Map<Integer, Integer> getListOfChatIds() {
-        return mapOfChatToOtherUser;
-    }
+    public Map<Integer, Integer>  getListOfChatIds() {return mapOfChatToOtherUser;}
 
     public void setListOfChatIds(Map<Integer, Integer> mapOfChatToOtherUser) {
         this.mapOfChatToOtherUser = mapOfChatToOtherUser;
@@ -79,10 +77,6 @@ public class User {
 
     public static int getNumUsers() {
         return numUsers;
-    }
-
-    public static void setNumUsers(int numUsers) {
-        User.numUsers = numUsers;
     }
 
     public void deleteChat(int chatId) {
