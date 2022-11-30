@@ -15,13 +15,13 @@ public class FeedFactory {
             tagList.add(this.tagFactory.createTag(tag));
         }
 
-        Feed feed = new Feed(new ArrayList<>(), tagList);
+        // Feed feed = new Feed(new ArrayList<>(), tagList);
         // Get list of codeSnippets TODO
         ArrayList<CodeSnippet> rawSnippets = new ArrayList<CodeSnippet>();
         //Sort by highest similarity score
         rawSnippets.sort(new TagComparator(tagList));
         //create feed with highest
-        feed.setSnippets(rawSnippets.subList(0, length));
+        // feed.setSnippets(rawSnippets.subList(0, length));
         return null;
     }
 }

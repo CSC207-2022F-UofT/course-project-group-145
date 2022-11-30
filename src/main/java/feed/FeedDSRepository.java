@@ -11,4 +11,5 @@ public interface FeedDSRepository {
     void advanceFeed(String id) throws IOException;
 
     void match(String id) throws IOException;
+
 }

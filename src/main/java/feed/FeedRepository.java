@@ -72,6 +72,7 @@ public class FeedRepository implements FeedDSRepository{
             List<String> newMatched = new ArrayList<>(requestModel.getMatchedIDs());
             newMatched.add(snippetId);
             requestModel.setMatchedIDs(newMatched);
+            requestModel.setCurr(requestModel.getCurr()+1);
             saveJSON();
         }
     }
