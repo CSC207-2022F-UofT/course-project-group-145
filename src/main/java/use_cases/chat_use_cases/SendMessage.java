@@ -1,6 +1,6 @@
-package chat_use_case;
+package use_cases.chat_use_cases;
 
-import chat.*;
+import controller_presenter_gateway.chat_controller_presenter_gateway.*;
 import entities.Message;
 import entities.MessageFactory;
 
@@ -16,6 +16,14 @@ public class SendMessage implements SendMessageInputBoundary {
 
     private final ChatRepoGateway chatRepoGateway;
 
+    /**
+     * Creates the use case with the given factory and interfaces
+     *
+     * @param messageFactory the message factory
+     * @param chatOutputBoundary the output boundary
+     * @param messageRepoGateway the message repository gateway
+     * @param chatRepoGateway the chat repository gateway
+     */
     public SendMessage(MessageFactory messageFactory, ChatOutputBoundary chatOutputBoundary,
                        MessageRepoGateway messageRepoGateway, ChatRepoGateway chatRepoGateway) {
         this.messageFactory = messageFactory;
@@ -31,15 +39,19 @@ public class SendMessage implements SendMessageInputBoundary {
      * @param requestModel the request model created from controller with chat id and message
      */
     @Override
-    public void send(ChatRequestModel requestModel) throws IOException {
-        MessageRepoRequestModel messageRepoRequestModel = getMessageRepoRequestModel(requestModel);
-        messageRepoGateway.save(messageRepoRequestModel);
-        chatRepoGateway.addMessage(requestModel.getChatId(), messageRepoRequestModel.getMessageId());
-        ChatResponseModel responseModel = new ChatResponseModel(messageRepoRequestModel.getMessageId(),
-                messageRepoRequestModel.getContent(), messageRepoRequestModel.getAuthor(),
-                messageRepoRequestModel.getReceiver(), messageRepoRequestModel.getSendTime());
+    public void send(ChatRequestModel requestModel) {
+        try {
+            MessageRepoRequestModel messageRepoRequestModel = getMessageRepoRequestModel(requestModel);
+            messageRepoGateway.save(messageRepoRequestModel);
+            chatRepoGateway.addMessage(requestModel.getChatId(), messageRepoRequestModel.getMessageId());
+            ChatResponseModel responseModel = new ChatResponseModel(messageRepoRequestModel.getMessageId(),
+                    messageRepoRequestModel.getContent(), messageRepoRequestModel.getAuthor(),
+                    messageRepoRequestModel.getReceiver(), messageRepoRequestModel.getSendTime());
 
-        chatOutputBoundary.addMessage(responseModel);
+            chatOutputBoundary.addMessage(responseModel);
+        } catch (IOException e) {
+            chatOutputBoundary.failView("Message failed to send");
+        }
     }
 
     /**
@@ -50,16 +62,20 @@ public class SendMessage implements SendMessageInputBoundary {
      * @param replyToMessageId the id of the message that the requestModel message is replying to
      */
     @Override
-    public void reply(ChatRequestModel requestModel, int replyToMessageId) throws IOException {
-        MessageRepoRequestModel messageRepoRequestModel = getMessageRepoRequestModel(requestModel);
-        messageRepoGateway.addReply(messageRepoRequestModel, replyToMessageId);
-        chatRepoGateway.addMessage(requestModel.getChatId(), messageRepoRequestModel.getMessageId());
+    public void reply(ChatRequestModel requestModel, int replyToMessageId) {
+        try {
+            MessageRepoRequestModel messageRepoRequestModel = getMessageRepoRequestModel(requestModel);
+            messageRepoGateway.addReply(messageRepoRequestModel, replyToMessageId);
+            chatRepoGateway.addMessage(requestModel.getChatId(), messageRepoRequestModel.getMessageId());
 
-        ChatResponseModel responseModel = new ChatResponseModel(messageRepoRequestModel.getMessageId(),
-                messageRepoRequestModel.getContent(), messageRepoRequestModel.getAuthor(),
-                messageRepoRequestModel.getReceiver(), messageRepoRequestModel.getSendTime());
+            ChatResponseModel responseModel = new ChatResponseModel(messageRepoRequestModel.getMessageId(),
+                    messageRepoRequestModel.getContent(), messageRepoRequestModel.getAuthor(),
+                    messageRepoRequestModel.getReceiver(), messageRepoRequestModel.getSendTime());
 
-        chatOutputBoundary.replyMessage(responseModel, replyToMessageId);
+            chatOutputBoundary.replyMessage(responseModel, replyToMessageId);
+        } catch (IOException e) {
+            chatOutputBoundary.failView("Message failed to reply");
+        }
     }
 
     private MessageRepoRequestModel getMessageRepoRequestModel(ChatRequestModel requestModel) {

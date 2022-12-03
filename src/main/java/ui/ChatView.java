@@ -1,10 +1,13 @@
-package chat;
+package ui;
+
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatController;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatResponseModel;
+import controller_presenter_gateway.chat_controller_presenter_gateway.MessageRepoRequestModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +19,8 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
 
     private final JPanel messages = new JPanel();
 
-    private final JScrollPane scroll = new JScrollPane(messages, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    private final JScrollPane scroll = new JScrollPane(messages, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     private int chatId;
 
@@ -26,6 +30,9 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
 
     private int numMessages = 0;
 
+    /**
+     *  The UI which is a JPanel of a chat between two users
+     */
     public ChatView() {
         // will later pass in name of other person to put into title
         JLabel title = new JLabel("Chat");
@@ -52,44 +59,39 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
      * @param evt the event to be processed
      */
     public void actionPerformed(ActionEvent evt) {
-        try {
-            if (!textArea.getText().equals("") && evt.getActionCommand().equals("Send")) {
-                this.controller.sendMessage(this.chatId, textArea.getText(), this.userId, this.otherUser);
-                this.textArea.setText("");
-                messages.revalidate();
-                scroll.revalidate();
-                this.revalidate();
-            } else if(evt.getActionCommand().startsWith("Delete")){
-                String[] s = evt.getActionCommand().split("\\s");
-                int messageId = Integer.parseInt(s[1]);
-                this.controller.deleteMessage(messageId);
-                messages.revalidate();
-                scroll.revalidate();
-                this.revalidate();
-            } else if(!textArea.getText().equals("") && evt.getActionCommand().startsWith("Reply")) {
-                String[] s = evt.getActionCommand().split("\\s");
-                int messageId = Integer.parseInt(s[1]);
-                this.controller.replyMessage(this.chatId, textArea.getText(), this.userId, this.otherUser, messageId);
-                this.textArea.setText("");
-                messages.revalidate();
-                scroll.revalidate();
-                this.revalidate();
-            } else if(!textArea.getText().equals("") && evt.getActionCommand().startsWith("Edit")) {
-                String[] s = evt.getActionCommand().split("\\s");
-                int messageId = Integer.parseInt(s[1]);
-                this.controller.editMessage(messageId, textArea.getText());
-                this.textArea.setText("");
-                messages.revalidate();
-                scroll.revalidate();
-                this.revalidate();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (!textArea.getText().equals("") && evt.getActionCommand().equals("Send")) {
+            this.controller.sendMessage(this.chatId, textArea.getText(), this.userId, this.otherUser);
+            this.textArea.setText("");
+            messages.revalidate();
+            scroll.revalidate();
+            this.revalidate();
+        } else if(evt.getActionCommand().startsWith("Delete")){
+            String[] s = evt.getActionCommand().split("\\s");
+            int messageId = Integer.parseInt(s[1]);
+            this.controller.deleteMessage(messageId);
+            messages.revalidate();
+            scroll.revalidate();
+            this.revalidate();
+        } else if(!textArea.getText().equals("") && evt.getActionCommand().startsWith("Reply")) {
+            String[] s = evt.getActionCommand().split("\\s");
+            int messageId = Integer.parseInt(s[1]);
+            this.controller.replyMessage(this.chatId, textArea.getText(), this.userId, this.otherUser, messageId);
+            this.textArea.setText("");
+            messages.revalidate();
+            scroll.revalidate();
+            this.revalidate();
+        } else if(!textArea.getText().equals("") && evt.getActionCommand().startsWith("Edit")) {
+            String[] s = evt.getActionCommand().split("\\s");
+            int messageId = Integer.parseInt(s[1]);
+            this.controller.editMessage(messageId, textArea.getText());
+            this.textArea.setText("");
+            messages.revalidate();
+            scroll.revalidate();
+            this.revalidate();
         }
     }
 
-    // should be private but in order for demonstration to currently work, it is public
-    public void addMessages(List<MessageRepoRequestModel> messages) {
+    private void addMessages(List<MessageRepoRequestModel> messages) {
         List<Integer> list = new ArrayList<>();
         for(MessageRepoRequestModel message: messages) {
             if (!message.isDeleted() &&!list.contains(message.getMessageId())) {
@@ -107,6 +109,7 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
             }
         }
     }
+
 
     private JPanel add(int messageId, String content, int author, boolean hasReply) {
         JPanel messageArea = new JPanel();
@@ -136,6 +139,12 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
         return messageArea;
     }
 
+    /**
+     * Add a reply message directly under the message being replied to
+     *
+     * @param responseModel the reply message
+     * @param replyToId the message being applied to
+     */
     @Override
     public void addReply(ChatResponseModel responseModel, int replyToId){
         JPanel messageArea = add(responseModel.getMessageId(), responseModel.getContent(), responseModel.getAuthor(),
@@ -150,6 +159,12 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
         this.numMessages = this.numMessages + 1;
     }
 
+    /**
+     * Edit a message by directly changing the message to the String content in the correct message based on messageId
+     *
+     * @param messageId the message being edited
+     * @param content the message content that the message is changing to
+     */
     @Override
     public void editMessage(int messageId, String content) {
         Component[] components = messages.getComponents();
@@ -202,7 +217,6 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
      * @param chatId the id of the chat that is being opened
      * @param userId the id of the current user
      * @param otherUser the id of the other user of the chat
-     * @param messages the list of messages of the chat to add to the UI
      */
     @Override
     public void openChat(int chatId, int userId, int otherUser, List<MessageRepoRequestModel> messages) {
@@ -210,9 +224,26 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
         this.setOtherUser(otherUser);
         this.setChatId(chatId);
         this.setNumMessages(0);
+        Component[] components = this.messages.getComponents();
+        for(Component c: components) {
+            this.messages.remove(c);
+        }
         this.addMessages(messages);
+        this.messages.revalidate();
+        scroll.revalidate();
+        this.revalidate();
         this.setVisible(true);
 
+    }
+
+    /**
+     * Shows a message pane with error message
+     *
+     * @param message the error message
+     */
+    @Override
+    public void failView(String message) {
+        JOptionPane.showMessageDialog(this, message);
     }
 
     public void setController(ChatController controller) {

@@ -1,6 +1,6 @@
-package chat_use_case;
+package use_cases.chat_use_cases;
 
-import chat.ChatRepoGateway;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoGateway;
 import chat_for_deletion.ChatDeletionOutputBoundary;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package chat_use_case;
+package use_cases.chat_use_cases;
 
 import java.io.IOException;
 

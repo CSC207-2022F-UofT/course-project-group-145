@@ -1,4 +1,4 @@
-package chat;
+package controller_presenter_gateway.chat_controller_presenter_gateway;
 
 public interface ChatOutputBoundary {
 
