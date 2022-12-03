@@ -47,13 +47,11 @@ public class Main {
         ChatController controller = new ChatController(delete, edit, send);
         view.setController(controller);
 
-        JPanel panel = new test(presenter);
 
         presenter.openChat(0, 0, 1);
 
 
         screens.add(view, "Chat");
-        screens.add(panel, "hello");
         cardLayout.show(screens, "Chat");
         application.pack();
         application.setVisible(true);
