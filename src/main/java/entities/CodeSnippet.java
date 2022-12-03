@@ -1,14 +1,15 @@
 package entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
 public class CodeSnippet implements Taggable{
+    private int id;
     private int userId;
     private String title;
     private String fileUrl;
-    private String gistUrl;
-
+    private LocalDateTime creationTime;
     private List<Tag> tags;
     private List<String> languages;
     private Boolean isDrafted;
@@ -16,7 +17,8 @@ public class CodeSnippet implements Taggable{
     private Boolean isPublished;
 
 
-    CodeSnippet(int userId, String title, String fileUrl) {
+    public CodeSnippet(int id, int userId, String title, String fileUrl) {
+        this.id = id;
         this.userId = userId;
         this.title = title;
         this.fileUrl = fileUrl;
@@ -26,19 +28,31 @@ public class CodeSnippet implements Taggable{
         this.isArchived = false;
         this.isPublished = false;
     }
+    public int getId() { return id; }
+    public String getTitle() {
+        return this.title;
+    }
 
     public int getUserId() {
         return this.userId;
     }
 
     public void setTag(List<Tag> tags) {
-        this.tags = tags;
+      this.tags = tags;
     }
+    
+    public String getFileUrl() {
+        return this.fileUrl;
+    }
+
+    public LocalDateTime getCreationTime() {
+        return this.creationTime;
+    }
+        
 
     public void setLanguage(List<String> languages) {
         this.languages = languages;
     }
-
 
     public void publish() {
         this.isPublished = true;
