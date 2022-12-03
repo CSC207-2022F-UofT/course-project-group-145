@@ -1,14 +1,15 @@
 package entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
 public class CodeSnippet {
+    private int id;
     private int userId;
     private String title;
     private String fileUrl;
-    private String gistUrl;
-
+    private LocalDateTime creationTime;
     private List<String> tags;
     private List<String> languages;
     private Boolean isDrafted;
@@ -16,7 +17,8 @@ public class CodeSnippet {
     private Boolean isPublished;
 
 
-    CodeSnippet(int userId, String title, String fileUrl) {
+    public CodeSnippet(int id, int userId, String title, String fileUrl) {
+        this.id = id;
         this.userId = userId;
         this.title = title;
         this.fileUrl = fileUrl;
@@ -26,10 +28,23 @@ public class CodeSnippet {
         this.isArchived = false;
         this.isPublished = false;
     }
+    public int getId() { return id; }
+    public String getTitle() {
+        return this.title;
+    }
 
     public int getUserId() {
         return this.userId;
     }
+
+    public String getFileUrl() {
+        return this.fileUrl;
+    }
+
+    public LocalDateTime getCreationTime() {
+        return this.creationTime;
+    }
+
 
     public void setTag(List<String> tags) {
         this.tags = tags;
@@ -38,7 +53,6 @@ public class CodeSnippet {
     public void setLanguage(List<String> languages) {
         this.languages = languages;
     }
-
 
     public void publish() {
         this.isPublished = true;
