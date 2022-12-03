@@ -1,4 +1,4 @@
-package chat_for_deletion;
+package controller_presenter_gateway.chat_list_controller_presenter_gateway;
 
 public interface ChatDeletionOutputBoundary {
     void successView(ChatDeletionResponseModel responseModel);

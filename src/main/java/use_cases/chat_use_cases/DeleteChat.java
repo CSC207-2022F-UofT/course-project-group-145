@@ -1,7 +1,7 @@
 package use_cases.chat_use_cases;
 
 import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoGateway;
-import chat_for_deletion.ChatDeletionOutputBoundary;
+import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatDeletionOutputBoundary;
 
 import java.io.IOException;
 
