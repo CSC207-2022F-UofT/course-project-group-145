@@ -32,9 +32,9 @@ public class NextSnippetUseCase implements NextSnippetInputBoundary{
         FeedGatewayResponseModel feed = feedDSRepository.load(nextSnippetRequestModel.getFeedId());
 
         if(feed.getCurr() < (feed.getSnippetIDs().size()-1)) {
-            int curr = feed.getCurr();
-            String nextSnippetId = feed.getSnippetIDs().get(curr + 1);
-            NextSnippetResponseModel responseModel = new NextSnippetResponseModel(nextSnippetId);
+//            int curr = feed.getCurr();
+//            String nextSnippetId = feed.getSnippetIDs().get(curr + 1);
+            NextSnippetResponseModel responseModel = new NextSnippetResponseModel(nextSnippetRequestModel.getFeedId());
             feedDSRepository.advanceFeed(nextSnippetRequestModel.getFeedId());
             outputBoundary.showNextSnippet(responseModel);
         } else {

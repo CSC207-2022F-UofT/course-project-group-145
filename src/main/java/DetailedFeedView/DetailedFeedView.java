@@ -1,4 +1,5 @@
 package DetailedFeedView;
+import UI.ViewInterface;
 import feed_interaction_use_case.CurrentSnippetController;
 import feed_interaction_use_case.CurrentSnippetRequestModel;
 import feed_interaction_use_case.LikeSnippetController;
@@ -11,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class DetailedFeedView extends JPanel implements ActionListener {
+public class DetailedFeedView extends JPanel implements ActionListener, ViewInterface {
     LikeSnippetController likeSnippetController;
     NextSnippetController nextSnippetController;
     CurrentSnippetController currentSnippetController;
@@ -19,6 +20,8 @@ public class DetailedFeedView extends JPanel implements ActionListener {
     JButton likeButton;
     JButton nextButton;
     JLabel picture;
+
+    JLabel errorLabel;
 
     public DetailedFeedView(String feedId, LikeSnippetController likeSnippetController, NextSnippetController nextSnippetController,
                             CurrentSnippetController currentSnippetController) throws IOException {
@@ -63,6 +66,7 @@ public class DetailedFeedView extends JPanel implements ActionListener {
         String label = button.getText();
         if(label=="Like"){
             System.out.println("Like Button Was Pressed");
+            this.setBackground(new Color(100, 200, 100));
 //            try {
 //                likeSnippetController.like(this.feedId);
 //            } catch (IOException ex) {
@@ -70,6 +74,7 @@ public class DetailedFeedView extends JPanel implements ActionListener {
 //            }
         }else{
             System.out.println("Next Button Was Pressed");
+            this.setBackground(new Color(200, 100, 100));
 //            try {
 //                nextSnippetController.next(this.feedId);
 //            } catch (IOException ex) {
@@ -85,5 +90,20 @@ public class DetailedFeedView extends JPanel implements ActionListener {
         frame.setSize(900, 600);
         frame.setContentPane(new DetailedFeedView("44"));
         frame.setVisible(true);
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void reportFail(String errMsg) {
+        errorLabel = new JLabel(errMsg);
+        remove(likeButton);
+        remove(nextButton);
+        remove(picture);
+        add(errorLabel);
+        // take the user back to the main menu?
     }
 }
