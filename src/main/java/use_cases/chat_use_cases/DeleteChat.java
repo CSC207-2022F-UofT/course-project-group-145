@@ -22,7 +22,5 @@ public class DeleteChat implements DeleteChatInputBoundary {
     @Override
     public void delete(int chatId) throws IOException {
         chatRepoGateway.delete(chatId);
-        // TODO: add success view
-        // chatOutputBoundary.successView();
     }
 }
