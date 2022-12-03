@@ -1,6 +1,11 @@
 package use_cases.chat_use_cases;
 
-import controller_presenter_gateway.chat_controller_presenter_gateway.*;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatOutputBoundary;
+import controller_presenter_gateway.chat_controller_presenter_gateway.MessageRepoGateway;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoGateway;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRequestModel;
+import controller_presenter_gateway.chat_controller_presenter_gateway.MessageRepoRequestModel;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatResponseModel;
 import entities.Message;
 import entities.MessageFactory;
 
