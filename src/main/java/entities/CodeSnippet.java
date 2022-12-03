@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
-public class CodeSnippet {
+public class CodeSnippet implements Taggable{
     private int id;
     private int userId;
     private String title;
     private String fileUrl;
     private LocalDateTime creationTime;
-    private List<String> tags;
+    private List<Tag> tags;
     private List<String> languages;
     private Boolean isDrafted;
     private Boolean isArchived;
@@ -46,7 +46,7 @@ public class CodeSnippet {
     }
 
 
-    public void setTag(List<String> tags) {
+    public void setTag(List<Tag> tags) {
         this.tags = tags;
     }
 
