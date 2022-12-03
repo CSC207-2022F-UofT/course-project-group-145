@@ -40,15 +40,29 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
     private List<Integer> listOfOIds;
     private ChatListController chatListController;
 
-    public ChatListView(int userId, Map<Integer, Integer> chatToUserIds) {
+    //take nothing
+    public ChatListView() {
+        this.userId = -1;
+        chatIds = new ArrayList<Integer>();
+        otherUserIds = new ArrayList<Integer>();
+
+        initialize();
+    }
+
+    public void openChatList(int userId, Map<Integer, Integer> chatToUserIds) {
+        Component[] components = this.getComponents();
+        for (Component c : components) {
+            this.remove(c);
+        }
+        chats = new JPanel(new GridLayout(0, 1));
+
         this.userId = userId;
         chatIds = new ArrayList<Integer>(chatToUserIds.keySet());
         otherUserIds = new ArrayList<Integer>(chatToUserIds.values());
 
         initialize();
     }
-
-
+    //take in initialize userid and map
     public void initialize() {
         JLabel listChat = new JLabel();
         listChat.setText("List of Chats");
@@ -60,6 +74,7 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
         listOfRows = new ArrayList<Object>();
         listOfOIds = new ArrayList<Integer>();
 
+        int p = 0;
         for (int index = 0; index < chatIds.size(); index++) {
             JPanel row = new JPanel();
             JLabel user = new JLabel();
@@ -80,7 +95,16 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
             row.add(deleteButton);
             listOfRows.add(row);
             chats.add(row);
+            p = index;
         }
+        JButton backButton = new JButton();
+        backButton.setText("Back");
+        backButton.setBounds(0, (p*5)+100, 1, 1);
+        backButton.addActionListener(this);
+        backButton.setActionCommand("Back");
+        JPanel row = new JPanel();
+        row.add(backButton);
+        chats.add(row);
 
 
         JPanel panel = new JPanel();
@@ -122,6 +146,14 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
             }
 
         }
+        else if (e.getActionCommand().startsWith("Back")) {
+            try {
+                this.goHome();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
 
     }
 
@@ -147,6 +179,12 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
         this.setVisible(false);
         //open the new chat howwwwwwwwwww, explain to me BOBJOE
         chatListController.openChat(chatId, userId, otherUserId);
+    }
+
+    @Override
+    public void goHome() throws IOException {
+        this.setVisible(false);
+        // open home here pls
     }
 
     @Override
