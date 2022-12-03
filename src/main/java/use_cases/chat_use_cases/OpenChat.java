@@ -1,6 +1,6 @@
-package chat_use_case;
+package use_cases.chat_use_cases;
 
-import chat.ChatOutputBoundary;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatOutputBoundary;
 
 import java.io.IOException;
 
