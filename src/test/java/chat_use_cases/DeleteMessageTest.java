@@ -1,11 +1,13 @@
-package chat_use_case;
+package chat_use_cases;
 
-import chat.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import controller_presenter_gateway.chat_controller_presenter_gateway.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import use_cases.chat_use_cases.DeleteMessage;
+import use_cases.chat_use_cases.DeleteMessageInputBoundary;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,7 +44,27 @@ class DeleteMessageTest {
         MessageRepoGateway messageRepoGateway = new MessageRepository("message.json");
         class fakePresenter implements ChatOutputBoundary {
             @Override
-            public void successView(ChatResponseModel responseModel) {
+            public void addMessage(ChatResponseModel responseModel) {
+
+            }
+
+            @Override
+            public void deleteMessage(int messageId) {
+
+            }
+
+            @Override
+            public void editMessage(int messageId, String content) {
+
+            }
+
+            @Override
+            public void replyMessage(ChatResponseModel responseModel, int replyToMessageId) {
+
+            }
+
+            @Override
+            public void openChat(int chatId, int userId, int otherUser) {
 
             }
 

@@ -1,10 +1,10 @@
-package chat;
+package controller_presenter_gateway.chat_controller_presenter_gateway;
 
 import java.util.Date;
 
-public class ChatRequestModel {
+public class ChatResponseModel {
 
-    private int chatId;
+    private int messageId;
 
     private String content;
 
@@ -14,20 +14,12 @@ public class ChatRequestModel {
 
     private Date sendTime;
 
-    public ChatRequestModel(int chatId, String content, int author, int receiver, Date sendTime) {
-        this.chatId = chatId;
+    public ChatResponseModel(int messageId, String content, int author, int receiver, Date sendTime) {
+        this.messageId = messageId;
         this.content = content;
         this.author = author;
         this.receiver = receiver;
         this.sendTime = sendTime;
-    }
-
-    public int getChatId() {
-        return chatId;
-    }
-
-    public void setChatId(int chatId) {
-        this.chatId = chatId;
     }
 
     public String getContent() {
@@ -60,5 +52,13 @@ public class ChatRequestModel {
 
     public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
+    }
+
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
     }
 }

@@ -1,4 +1,4 @@
-package chat;
+package controller_presenter_gateway.chat_controller_presenter_gateway;
 
 import java.io.IOException;
 import java.util.List;

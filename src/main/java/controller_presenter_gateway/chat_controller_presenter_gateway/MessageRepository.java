@@ -1,4 +1,4 @@
-package chat;
+package controller_presenter_gateway.chat_controller_presenter_gateway;
 
 import java.io.*;
 import java.util.*;
@@ -6,7 +6,7 @@ import java.util.*;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
-public class MessageRepository implements MessageRepoGateway{
+public class MessageRepository implements MessageRepoGateway {
 
     private final String filePath;
 
@@ -14,6 +14,12 @@ public class MessageRepository implements MessageRepoGateway{
 
     private int numMessages;
 
+    /**
+     * Creates a MessageRepository that keeps track of all messages and also saves and updates the JSON file
+     *
+     * @param filePath the path of the JSON file
+     * @throws IOException if the file does not contain the right format
+     */
     public MessageRepository(String filePath) throws IOException {
         this.filePath = filePath;
         File JSONFile = new File(filePath);

@@ -1,4 +1,4 @@
-package chat;
+package controller_presenter_gateway.chat_controller_presenter_gateway;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,6 +20,12 @@ public class ChatRepository implements ChatRepoGateway {
 
     private int numChats;
 
+    /**
+     * Create a ChatRepository that keeps track of all chats along with saving to the JSON file given by filePath
+     *
+     * @param filePath the file path of the JSON file
+     * @throws IOException if the file does not contain the correct format
+     */
     public ChatRepository(String filePath) throws IOException {
         this.filePath = filePath;
         File JSONFile = new File(filePath);
@@ -101,5 +107,17 @@ public class ChatRepository implements ChatRepoGateway {
     @Override
     public Map<Integer, ChatRepoRequestModel> getAllChats() {
         return this.chats;
+    }
+
+    /**
+     * Get the list of message ids of the given chat id
+     *
+     * @param chatId the chat id
+     * @return the list of message ids of the given chat id
+     */
+    @Override
+    public List<Integer> getMessagesOfChat(int chatId) {
+        ChatRepoRequestModel chat = this.chats.get(chatId);
+        return chat.getMessageIds();
     }
 }

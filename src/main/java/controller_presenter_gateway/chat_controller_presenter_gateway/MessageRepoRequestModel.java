@@ -1,4 +1,4 @@
-package chat;
+package controller_presenter_gateway.chat_controller_presenter_gateway;
 
 import java.util.Date;
 
@@ -8,11 +8,11 @@ public class MessageRepoRequestModel {
 
     private String content;
 
-    private int author;
+    private final int author;
 
-    private int receiver;
+    private final int receiver;
 
-    private Date sendTime;
+    private final Date sendTime;
 
     private Date lastEditTime;
 
@@ -59,24 +59,12 @@ public class MessageRepoRequestModel {
         return author;
     }
 
-    public void setAuthor(int author) {
-        this.author = author;
-    }
-
     public int getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(int receiver) {
-        this.receiver = receiver;
-    }
-
     public Date getSendTime() {
         return sendTime;
-    }
-
-    public void setSendTime(Date sendTime) {
-        this.sendTime = sendTime;
     }
 
     public boolean isMessageSeen() {

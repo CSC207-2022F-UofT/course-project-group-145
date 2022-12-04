@@ -1,11 +1,13 @@
-package chat_use_case;
+package chat_use_cases;
 
-import chat.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import controller_presenter_gateway.chat_controller_presenter_gateway.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import use_cases.chat_use_cases.EditMessage;
+import use_cases.chat_use_cases.EditMessageInputBoundary;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,7 +46,27 @@ class EditMessageTest {
         ChatRequestModel requestModel = new ChatRequestModel(-1, "hello there", -1, -2, new Date());
         class fakePresenter implements ChatOutputBoundary {
             @Override
-            public void successView(ChatResponseModel responseModel) {
+            public void addMessage(ChatResponseModel responseModel) {
+
+            }
+
+            @Override
+            public void deleteMessage(int messageId) {
+
+            }
+
+            @Override
+            public void editMessage(int messageId, String content) {
+
+            }
+
+            @Override
+            public void replyMessage(ChatResponseModel responseModel, int replyToMessageId) {
+
+            }
+
+            @Override
+            public void openChat(int chatId, int userId, int otherUser) {
 
             }
 
@@ -54,7 +76,7 @@ class EditMessageTest {
             }
         }
         EditMessageInputBoundary editMessage = new EditMessage(new fakePresenter(), messageRepoGateway);
-        editMessage.edit(-1, requestModel);
+        editMessage.edit(-1, requestModel.getContent());
 
         // Check if content for message has changed
         String actual = messageRepoGateway.getAllMessages().get(-1).getContent();
