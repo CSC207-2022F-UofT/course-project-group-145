@@ -8,6 +8,7 @@ import java.lang.Iterable;
 public class Feed implements Iterable{
     //TODO: Add import for Snippets once that's done
 
+    private int userID;
     private String id;
     private List<Tag> tags;
     private List<CodeSnippet> snippets;
@@ -78,6 +79,14 @@ public class Feed implements Iterable{
             matched.add(snippets.get(curr));
             return snippets.get(curr).getUserId();
         }
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
 
