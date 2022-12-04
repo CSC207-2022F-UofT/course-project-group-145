@@ -44,6 +44,6 @@ public class AddUser implements AddUserInputBoundary {
                 requestModel.getPassword(), requestModel.getEmail(), requestModel.getListOfChatIds(), requestModel.getListOfFeedIds());
         return new UserRepoRequestModel(user.getUserId(),
                 user.getUsername(), user.getPassword(), user.getEmail(), user.getListOfChatIds(),
-                user.getListOfFeedIds());
+                user.getListOfFeedIds(), user.isDeleted());
     }
 }

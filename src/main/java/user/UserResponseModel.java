@@ -19,13 +19,16 @@ public class UserResponseModel {
 
     private List<Integer> listOfFeedIds;
 
-    public UserResponseModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds) {
+    private boolean isDeleted;
+
+    public UserResponseModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
         this.mapOfChatToOtherUser = mapOfChatToOtherUser;
         this.listOfFeedIds = listOfFeedIds;
+        this.isDeleted = isDeleted;
 
     }
 
@@ -87,6 +90,14 @@ public class UserResponseModel {
 
     public void addChat(int chatId){
 
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
 

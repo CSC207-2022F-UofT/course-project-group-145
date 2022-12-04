@@ -19,12 +19,15 @@ public class User {
 
     private List<Integer> listOfFeedIds;
 
+    private boolean isDeleted;
+
     User(String username, String password, String email, Map<Integer, Integer> chats, List<Integer> feeds){
         this.username = username;
         this.password = password;
         this.email = email;
         this.mapOfChatToOtherUser = chats;
         this.listOfFeedIds = feeds;
+        this.isDeleted = false;
         this.userId = numUsers;
         numUsers = numUsers + 1;
     }
@@ -91,6 +94,13 @@ public class User {
 
     public void addChat(int chatId){
 
+    }
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
 

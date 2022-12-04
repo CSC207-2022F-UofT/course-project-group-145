@@ -57,16 +57,18 @@ public class UserRepository implements UserRepoGateway {
     @Override
     public void delete(int userId) throws IOException {
         UserRepoRequestModel user = users.remove(userId);
+        user.setDeleted(true);
         users.put(userId, user);
         saveJSON();
     }
+
     @Override
     public void addChatId(int userId, int chatId) throws IOException{
         UserRepoRequestModel user = users.remove(userId);
         Map<Integer, Integer> chatIds = user.getListOfChatIds();
         chatIds.put(chatId, userId);
         user.setListOfChatIds(chatIds);
-        users.put(chatId, user);
+        users.put(userId, user);
         saveJSON();
     }
 
@@ -76,8 +78,25 @@ public class UserRepository implements UserRepoGateway {
         List<Integer> feedIds = user.getListOfFeedIds();
         feedIds.add(feedId);
         user.setListOfFeedIds(feedIds);
-        users.put(feedId, user);
+        users.put(userId, user);
         saveJSON();
+    }
+
+    @Override
+    public List<Integer> getFeeds(int userId) throws IOException{
+        UserRepoRequestModel user = users.remove(userId);
+        List<Integer> feedIds = user.getListOfFeedIds();
+        users.put(userId, user);
+        saveJSON();
+        return feedIds;
+    }
+
+    @Override
+    public UserRepoRequestModel getUser(int userId) throws IOException{
+        UserRepoRequestModel user = users.remove(userId);
+        users.put(userId, user);
+        saveJSON();
+        return user;
     }
 
     private void saveJSON() throws IOException {

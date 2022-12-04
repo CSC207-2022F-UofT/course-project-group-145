@@ -20,13 +20,16 @@ public class UserRepoRequestModel {
 
     private List<Integer> listOfFeedIds;
 
-    public UserRepoRequestModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds) {
+    private boolean isDeleted;
+
+    public UserRepoRequestModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
         this.mapOfChatToOtherUser = mapOfChatToOtherUser;
         this.listOfFeedIds = listOfFeedIds;
+        this.isDeleted = isDeleted;
 
     }
     public int getUserId() {
@@ -85,6 +88,14 @@ public class UserRepoRequestModel {
 
     public void addChat(int chatId){
 
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
 

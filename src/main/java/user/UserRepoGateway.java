@@ -11,4 +11,8 @@ public interface UserRepoGateway {
     void addChatId(int userId, int chatId) throws IOException;
 
     void addFeedId(int userId, int feedId) throws IOException;
+
+    List<Integer> getFeeds(int userId) throws IOException;
+
+    UserRepoRequestModel getUser(int userId) throws IOException;
 }
