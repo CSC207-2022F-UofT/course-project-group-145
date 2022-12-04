@@ -1,10 +1,10 @@
 package feed_use_case;
 
 import entities.*;
+import feed.CreateFeedOutputBoundary;
 import feed.CreateFeedResponseModel;
 import feed.FeedDSRepository;
 import feed.FeedGatewayRequestModel;
-import feed.CreateFeedOutputBoundary;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         catch (IOException e){
             failView(e);
         }
-        successView();
+        successView(userID);
     }
     /**
      * Creates a new feed of size 30 with snippets of the given tags, sorted from most relevant to the least relevant
@@ -78,9 +78,9 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         createFeed(userID, tags, 30);
     }
 
-    private void successView(){
-        CreateFeedResponseModel model = new CreateFeedResponseModel();
-        presenter.successView();
+    private void successView(int userID){
+        CreateFeedResponseModel model = new CreateFeedResponseModel(userID);
+        presenter.successView(model);
     }
     private void failView(IOException e){
         presenter.failView(e.toString());

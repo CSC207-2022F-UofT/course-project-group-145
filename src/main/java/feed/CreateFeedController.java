@@ -2,11 +2,11 @@ package feed;
 
 import feed_use_case.CreateFeedUseCaseInputBoundary;
 
-public class FeedController implements FeedControllerInputBoundary{
+public class CreateFeedController implements FeedControllerInputBoundary{
 
     private CreateFeedUseCaseInputBoundary useCase;
 
-    public FeedController(CreateFeedUseCaseInputBoundary useCase){
+    public CreateFeedController(CreateFeedUseCaseInputBoundary useCase){
         this.useCase = useCase;
     }
 

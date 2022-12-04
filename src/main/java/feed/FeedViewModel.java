@@ -15,6 +15,7 @@ import java.util.Map;
 public class FeedViewModel {
 
     private List<ViewInterface> listeners;
+
     //Feeds organised by their id and tags, maybe will implement a creation date system
     private Map<Integer, List<String>> feeds;
 
