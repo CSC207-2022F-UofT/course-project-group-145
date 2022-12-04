@@ -48,6 +48,7 @@ class DeleteMessageTest {
 
             @Override
             public void deleteMessage(int messageId) {
+                assertEquals(messageId, -1);
 
             }
 

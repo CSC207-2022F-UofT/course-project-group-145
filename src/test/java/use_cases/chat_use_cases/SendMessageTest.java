@@ -63,7 +63,9 @@ class SendMessageTest {
         class fakePresenter implements ChatOutputBoundary {
             @Override
             public void addMessage(ChatResponseModel responseModel) {
-
+                assertEquals(responseModel.getAuthor(), -1);
+                assertEquals(responseModel.getReceiver(), -2);
+                assertEquals(responseModel.getContent(),"hello");
             }
 
             @Override
@@ -128,7 +130,10 @@ class SendMessageTest {
 
             @Override
             public void replyMessage(ChatResponseModel responseModel, int replyToMessageId) {
-
+                assertEquals(responseModel.getAuthor(), -1);
+                assertEquals(responseModel.getReceiver(), -2);
+                assertEquals(responseModel.getContent(),"hello");
+                assertEquals(replyToMessageId, -1);
             }
 
             @Override

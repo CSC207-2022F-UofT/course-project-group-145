@@ -55,6 +55,8 @@ class EditMessageTest {
 
             @Override
             public void editMessage(int messageId, String content) {
+                assertEquals(messageId, -1);
+                assertEquals(content, "hello there");
 
             }
 
