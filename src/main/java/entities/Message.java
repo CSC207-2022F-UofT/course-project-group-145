@@ -40,10 +40,6 @@ public class Message {
         numMessages = numMessages + 1;
     }
 
-    public static int getNumMessages() {
-        return numMessages;
-    }
-
     public static void setNumMessages(int numMessages) {
         Message.numMessages = numMessages;
     }
@@ -68,63 +64,31 @@ public class Message {
         return sendTime;
     }
 
-    public void setSendTime(Date sendTime) {
-        this.sendTime = sendTime;
-    }
-
     public int getAuthor() {
         return author;
-    }
-
-    public void setAuthor(int author) {
-        this.author = author;
     }
 
     public int getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(int receiver) {
-        this.receiver = receiver;
-    }
-
     public boolean isMessageSeen() {
         return isMessageSeen;
-    }
-
-    public void setMessageSeen(boolean messageSeen) {
-        isMessageSeen = messageSeen;
     }
 
     public boolean isEdited() {
         return isEdited;
     }
 
-    public void setEdited(boolean edited) {
-        isEdited = edited;
-    }
-
     public int getReplyId() {
         return replyId;
-    }
-
-    public void setReplyId(int replyId) {
-        this.replyId = replyId;
     }
 
     public boolean isDeleted() {
         return isDeleted;
     }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
     public Date getLastEditTime() {
         return lastEditTime;
-    }
-
-    public void setLastEditTime(Date lastEditTime) {
-        this.lastEditTime = lastEditTime;
     }
 }
