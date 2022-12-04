@@ -1,4 +1,4 @@
-package use_cases.chat_use_cases;
+package use_cases.chat_list_use_cases;
 
 import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoGateway;
 import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatDeletionOutputBoundary;

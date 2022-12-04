@@ -1,4 +1,4 @@
-package chat_use_cases;
+package use_cases.chat_use_cases;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,8 +6,6 @@ import controller_presenter_gateway.chat_controller_presenter_gateway.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_cases.chat_use_cases.EditMessage;
-import use_cases.chat_use_cases.EditMessageInputBoundary;
 
 import java.io.FileWriter;
 import java.io.IOException;

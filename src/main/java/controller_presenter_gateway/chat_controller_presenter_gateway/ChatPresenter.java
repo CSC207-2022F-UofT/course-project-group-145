@@ -48,7 +48,7 @@ public class ChatPresenter implements ChatOutputBoundary {
     }
 
     /**
-     * Passes the reply message and the id of the message to be replied to to the view to add it to the view
+     * Passes the reply message and the id of the message to be replied to the view to add it to the view
      *
      * @param responseModel the reply message
      * @param replyToId the message that is being replied to

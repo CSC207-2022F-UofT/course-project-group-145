@@ -1,7 +1,7 @@
 package controller_presenter_gateway.chat_list_controller_presenter_gateway;
 
-import use_cases.chat_use_cases.DeleteChatInputBoundary;
-import use_cases.chat_use_cases.OpenChatInputBoundary;
+import use_cases.chat_list_use_cases.DeleteChatInputBoundary;
+import use_cases.chat_list_use_cases.OpenChatInputBoundary;
 
 import java.io.IOException;
 
