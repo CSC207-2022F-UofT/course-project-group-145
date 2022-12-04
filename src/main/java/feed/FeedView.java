@@ -1,6 +1,6 @@
 package feed;
 
-import UI.ViewInterface;
+import ui.ViewInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,7 +98,6 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface {
 
         this.feedList = new JList();
         this.feedList.setBounds(20, 120, panelX-40, panelY-140);
-        this.feedList.addlistener
     }
 
     /**
