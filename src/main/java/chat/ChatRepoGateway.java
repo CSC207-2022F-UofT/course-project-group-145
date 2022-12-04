@@ -5,6 +5,8 @@ import java.util.Map;
 
 public interface ChatRepoGateway {
 
+    void delete(int chatId) throws IOException;
+
     int getNumChats();
 
     void addMessage(int chatId, int messageId) throws IOException;
