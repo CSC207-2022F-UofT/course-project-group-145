@@ -7,6 +7,7 @@ public class FeedFactory {
 
     private TagFactory tagFactory;
 
+
     public Feed create(List<CodeSnippet> snippets, List<Tag> tags){
         return new Feed(snippets, tags);
     }

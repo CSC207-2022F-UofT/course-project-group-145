@@ -34,6 +34,20 @@ public class ChatRepository implements ChatRepoGateway {
     }
 
     /**
+     * Deletes the chat by changing is_deleted to true (even if already deleted).
+     * Then saves to the JSON file.
+     *
+     * @param chatId the id of the chat that is being deleted
+     */
+    @Override
+    public void delete(int chatId) throws IOException {
+        ChatRepoRequestModel chat = chats.remove(chatId);
+        chat.setDeleted(true);
+        chats.put(chatId, chat);
+        saveJSON();
+    }
+
+    /**
      * Returns the total number of chats in the repository
      *
      * @return the total number of chats

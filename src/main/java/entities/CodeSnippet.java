@@ -37,6 +37,10 @@ public class CodeSnippet implements Taggable{
         return this.userId;
     }
 
+    public void setTag(List<Tag> tags) {
+      this.tags = tags;
+    }
+    
     public String getFileUrl() {
         return this.fileUrl;
     }
@@ -44,12 +48,7 @@ public class CodeSnippet implements Taggable{
     public LocalDateTime getCreationTime() {
         return this.creationTime;
     }
-
-
-    public void setTag(List<Tag> tags) {
-        this.tags = tags;
-    }
-
+    
     public void setLanguage(List<String> languages) {
         this.languages = languages;
     }
