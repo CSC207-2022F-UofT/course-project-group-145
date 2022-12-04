@@ -25,4 +25,8 @@ public class DetailedFeedViewModel {
     public void reportFail(String error){
         listener.reportFail(error);
     }
+
+    public String getSnippetLocation() {
+        return snippetLocation;
+    }
 }

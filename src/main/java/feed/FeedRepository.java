@@ -55,9 +55,9 @@ public class FeedRepository implements FeedDSRepository{
     }
 
     @Override
-    public void advanceFeed(String id) throws IOException {
-        if(feeds.containsKey(id)){
-            FeedGatewayRequestModel requestModel = feeds.get(id);
+    public void advanceFeed(String FeedId) throws IOException {
+        if(feeds.containsKey(FeedId)){
+            FeedGatewayRequestModel requestModel = feeds.get(FeedId);
             int current = requestModel.getCurr();
             requestModel.setCurr(current+1);
             saveJSON();
@@ -65,9 +65,9 @@ public class FeedRepository implements FeedDSRepository{
     }
 
     @Override
-    public void match(String id) throws IOException {
-        if(feeds.containsKey(id)){
-            FeedGatewayRequestModel requestModel = feeds.get(id);
+    public void match(String FeedId) throws IOException {
+        if(feeds.containsKey(FeedId)){
+            FeedGatewayRequestModel requestModel = feeds.get(FeedId);
             String snippetId = requestModel.getSnippetIDs().get(requestModel.getCurr());
             List<String> newMatched = new ArrayList<>(requestModel.getMatchedIDs());
             newMatched.add(snippetId);

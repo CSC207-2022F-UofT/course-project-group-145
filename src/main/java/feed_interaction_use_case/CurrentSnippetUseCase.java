@@ -28,8 +28,11 @@ public class CurrentSnippetUseCase implements CurrentSnippetInputBoundary{
     @Override
     public void current(CurrentSnippetRequestModel requestModel) throws IOException {
         FeedGatewayResponseModel responseModel = feedDSRepository.load(requestModel.getFeedId());
-        String snippetId = responseModel.getSnippetIDs().get(responseModel.getCurr());
-        CurrentSnippetResponseModel currentSnippetResponseModel = new CurrentSnippetResponseModel(snippetId);
-        outputBoundary.getSnippet(currentSnippetResponseModel);
+        if (responseModel.getSnippetIDs().size() > 0) {
+            CurrentSnippetResponseModel currentSnippetResponseModel = new CurrentSnippetResponseModel(requestModel.getFeedId());
+            outputBoundary.getSnippet(currentSnippetResponseModel);
+        } else {
+            outputBoundary.prepareFailView("This feed is empty");
+        }
     }
 }

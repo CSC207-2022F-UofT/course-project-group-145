@@ -3,7 +3,6 @@ package feed_interaction_use_case;
 import DetailedFeedView.DetailedFeedViewModel;
 import codesnippet.CodeSnippetRepoGateway;
 import codesnippet.CodeSnippetRequestModel;
-import codesnippet.CodeSnippetResponseModel;
 import feed.FeedDSRepository;
 import feed.FeedGatewayResponseModel;
 
@@ -12,26 +11,25 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class NextSnippetPresenter implements NextSnippetOutputBoundary{
-
+public class CurrentSnippetPresenter implements CurrentSnippetOutputBoundary{
     final FeedDSRepository repository;
-    final CodeSnippetRepoGateway codeSnippetRepoGateway;
-    private DetailedFeedViewModel viewModel;
+    final CodeSnippetRepoGateway codeSnippetGateway;
+    final DetailedFeedViewModel viewModel;
 
-    public NextSnippetPresenter(FeedDSRepository repository, CodeSnippetRepoGateway codeSnippetRepoGateway, DetailedFeedViewModel viewModel) {
-        this.repository = repository;
-        this.codeSnippetRepoGateway = codeSnippetRepoGateway;
+    public CurrentSnippetPresenter(FeedDSRepository feedGateway, CodeSnippetRepoGateway codeSnippetGateway, DetailedFeedViewModel viewModel) {
+        this.repository = feedGateway;
+        this.codeSnippetGateway = codeSnippetGateway;
         this.viewModel = viewModel;
     }
 
     @Override
-    public void showNextSnippet(NextSnippetResponseModel responseModel) {
+    public void getSnippet(CurrentSnippetResponseModel responseModel) {
         FeedGatewayResponseModel feed = repository.load(responseModel.getFeedId());
         int current = feed.getCurr();
         List<String> SnippetIDs = feed.getSnippetIDs();
         List<String> SnippetLocations = new ArrayList<>();
         for(String s: SnippetIDs){
-            CodeSnippetRequestModel codeSnippetRequestModel = codeSnippetRepoGateway.retrieve(parseInt(s));
+            CodeSnippetRequestModel codeSnippetRequestModel = codeSnippetGateway.retrieve(parseInt(s));
             String location = codeSnippetRequestModel.getFileUrl();
             SnippetLocations.add(location);
         }
@@ -39,7 +37,8 @@ public class NextSnippetPresenter implements NextSnippetOutputBoundary{
     }
 
     @Override
-     public void prepareFailView(String message) {
-        viewModel.reportFail(message);
+    public void prepareFailView(String error) {
+        viewModel.reportFail(error);
     }
+
 }

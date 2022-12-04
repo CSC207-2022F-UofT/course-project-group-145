@@ -8,8 +8,8 @@ public interface FeedDSRepository {
 
     FeedGatewayResponseModel load(String id);
 
-    void advanceFeed(String id) throws IOException;
+    void advanceFeed(String FeedId) throws IOException;
 
-    void match(String id) throws IOException;
+    void match(String FeedId) throws IOException;
 
 }

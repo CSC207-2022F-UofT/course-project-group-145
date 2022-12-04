@@ -16,16 +16,17 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
     LikeSnippetController likeSnippetController;
     NextSnippetController nextSnippetController;
     CurrentSnippetController currentSnippetController;
+    DetailedFeedViewModel viewModel;
     String feedId;
     JButton likeButton;
     JButton nextButton;
     JLabel picture;
-
     JLabel errorLabel;
 
     public DetailedFeedView(String feedId, LikeSnippetController likeSnippetController, NextSnippetController nextSnippetController,
-                            CurrentSnippetController currentSnippetController) throws IOException {
+                            CurrentSnippetController currentSnippetController, DetailedFeedViewModel viewModel) throws IOException {
         this.feedId = feedId;
+        this.viewModel = viewModel;
         this.nextSnippetController = nextSnippetController;
         this.likeSnippetController = likeSnippetController;
         this.currentSnippetController = currentSnippetController;
@@ -34,8 +35,7 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.nextButton = new JButton("Next");
         this.add(nextButton);
         // TODO: obtain the name of the picture.
-        currentSnippetController.getCurrent(this.feedId);
-        this.picture = new JLabel(new ImageIcon("Bucket/testPicture.jpeg"));
+        this.picture = new JLabel();
         this.add(picture);
         picture.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setBackground(new Color(200, 200, 100));
@@ -94,7 +94,13 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
 
     @Override
     public void update() {
+        String location = viewModel.getSnippetLocation();
+        this.picture.setIcon(new ImageIcon(location));
+        // draw();
+    }
 
+    public void open() throws IOException {
+        currentSnippetController.getCurrent(feedId);
     }
 
     @Override

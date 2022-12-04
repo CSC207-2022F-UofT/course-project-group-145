@@ -1,5 +1,9 @@
 package feed_interaction_use_case;
 
+import chat.ChatRepoGateway;
+import chat.ChatRepoRequestModel;
+import codesnippet.CodeSnippetRepoGateway;
+import codesnippet.CodeSnippetRequestModel;
 import entities.Chat;
 import entities.ChatFactory;
 import entities.FeedFactory;
@@ -10,18 +14,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
     final FeedDSRepository feedDSRepository;
+    final ChatRepoGateway chatRepoGateway;
+    final CodeSnippetRepoGateway codeSnippetRepoGateway;
     final FeedFactory feedFactory;
     final ChatFactory chatFactory;
 
-//    final CodeSnippetRepoGateway snippetRepoGateway;
 
-    public LikeSnippetUseCase(FeedDSRepository feedDSRepository, FeedFactory feedFactory, ChatFactory chatFactory) {
+    public LikeSnippetUseCase(FeedDSRepository feedDSRepository, ChatRepoGateway chatRepoGateway, CodeSnippetRepoGateway codeSnippetRepoGateway, FeedFactory feedFactory, ChatFactory chatFactory) {
         this.feedDSRepository = feedDSRepository;
+        this.chatRepoGateway = chatRepoGateway;
+        this.codeSnippetRepoGateway = codeSnippetRepoGateway;
         this.feedFactory = feedFactory;
         this.chatFactory = chatFactory;
-//        this.snippetRepoGateway = snippetRepoGateway;
     }
 
     /**
@@ -37,25 +45,29 @@ public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
     public void like(LikeSnippetRequestModel likeSnippetRequestModel) throws IOException {
 
         FeedGatewayResponseModel feed = feedDSRepository.load(likeSnippetRequestModel.getFeedId());
-        feedDSRepository.match(likeSnippetRequestModel.getFeedId());
 
-//        List<String> newMatched = new ArrayList<>(feed.getMatchedIDs());
-//        newMatched.add(snippetID);
-
+        Chat.setNumChat(chatRepoGateway.getNumChats());
         List<Integer> emptyList = new ArrayList<>();
         Chat newChat = chatFactory.create(emptyList);
-        Chat.setNumChat(8); // set this to the ChatRepository's number of chats. 8 is a placeholder
-        Integer chatID = newChat.getChatId();
+        int chatID = newChat.getChatId();
+        ChatRepoRequestModel chatRepoRequestModel = new ChatRepoRequestModel(chatID, emptyList, false);
 
         int thisUser = feed.getUserId();
-        int otherUser; //
+        String currentSnippetId = feed.getSnippetIDs().get(feed.getCurr());
+        CodeSnippetRequestModel codeSnippetRequestModel = codeSnippetRepoGateway.retrieve(parseInt(currentSnippetId));
+        int otherUser = codeSnippetRequestModel.getUserId(); //
+
+        feedDSRepository.match(likeSnippetRequestModel.getFeedId());
+
+
 
         // add chatID to the list of ChatIds of the two users.
         // retrieve Snippet from the SnippetRepository. Obtain the UserID from the CodeSnippetResponseModel.
         // Then retrieve the user from the user repository. Create the user and add the new chatID to its
         // list of chatIDs.
 
-        // make a call to the chat presenter passing in the id of the chat.
+        // save chat to the repository
+        // call presenter
 
 
     }
