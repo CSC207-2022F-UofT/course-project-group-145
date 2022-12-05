@@ -20,8 +20,7 @@ public class UserRequestModel {
 
     private boolean isDeleted;
 
-    public UserRequestModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
-        this.userId = userId;
+    public UserRequestModel(String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
         this.username = username;
         this.password = password;
         this.email = email;
