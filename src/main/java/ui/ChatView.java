@@ -42,10 +42,14 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
         message.add(new JLabel("Message"));
         message.add(textArea);
         JButton send = new JButton("Send");
+        JButton backToHome = new JButton("Back to Home Page");
         JPanel buttons = new JPanel();
         buttons.add(send);
+        buttons.add(backToHome);
         send.addActionListener(this);
         send.setActionCommand("Send");
+        backToHome.addActionListener(this);
+        backToHome.setActionCommand("Back");
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
         this.add(scroll);
@@ -88,6 +92,9 @@ public class ChatView extends JPanel implements ChatViewInterface, ActionListene
             messages.revalidate();
             scroll.revalidate();
             this.revalidate();
+        } else if(evt.getActionCommand().equals("Back")) {
+            this.controller.goToHome(this.userId);
+            this.setVisible(false);
         }
     }
 

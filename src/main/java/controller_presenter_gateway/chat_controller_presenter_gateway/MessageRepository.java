@@ -76,7 +76,7 @@ public class MessageRepository implements MessageRepoGateway {
     }
 
     /**
-     * Saves the reply message to the JSON and update the message that is being replied to to contain the reply id
+     * Saves the reply message to the JSON and update the message that is being replied to contain the reply id
      *
      * @param reply the request model containing the message to be saved
      * @param replyToMessage the id of the message that the requestModel message is replying to

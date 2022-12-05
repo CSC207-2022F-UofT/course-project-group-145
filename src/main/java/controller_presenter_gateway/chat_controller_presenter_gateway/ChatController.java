@@ -3,6 +3,7 @@ package controller_presenter_gateway.chat_controller_presenter_gateway;
 import use_cases.chat_use_cases.DeleteMessageInputBoundary;
 import use_cases.chat_use_cases.EditMessageInputBoundary;
 import use_cases.chat_use_cases.SendMessageInputBoundary;
+import use_cases.homepage_use_cases.OpenHomePageInputBoundary;
 
 import java.util.Date;
 
@@ -13,19 +14,24 @@ public class ChatController {
 
     private final SendMessageInputBoundary sendMessageInputBoundary;
 
+    private final OpenHomePageInputBoundary openHomePageInputBoundary;
+
     /**
      * Create a ChatController with given input boundaries
      *
      * @param deleteMessageInputBoundary for deleting a chat
      * @param editMessageInputBoundary for editing a chat
      * @param sendMessageInputBoundary for sending a message or replying to a message
+     * @param openHomePageInputBoundary for opening the home page
      */
     public ChatController(DeleteMessageInputBoundary deleteMessageInputBoundary,
                           EditMessageInputBoundary editMessageInputBoundary,
-                          SendMessageInputBoundary sendMessageInputBoundary) {
+                          SendMessageInputBoundary sendMessageInputBoundary,
+                          OpenHomePageInputBoundary openHomePageInputBoundary) {
         this.deleteMessageInputBoundary = deleteMessageInputBoundary;
         this.editMessageInputBoundary = editMessageInputBoundary;
         this.sendMessageInputBoundary = sendMessageInputBoundary;
+        this.openHomePageInputBoundary = openHomePageInputBoundary;
     }
 
     /**
@@ -72,5 +78,14 @@ public class ChatController {
     public void replyMessage(int chatId, String content, int sender, int receiver, int replyToId) {
         ChatRequestModel requestModel = new ChatRequestModel(chatId, content, sender, receiver, new Date());
         this.sendMessageInputBoundary.reply(requestModel, replyToId);
+    }
+
+    /**
+     * Move to the homepage
+     *
+     * @param userId the current user id
+     */
+    public void goToHome(int userId) {
+        this.openHomePageInputBoundary.openHome(userId);
     }
 }

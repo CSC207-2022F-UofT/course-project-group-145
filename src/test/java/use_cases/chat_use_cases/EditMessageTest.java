@@ -1,4 +1,4 @@
-package chat_use_cases;
+package use_cases.chat_use_cases;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,8 +6,6 @@ import controller_presenter_gateway.chat_controller_presenter_gateway.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_cases.chat_use_cases.DeleteMessage;
-import use_cases.chat_use_cases.DeleteMessageInputBoundary;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +14,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DeleteMessageTest {
+class EditMessageTest {
 
     @BeforeEach
     void setUp() throws IOException {
@@ -25,6 +23,7 @@ class DeleteMessageTest {
         MessageRepoRequestModel message = new MessageRepoRequestModel(-1, "hello", -1, -2, new Date(),
                 new Date(), false, false, false, -1);
         messageRepoGateway.save(message);
+
     }
 
     @AfterEach
@@ -40,8 +39,9 @@ class DeleteMessageTest {
     }
 
     @Test
-    void delete() throws IOException {
+    void edit() throws IOException {
         MessageRepoGateway messageRepoGateway = new MessageRepository("message.json");
+        ChatRequestModel requestModel = new ChatRequestModel(-1, "hello there", -1, -2, new Date());
         class fakePresenter implements ChatOutputBoundary {
             @Override
             public void addMessage(ChatResponseModel responseModel) {
@@ -55,6 +55,8 @@ class DeleteMessageTest {
 
             @Override
             public void editMessage(int messageId, String content) {
+                assertEquals(messageId, -1);
+                assertEquals(content, "hello there");
 
             }
 
@@ -73,11 +75,15 @@ class DeleteMessageTest {
 
             }
         }
-        DeleteMessageInputBoundary deleteMessage = new DeleteMessage(new fakePresenter(), messageRepoGateway);
+        EditMessageInputBoundary editMessage = new EditMessage(new fakePresenter(), messageRepoGateway);
+        editMessage.edit(-1, requestModel.getContent());
 
-        // Check if message is deleted
-        deleteMessage.delete(-1);
-        boolean actual = messageRepoGateway.getAllMessages().get(-1).isDeleted();
-        assertTrue(actual);
+        // Check if content for message has changed
+        String actual = messageRepoGateway.getAllMessages().get(-1).getContent();
+        String expected = requestModel.getContent();
+        assertEquals(actual, expected);
+        assertTrue(messageRepoGateway.getAllMessages().get(-1).isEdited());
+
+
     }
 }
