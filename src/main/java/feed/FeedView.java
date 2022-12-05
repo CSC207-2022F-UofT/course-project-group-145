@@ -32,8 +32,8 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
     private int panelX;
     private int panelY;
 
-    private List<Integer> feedIDs;
-    private List<List<String>> feedTags;
+    private List<Integer> feedIDs = new ArrayList<>(); // = Arrays.asList(1,2);
+    private List<List<String>> feedTags = new ArrayList<>(); // = Arrays.asList(Arrays.asList("hello","world"), Arrays.asList("UwU"));
 
     public FeedView(FeedControllerInputBoundary controller, FeedViewModel model, int sizeX, int sizeY){
         this.controller = controller;
@@ -92,32 +92,32 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
 
         this.generateNew = new JButton("Create new feed");
         generateNew.addActionListener(this);
-        generateNew.setBounds(20,90,140, 30);
+        generateNew.setBounds(30,90,140, 30);
         this.add(this.generateNew);
 
         JLabel tagsLabel = new JLabel();
         tagsLabel.setFont(new Font("Serif", Font.PLAIN, 12));
         tagsLabel.setText("Search Tags (separated by spaces)");
-        tagsLabel.setBounds(180, 65, 100, 30);
+        tagsLabel.setBounds(190, 65, 400, 30);
         this.add(tagsLabel);
 
         this.tagInput = new JTextField();
-        this.tagInput.setBounds(180, 90, 280, 30);
+        this.tagInput.setBounds(190, 90, 280, 30);
         this.add(this.tagInput);
 
         JLabel lengthLabel = new JLabel();
         lengthLabel.setFont(new Font("Serif", Font.PLAIN, 12));
         lengthLabel.setText("Feed Length");
-        lengthLabel.setBounds(480, 65, 350, 30);
+        lengthLabel.setBounds(490, 65, 350, 30);
         this.add(lengthLabel);
 
         this.lengthInput = new JFormattedTextField(NumberFormat.getInstance());
-        this.lengthInput.setBounds(480, 90, 60, 30);
+        this.lengthInput.setBounds(490, 90, 60, 30);
         this.lengthInput.setText("30");
         this.add(this.lengthInput);
 
         this.feedList = new JList<String>();
-        this.feedList.setBounds(20, 120, panelX-40, panelY-140);
+        this.feedList.setBounds(20, 140, panelX-60, panelY-280);
         this.feedList.setModel(new AbstractListModel<String>() {
             @Override
             public int getSize() {
@@ -130,6 +130,7 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
             }
         });
         this.feedList.addListSelectionListener(this);
+        this.add(feedList);
     }
 
     /**
