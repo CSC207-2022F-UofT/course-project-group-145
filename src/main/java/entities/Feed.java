@@ -26,6 +26,10 @@ public class Feed implements Iterable{
         this.snippets = snippets;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
     protected void setSnippets(List<CodeSnippet> snippets){
         this.snippets = snippets;
     }
@@ -38,7 +42,13 @@ public class Feed implements Iterable{
         this.id = id;
     }
 
-
+    //TODO: Implement this
+//    public List<String> getSnippetIDs(){
+//        ArrayList<String> snippetIDs = new ArrayList<>();
+//        for (CodeSnippet snippet: snippets){
+//            snippetIDs.add(snippet.)
+//        }
+//    }
 
     @Override
     public FeedIterator iterator() {
@@ -61,6 +71,13 @@ public class Feed implements Iterable{
             return snippets.get(curr++);
         }
 
+        public int getCurr(){
+            return curr;
+        }
+        public void setCurr(int curr){
+            this.curr = curr;
+        }
+
         public int match(){
             //Adds the code snippet at the ith index to matched, and returns the userID of the snippet
             matched.add(snippets.get(curr));
@@ -75,7 +92,5 @@ public class Feed implements Iterable{
     public void setUserID(int userID) {
         this.userID = userID;
     }
-
-
 
 }

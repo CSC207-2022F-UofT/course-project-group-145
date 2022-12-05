@@ -13,7 +13,8 @@ public class Tag {
         tags.add(this);
     }
 
-    public String getDesc(){
+    @Override
+    public String toString(){
         return desc;
     }
 
