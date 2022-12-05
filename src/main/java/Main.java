@@ -25,10 +25,8 @@ import use_cases.user_use_case.Login;
 import use_cases.user_use_case.LoginInputBoundary;
 
 import java.io.IOException;
-import java.util.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class Main {
 
@@ -74,16 +72,17 @@ public class Main {
         ChatRepoGateway chatRepoGateway = new ChatRepository("chat.json");
         UserRepoGateway userRepoGateway = new UserRepository("user.json");
 
+        LoginView login = new LoginView();
+        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(login);
 
         HomePageView homePage = new HomePageView();
         HomePageOutputBoundary homePagePresenter = new HomePagePresenter(homePage);
         ChatListView chatListView = new ChatListView();
         ChatDeletionOutputBoundary chatDeletionOutputBoundary = new ChatListPresenter(chatListView, chatRepoGateway, userRepoGateway);
         OpenChatListInputBoundary openChatListInputBoundary = new OpenChatList(chatDeletionOutputBoundary);
-        HomePageController homePageController = new HomePageController(openChatListInputBoundary);
+        HomePageController homePageController = new HomePageController(openChatListInputBoundary, loginOutputBoundary);
         homePage.setController(homePageController);
 
-        LoginView login = new LoginView();
         RegisterView register = new RegisterView();
         RegisterOutputBoundary registerOutputBoundary = new RegisterPresenter(register);
         LoginInputBoundary loginInputBoundary = new Login(userRepoGateway, homePagePresenter);

@@ -72,4 +72,9 @@ public class LoginView extends JPanel implements ActionListener, LoginViewInterf
     public void setController(LoginController controller) {
         this.controller = controller;
     }
+
+    @Override
+    public void open(){
+        this.setVisible(true);
+    }
 }
