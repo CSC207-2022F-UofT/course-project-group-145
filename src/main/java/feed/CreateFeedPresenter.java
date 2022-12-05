@@ -1,20 +1,32 @@
 package feed;
 
-import java.util.ArrayList;
-import java.util.List;
+import user.UserRepoGateway;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * CreateFeedPresenter, this class updates the FeedViewModel with the results of CreateFeedUseCase
+ */
 public class CreateFeedPresenter implements CreateFeedOutputBoundary{
 
-    private FeedViewModel model;
+    private FeedViewModel viewModel;
     private FeedDSRepository feedRepo;
-    //private UserRepoGateway userRepo
-    //TODO: User repo reference
+    private UserRepoGateway userRepo;
 
-    public CreateFeedPresenter(FeedViewModel model, FeedDSRepository feedRepo){
-        this.model = model;
+    /**
+     * Constructor for creating a c
+     * @param viewModel the FeedViewModel that this presenter will update
+     * @param feedRepo the gateway to the feed repository
+     * @param userRepo the gateway to the user repository
+     */
+    public CreateFeedPresenter(FeedViewModel viewModel, FeedDSRepository feedRepo, UserRepoGateway userRepo){
+        this.viewModel = viewModel;
         this.feedRepo = feedRepo;
-
-
+        this.userRepo = userRepo;
     }
 
     /**
@@ -28,13 +40,22 @@ public class CreateFeedPresenter implements CreateFeedOutputBoundary{
 
     private void updateView(int userID){
         //Get list of feed IDs from repo
-        //UserRepoRequestModel model = userRepo.
-        List<Integer> listIDs = new ArrayList<>(); //TODO: Change to list as needed
-
+        try {
+            List<Integer> feedIDs = userRepo.getFeeds(userID);
+            Map<Integer, List<String>> feedMap = new HashMap<>();
+            for (int id : feedIDs){
+                FeedGatewayResponseModel feedModel = feedRepo.load(String.valueOf(id));
+                feedMap.put(id, feedModel.getTags());
+            }
+            viewModel.updateFeedMap(feedMap);
+        }
+        catch (IOException e){
+            failView("Unable to load feeds, please refresh and try again");
+        }
     }
 
     @Override
     public void failView(String errDesc) {
-        model.reportFailure(errDesc);
+        viewModel.reportFailure(errDesc);
     }
 }

@@ -53,7 +53,7 @@ public class FeedViewModel {
      * changes feeds to the new incoming lists
      * @param feeds map that maps a feed ID to a list of its tags as strings
      */
-    public void updateFeedList(Map<Integer, List<String>> feeds){
+    public void updateFeedMap(Map<Integer, List<String>> feeds){
         this.feeds = feeds;
         update();
     }

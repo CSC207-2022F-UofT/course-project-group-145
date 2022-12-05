@@ -1,11 +1,19 @@
 package feed;
 
 import feed_use_case.CreateFeedUseCaseInputBoundary;
+import feed_use_case.CreateFeedUseCaseRequestModel;
 
+/**
+ * Controller that relays information from the feedview to the CreateFeedUseCase
+ */
 public class CreateFeedController implements FeedControllerInputBoundary{
 
     private CreateFeedUseCaseInputBoundary useCase;
 
+    /**Constructor to create a CreateFeedController
+     *
+     * @param  useCase the input boundary interface of the CreateFeedUseCase
+     */
     public CreateFeedController(CreateFeedUseCaseInputBoundary useCase){
         this.useCase = useCase;
     }
@@ -16,6 +24,7 @@ public class CreateFeedController implements FeedControllerInputBoundary{
      */
     @Override
     public void createNewFeed(FeedControllerInputModel model) {
-        useCase.createFeed(model.getUserID(), model.getTags(), model.getLen());
+        CreateFeedUseCaseRequestModel rModel = new CreateFeedUseCaseRequestModel(model.getUserID(), model.getTags(), model.getLen());
+        useCase.createFeed(rModel);
     }
 }

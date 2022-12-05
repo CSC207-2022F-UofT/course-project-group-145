@@ -42,16 +42,6 @@ public class Feed implements Iterable{
         this.id = id;
     }
 
-    //TODO: Implement this
-//    public List<String> getSnippetIDs(){
-//        ArrayList<String> snippetIDs = new ArrayList<>();
-//        for (CodeSnippet snippet: snippets){
-//            snippetIDs.add(snippet.)
-//        }
-//    }
-
-
-
     @Override
     public FeedIterator iterator() {
         return new FeedIterator();
