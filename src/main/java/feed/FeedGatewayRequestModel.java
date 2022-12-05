@@ -4,23 +4,24 @@ import java.util.List;
 
 public class FeedGatewayRequestModel {
 
+
+    private String feedID;
     private List<String> snippetIDs;
     private List<String> matchedIDs;
     private List<String> tags;
     private int curr;
     private int userId;
 
-
-    private String feedId;
-
     public FeedGatewayRequestModel(List<String> snippetIDs, List<String> matchedIDs, List<String> tags, int curr,
                                    int userId, String feedId){
+
         this.snippetIDs = snippetIDs;
         this.matchedIDs = matchedIDs;
         this.tags = tags;
         this.curr = curr;
         this.userId = userId;
         this.feedId = feedId;
+
     }
 
     public List<String> getMatchedIDs() {

@@ -1,4 +1,4 @@
-package chat_use_cases;
+package use_cases.chat_use_cases;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -7,8 +7,6 @@ import entities.MessageFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_cases.chat_use_cases.SendMessage;
-import use_cases.chat_use_cases.SendMessageInputBoundary;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -65,7 +63,9 @@ class SendMessageTest {
         class fakePresenter implements ChatOutputBoundary {
             @Override
             public void addMessage(ChatResponseModel responseModel) {
-
+                assertEquals(responseModel.getAuthor(), -1);
+                assertEquals(responseModel.getReceiver(), -2);
+                assertEquals(responseModel.getContent(),"hello");
             }
 
             @Override
@@ -130,7 +130,10 @@ class SendMessageTest {
 
             @Override
             public void replyMessage(ChatResponseModel responseModel, int replyToMessageId) {
-
+                assertEquals(responseModel.getAuthor(), -1);
+                assertEquals(responseModel.getReceiver(), -2);
+                assertEquals(responseModel.getContent(),"hello");
+                assertEquals(replyToMessageId, -1);
             }
 
             @Override

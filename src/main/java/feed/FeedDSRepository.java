@@ -12,4 +12,5 @@ public interface FeedDSRepository {
 
     void match(String FeedId) throws IOException;
 
+    int numFeeds();
 }

@@ -30,6 +30,10 @@ public class Feed implements Iterable{
         this.userId = userId;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
     protected void setSnippets(List<CodeSnippet> snippets){
         this.snippets = snippets;
     }
@@ -42,9 +46,11 @@ public class Feed implements Iterable{
         this.id = id;
     }
 
+
     public int getUserId(){return this.userId;}
 
     public void setUserId(int userId){this.userId = userId;}
+
 
     @Override
     public FeedIterator iterator() {
@@ -88,7 +94,5 @@ public class Feed implements Iterable{
     public void setUserID(int userID) {
         this.userID = userID;
     }
-
-
 
 }
