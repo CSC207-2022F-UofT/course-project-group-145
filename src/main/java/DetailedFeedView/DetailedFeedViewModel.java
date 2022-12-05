@@ -1,6 +1,6 @@
 package DetailedFeedView;
 
-import UI.ViewInterface;
+import ui.ViewInterface;
 
 import java.util.List;
 

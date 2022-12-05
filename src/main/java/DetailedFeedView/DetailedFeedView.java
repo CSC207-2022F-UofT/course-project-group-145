@@ -1,5 +1,5 @@
 package DetailedFeedView;
-import UI.ViewInterface;
+import ui.ViewInterface;
 import feed_interaction_use_case.CurrentSnippetController;
 import feed_interaction_use_case.LikeSnippetController;
 import feed_interaction_use_case.NextSnippetController;
@@ -22,20 +22,14 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
     JLabel picture;
     JLabel errorLabel;
 
-    public DetailedFeedView(String feedId, LikeSnippetController likeSnippetController, NextSnippetController nextSnippetController,
-                            CurrentSnippetController currentSnippetController) throws IOException {
-        this.feedId = feedId;
+    public DetailedFeedView() throws IOException {
         this.viewModel = new DetailedFeedViewModel();
         this.viewModel.addListener(this);
-        this.nextSnippetController = nextSnippetController;
-        this.likeSnippetController = likeSnippetController;
-        this.currentSnippetController = currentSnippetController;
         this.likeButton = new JButton("Like");
         this.add(likeButton);
         this.nextButton = new JButton("Next");
         this.add(nextButton);
         this.picture = new JLabel();
-        draw();
         picture.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setBackground(new Color(200, 200, 100));
         likeButton.addActionListener(this);
@@ -43,6 +37,21 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
+    public void setFeedId(String feedId) {
+        this.feedId = feedId;
+    }
+
+    public void setLikeSnippetController(LikeSnippetController likeSnippetController){
+        this.likeSnippetController = likeSnippetController;
+    }
+
+    public void setNextSnippetController(NextSnippetController nextSnippetController){
+        this.nextSnippetController = nextSnippetController;
+    }
+
+    public void setCurrentSnippetController(CurrentSnippetController currentSnippetController){
+        this.currentSnippetController = currentSnippetController;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
