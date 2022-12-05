@@ -2,6 +2,8 @@ package use_cases.homepage_use_cases;
 
 import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatDeletionOutputBoundary;
 
+import java.io.IOException;
+
 public class OpenChatList implements OpenChatListInputBoundary {
 
     private final ChatDeletionOutputBoundary deletionOutputBoundary;
@@ -21,7 +23,7 @@ public class OpenChatList implements OpenChatListInputBoundary {
      * @param userId the user id of the current user
      */
     @Override
-    public void openList(int userId) {
-        // deletionOutputBoundary.openListChat(userId);
+    public void openList(int userId) throws IOException {
+        deletionOutputBoundary.openChatList(userId);
     }
 }

@@ -2,6 +2,8 @@ package controller_presenter_gateway.hompage_controller_presenter;
 
 import use_cases.homepage_use_cases.OpenChatListInputBoundary;
 
+import java.io.IOException;
+
 public class HomePageController {
 
     private final OpenChatListInputBoundary openChatListInputBoundary;
@@ -20,7 +22,7 @@ public class HomePageController {
      *
      * @param userId the user id
      */
-    public void openList(int userId) {
+    public void openList(int userId) throws IOException {
         this.openChatListInputBoundary.openList(userId);
     }
 

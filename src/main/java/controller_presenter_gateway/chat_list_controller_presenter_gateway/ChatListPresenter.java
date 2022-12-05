@@ -1,11 +1,11 @@
 package controller_presenter_gateway.chat_list_controller_presenter_gateway;
 
 import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoGateway;
-import entities.User;
 import ui.ChatListViewInterface;
+import user.UserRepoGateway;
+import user.UserRepoRequestModel;
 
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
 
 public class ChatListPresenter implements ChatDeletionOutputBoundary {
 
@@ -37,10 +37,11 @@ public class ChatListPresenter implements ChatDeletionOutputBoundary {
     }
 
 
-    public void openChatList(int userId) {
-    //call the User repository
-    User u = userRepoGateway.getUser(userId);
-    this.chatListViewInterface.openChatList(userId, u.getListOfChatIds());
+    @Override
+    public void openChatList(int userId) throws IOException {
+        //call the User repository
+        UserRepoRequestModel u = userRepoGateway.getUser(userId);
+        this.chatListViewInterface.openChatList(userId, u.getListOfChatIds());
     }
 }
 

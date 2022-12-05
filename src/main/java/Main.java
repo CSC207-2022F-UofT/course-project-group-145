@@ -19,6 +19,9 @@ import use_cases.homepage_use_cases.OpenChatList;
 import use_cases.homepage_use_cases.OpenChatListInputBoundary;
 import use_cases.homepage_use_cases.OpenHomePage;
 import use_cases.homepage_use_cases.OpenHomePageInputBoundary;
+import user.UserRepoGateway;
+import user.UserRepoRequestModel;
+import user.UserRepository;
 
 import java.io.IOException;
 import java.util.*;
@@ -36,13 +39,28 @@ public class Main {
         ids.add(0);
         ids.add(1);
 
+        List<Integer> ids1 = new ArrayList<>();
+        ids1.add(2);
+        ids1.add(3);
+
         chatRepo.save(new ChatRepoRequestModel(0, ids, false));
+        chatRepo.save(new ChatRepoRequestModel(1, ids1, false));
+        UserRepoGateway userRepo = new UserRepository("user.json");
+        Map<Integer, Integer> idToId = new HashMap<>();
+        idToId.put(0, 1);
+        idToId.put(1, 2);
+        UserRepoRequestModel user = new UserRepoRequestModel(0, "bob", "joe", "blah@blah.com", idToId, ids, false);
+        userRepo.save(user);
 
         MessageRepoGateway messageGateway = new MessageRepository("message.json");
         MessageRepoRequestModel message = new MessageRepoRequestModel(0, "hello", 0, 1, new Date(), new Date(), false, false, false , -1);
         messageGateway.save(message);
         MessageRepoRequestModel message1 = new MessageRepoRequestModel(1, "hello there", 1, 0, new Date(), new Date(), false, false, false , -1);
         messageGateway.save(message1);
+        MessageRepoRequestModel message2 = new MessageRepoRequestModel(2, "hi", 0, 2, new Date(), new Date(), false, false, false , -1);
+        messageGateway.save(message2);
+        MessageRepoRequestModel message3 = new MessageRepoRequestModel(3, "bonjour", 2, 0, new Date(), new Date(), false, false, false , -1);
+        messageGateway.save(message3);
 
         JFrame application = new JFrame("CodeR");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,11 +72,12 @@ public class Main {
 
         MessageRepoGateway messageRepoGateway = new MessageRepository("message.json");
         ChatRepoGateway chatRepoGateway = new ChatRepository("chat.json");
+        UserRepoGateway userRepoGateway = new UserRepository("user.json");
 
         HomePageView homePage = new HomePageView();
         HomePageOutputBoundary homePagePresenter = new HomePagePresenter(homePage);
-        ChatListView chatListView = new ChatListView(0, new HashMap<>());
-        ChatDeletionOutputBoundary chatDeletionOutputBoundary = new ChatListPresenter(chatListView, chatRepoGateway);
+        ChatListView chatListView = new ChatListView();
+        ChatDeletionOutputBoundary chatDeletionOutputBoundary = new ChatListPresenter(chatListView, chatRepoGateway, userRepoGateway);
         OpenChatListInputBoundary openChatListInputBoundary = new OpenChatList(chatDeletionOutputBoundary);
         HomePageController homePageController = new HomePageController(openChatListInputBoundary);
         homePage.setController(homePageController);
@@ -72,11 +91,18 @@ public class Main {
         EditMessageInputBoundary edit = new EditMessage(chatPresenter, messageRepoGateway);
         OpenHomePageInputBoundary openHomePage = new OpenHomePage(homePagePresenter);
         ChatController chatController = new ChatController(delete, edit, send, openHomePage);
+
+        DeleteChatInputBoundary deleteChat = new DeleteChat(chatDeletionOutputBoundary, chatRepoGateway);
+        OpenChatInputBoundary openChat = new OpenChat(chatPresenter);
+        ChatListController chatListController = new ChatListController(deleteChat, openChat, openHomePage);
+        chatListView.setListController(chatListController);
+
         chat.setController(chatController);
 
         screens.add(chat, "Chat");
         screens.add(homePage, "Home");
-        cardLayout.show(screens, "Chat");
+        screens.add(chatListView, "Chat List");
+        cardLayout.show(screens, "Home");
         application.pack();
         application.setVisible(true);
 

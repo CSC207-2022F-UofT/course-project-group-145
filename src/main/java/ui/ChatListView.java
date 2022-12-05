@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
-import javax.swing.border.Border;
 
 public class ChatListView extends JPanel implements ChatListViewInterface, ActionListener {
 //    private final JTextArea textArea = new JTextArea(5, 20);
@@ -43,8 +42,8 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
     //take nothing
     public ChatListView() {
         this.userId = -1;
-        chatIds = new ArrayList<Integer>();
-        otherUserIds = new ArrayList<Integer>();
+        chatIds = new ArrayList<>();
+        otherUserIds = new ArrayList<>();
 
         initialize();
     }
@@ -57,10 +56,11 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
         chats = new JPanel(new GridLayout(0, 1));
 
         this.userId = userId;
-        chatIds = new ArrayList<Integer>(chatToUserIds.keySet());
-        otherUserIds = new ArrayList<Integer>(chatToUserIds.values());
+        chatIds = new ArrayList<>(chatToUserIds.keySet());
+        otherUserIds = new ArrayList<>(chatToUserIds.values());
 
         initialize();
+        this.setVisible(true);
     }
     //take in initialize userid and map
     public void initialize() {
@@ -71,8 +71,8 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
 
         chats.setLayout(new GridLayout(chatIds.size(),2));
         chats.setBounds(0, 500, 200, 200);
-        listOfRows = new ArrayList<Object>();
-        listOfOIds = new ArrayList<Integer>();
+        listOfRows = new ArrayList<>();
+        listOfOIds = new ArrayList<>();
 
         int p = 0;
         for (int index = 0; index < chatIds.size(); index++) {
@@ -118,11 +118,11 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String[] s = e.getActionCommand().split("\\s");
-        int uId = Integer.parseInt(s[1]);
-        int cId = Integer.parseInt(s[3]);
-        int oId = Integer.parseInt(s[2]);
         if (e.getActionCommand().startsWith("Delete")) {
+            String[] s = e.getActionCommand().split("\\s");
+            int uId = Integer.parseInt(s[1]);
+            int cId = Integer.parseInt(s[3]);
+            int oId = Integer.parseInt(s[2]);
             int x = 0;
             for (Integer i : listOfOIds) {
                 if (i == oId) {
@@ -139,6 +139,10 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
 
         }
         else if (e.getActionCommand().startsWith("Open")) {
+            String[] s = e.getActionCommand().split("\\s");
+            int uId = Integer.parseInt(s[1]);
+            int cId = Integer.parseInt(s[3]);
+            int oId = Integer.parseInt(s[2]);
             try {
                 this.openChat(uId, cId, oId);
             } catch (IOException ex) {
@@ -177,14 +181,13 @@ public class ChatListView extends JPanel implements ChatListViewInterface, Actio
     public void openChat(int userId, int chatId, int otherUserId) throws IOException {
         //hide ui
         this.setVisible(false);
-        //open the new chat howwwwwwwwwww, explain to me BOBJOE
         chatListController.openChat(chatId, userId, otherUserId);
     }
 
     @Override
     public void goHome() throws IOException {
         this.setVisible(false);
-        // open home here pls
+        this.chatListController.openHomePage(this.userId);
     }
 
     @Override

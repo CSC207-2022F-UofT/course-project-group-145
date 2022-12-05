@@ -56,7 +56,8 @@ class DeleteChatTest {
 
             }
 
-            public void openListChat(int userId) {
+            @Override
+            public void openChatList(int userId) {
 
             }
         }

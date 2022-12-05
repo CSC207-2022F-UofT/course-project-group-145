@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class HomePageView extends JPanel implements HomePageViewInterface, ActionListener {
 
@@ -45,11 +46,15 @@ public class HomePageView extends JPanel implements HomePageViewInterface, Actio
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getActionCommand().equals("List")) {
-            this.controller.openList(this.userId);
+            try {
+                this.controller.openList(this.userId);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             this.setVisible(false);
         } else if (evt.getActionCommand().equals("Log Out")) {
             this.controller.logOut();
-            this.setVisible(false);
+            //this.setVisible(false);
         }
     }
 
