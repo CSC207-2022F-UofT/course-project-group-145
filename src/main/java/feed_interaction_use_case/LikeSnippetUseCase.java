@@ -1,14 +1,17 @@
 package feed_interaction_use_case;
 
-import chat.ChatRepoGateway;
-import chat.ChatRepoRequestModel;
+
 import codesnippet.CodeSnippetRepoGateway;
 import codesnippet.CodeSnippetRequestModel;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatOutputBoundary;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoGateway;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoRequestModel;
 import entities.Chat;
 import entities.ChatFactory;
 import entities.FeedFactory;
 import feed.FeedDSRepository;
 import feed.FeedGatewayResponseModel;
+import user.UserRepoGateway;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,16 +23,20 @@ public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
     final FeedDSRepository feedDSRepository;
     final ChatRepoGateway chatRepoGateway;
     final CodeSnippetRepoGateway codeSnippetRepoGateway;
+    final UserRepoGateway userRepoGateway;
     final FeedFactory feedFactory;
     final ChatFactory chatFactory;
+    final ChatOutputBoundary chatOutputBoundary;
 
 
-    public LikeSnippetUseCase(FeedDSRepository feedDSRepository, ChatRepoGateway chatRepoGateway, CodeSnippetRepoGateway codeSnippetRepoGateway, FeedFactory feedFactory, ChatFactory chatFactory) {
+    public LikeSnippetUseCase(FeedDSRepository feedDSRepository, ChatRepoGateway chatRepoGateway, CodeSnippetRepoGateway codeSnippetRepoGateway, UserRepoGateway userRepoGateway, FeedFactory feedFactory, ChatFactory chatFactory, ChatOutputBoundary chatOutputBoundary) {
         this.feedDSRepository = feedDSRepository;
         this.chatRepoGateway = chatRepoGateway;
         this.codeSnippetRepoGateway = codeSnippetRepoGateway;
+        this.userRepoGateway = userRepoGateway;
         this.feedFactory = feedFactory;
         this.chatFactory = chatFactory;
+        this.chatOutputBoundary = chatOutputBoundary;
     }
 
     /**
@@ -53,22 +60,17 @@ public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
         ChatRepoRequestModel chatRepoRequestModel = new ChatRepoRequestModel(chatID, emptyList, false);
 
         int thisUser = feed.getUserId();
-        String currentSnippetId = feed.getSnippetIDs().get(feed.getCurr());
+        String currentSnippetId = feed.getSnippetIDs().get(feed.getCurr()+1);
         CodeSnippetRequestModel codeSnippetRequestModel = codeSnippetRepoGateway.retrieve(parseInt(currentSnippetId));
-        int otherUser = codeSnippetRequestModel.getUserId(); //
+        int otherUser = codeSnippetRequestModel.getUserId();
+
+        userRepoGateway.addChatId(thisUser, chatID);
+        userRepoGateway.addChatId(otherUser, chatID);
 
         feedDSRepository.match(likeSnippetRequestModel.getFeedId());
 
+        chatRepoGateway.save(chatRepoRequestModel);
 
-
-        // add chatID to the list of ChatIds of the two users.
-        // retrieve Snippet from the SnippetRepository. Obtain the UserID from the CodeSnippetResponseModel.
-        // Then retrieve the user from the user repository. Create the user and add the new chatID to its
-        // list of chatIDs.
-
-        // save chat to the repository
-        // call presenter
-
-
+        chatOutputBoundary.openChat(chatID, thisUser, otherUser);
     }
 }

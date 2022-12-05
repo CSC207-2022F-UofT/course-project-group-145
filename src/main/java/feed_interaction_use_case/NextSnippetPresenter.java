@@ -3,7 +3,6 @@ package feed_interaction_use_case;
 import DetailedFeedView.DetailedFeedViewModel;
 import codesnippet.CodeSnippetRepoGateway;
 import codesnippet.CodeSnippetRequestModel;
-import codesnippet.CodeSnippetResponseModel;
 import feed.FeedDSRepository;
 import feed.FeedGatewayResponseModel;
 
@@ -24,6 +23,12 @@ public class NextSnippetPresenter implements NextSnippetOutputBoundary{
         this.viewModel = viewModel;
     }
 
+    /**
+     * This method finds the list of locations of the code snippets in the feed. Then it makes a call to the view model
+     * passing in the list of code snippet locations, and the index of the current code snippet. The view model will
+     * use this information to determine which code snippet needs to be displayed in the view, and it updates the view.
+     * @param responseModel contains the id of the feed which we want to update.
+     */
     @Override
     public void showNextSnippet(NextSnippetResponseModel responseModel) {
         FeedGatewayResponseModel feed = repository.load(responseModel.getFeedId());
@@ -35,9 +40,14 @@ public class NextSnippetPresenter implements NextSnippetOutputBoundary{
             String location = codeSnippetRequestModel.getFileUrl();
             SnippetLocations.add(location);
         }
-        viewModel.nextSnippet(SnippetLocations, current);
+        // we need to add 1 because the variable curr starts from -1
+        viewModel.nextSnippet(SnippetLocations, current+1);
     }
 
+    /**
+     * This method triggers a call to the reportFail method in the ViewModel to display and error in the screen.
+     * @param message the error message to be displayed in the View.
+     */
     @Override
      public void prepareFailView(String message) {
         viewModel.reportFail(message);

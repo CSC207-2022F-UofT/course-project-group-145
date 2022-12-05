@@ -22,6 +22,12 @@ public class CurrentSnippetPresenter implements CurrentSnippetOutputBoundary{
         this.viewModel = viewModel;
     }
 
+    /**
+     * This method triggers a call to the nextSnippet method in the ViewModel passing in a list of the locations of
+     * the code snippets, and the index of the code snippet that needs to be displayed in the View. The ViewModel will
+     * then update the View.
+     * @param responseModel contains the id of the feed for which we wish to display the current snippet.
+     */
     @Override
     public void getSnippet(CurrentSnippetResponseModel responseModel) {
         FeedGatewayResponseModel feed = repository.load(responseModel.getFeedId());
@@ -33,9 +39,15 @@ public class CurrentSnippetPresenter implements CurrentSnippetOutputBoundary{
             String location = codeSnippetRequestModel.getFileUrl();
             SnippetLocations.add(location);
         }
-        viewModel.nextSnippet(SnippetLocations, current);
+        // we need to add 1 because the variable curr starts from -1.
+        viewModel.nextSnippet(SnippetLocations, current+1);
     }
 
+    /**
+     * This method triggers a call to the perpareFailView method in the ViewModel to display an error message in the
+     * screen.
+     * @param error the error message to be displayed in the View.
+     */
     @Override
     public void prepareFailView(String error) {
         viewModel.reportFail(error);

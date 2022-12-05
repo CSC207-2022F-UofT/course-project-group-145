@@ -1,6 +1,5 @@
 package feed_interaction_use_case;
 
-import entities.FeedFactory;
 import feed.FeedDSRepository;
 import feed.FeedGatewayResponseModel;
 
@@ -8,13 +7,10 @@ import java.io.IOException;
 
 public class NextSnippetUseCase implements NextSnippetInputBoundary{
     final FeedDSRepository feedDSRepository;
-    final FeedFactory feedFactory;
     final NextSnippetOutputBoundary outputBoundary;
 
-    public NextSnippetUseCase(FeedDSRepository feedDSRepository, FeedFactory feedFactory,
-                              NextSnippetPresenter outputBoundary) {
+    public NextSnippetUseCase(FeedDSRepository feedDSRepository, NextSnippetOutputBoundary outputBoundary) {
         this.feedDSRepository = feedDSRepository;
-        this.feedFactory = feedFactory;
         this.outputBoundary = outputBoundary;
     }
 
@@ -32,8 +28,6 @@ public class NextSnippetUseCase implements NextSnippetInputBoundary{
         FeedGatewayResponseModel feed = feedDSRepository.load(nextSnippetRequestModel.getFeedId());
 
         if(feed.getCurr() < (feed.getSnippetIDs().size()-1)) {
-//            int curr = feed.getCurr();
-//            String nextSnippetId = feed.getSnippetIDs().get(curr + 1);
             NextSnippetResponseModel responseModel = new NextSnippetResponseModel(nextSnippetRequestModel.getFeedId());
             feedDSRepository.advanceFeed(nextSnippetRequestModel.getFeedId());
             outputBoundary.showNextSnippet(responseModel);

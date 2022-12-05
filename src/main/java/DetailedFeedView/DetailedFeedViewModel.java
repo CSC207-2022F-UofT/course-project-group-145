@@ -13,6 +13,13 @@ public class DetailedFeedViewModel {
         this.listener = listener;
     }
 
+    public DetailedFeedViewModel(){
+
+    }
+    public void addListener(ViewInterface listener){
+        this.listener=listener;
+    }
+
     public void nextSnippet(List<String> snippetLocations, int toDisplay){
         snippetLocation = snippetLocations.get(toDisplay);
         update();

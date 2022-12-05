@@ -1,7 +1,6 @@
 package DetailedFeedView;
 import UI.ViewInterface;
 import feed_interaction_use_case.CurrentSnippetController;
-import feed_interaction_use_case.CurrentSnippetRequestModel;
 import feed_interaction_use_case.LikeSnippetController;
 import feed_interaction_use_case.NextSnippetController;
 
@@ -24,9 +23,10 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
     JLabel errorLabel;
 
     public DetailedFeedView(String feedId, LikeSnippetController likeSnippetController, NextSnippetController nextSnippetController,
-                            CurrentSnippetController currentSnippetController, DetailedFeedViewModel viewModel) throws IOException {
+                            CurrentSnippetController currentSnippetController) throws IOException {
         this.feedId = feedId;
-        this.viewModel = viewModel;
+        this.viewModel = new DetailedFeedViewModel();
+        this.viewModel.addListener(this);
         this.nextSnippetController = nextSnippetController;
         this.likeSnippetController = likeSnippetController;
         this.currentSnippetController = currentSnippetController;
@@ -34,9 +34,8 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.add(likeButton);
         this.nextButton = new JButton("Next");
         this.add(nextButton);
-        // TODO: obtain the name of the picture.
         this.picture = new JLabel();
-        this.add(picture);
+        draw();
         picture.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setBackground(new Color(200, 200, 100));
         likeButton.addActionListener(this);
@@ -44,59 +43,37 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
-    public DetailedFeedView(String feedId) throws IOException {
-        this.feedId = feedId;
-        this.likeButton = new JButton("Like");
-        this.add(likeButton);
-        this.nextButton = new JButton("Next");
-        this.add(nextButton);
-        // TODO: obtain the name of the picture.
-        this.picture = new JLabel(new ImageIcon("Bucket/testPicture.jpeg"));
-        this.add(picture);
-        picture.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setBackground(new Color(200, 200, 100));
-        likeButton.addActionListener(this);
-        nextButton.addActionListener(this);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
         String label = button.getText();
         if(label=="Like"){
-            System.out.println("Like Button Was Pressed");
-            this.setBackground(new Color(100, 200, 100));
-//            try {
-//                likeSnippetController.like(this.feedId);
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
+            try {
+                likeSnippetController.like(this.feedId);
+                this.setVisible(false);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }else{
-            System.out.println("Next Button Was Pressed");
-            this.setBackground(new Color(200, 100, 100));
-//            try {
-//                nextSnippetController.next(this.feedId);
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
+            try {
+                nextSnippetController.next(this.feedId);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        JFrame frame = new JFrame("CodeR");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(900, 600);
-        frame.setContentPane(new DetailedFeedView("44"));
-        frame.setVisible(true);
     }
 
     @Override
     public void update() {
         String location = viewModel.getSnippetLocation();
         this.picture.setIcon(new ImageIcon(location));
-        // draw();
+    }
+
+    public void draw() throws IOException {
+        this.open();
+        this.add(picture);
     }
 
     public void open() throws IOException {
@@ -110,6 +87,5 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         remove(nextButton);
         remove(picture);
         add(errorLabel);
-        // take the user back to the main menu?
     }
 }

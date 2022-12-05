@@ -1,7 +1,5 @@
 package feed_interaction_use_case;
 
-import java.util.List;
-
 public class LikeSnippetRequestModel {
 
     private String feedId;
