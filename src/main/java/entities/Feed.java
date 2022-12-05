@@ -85,6 +85,4 @@ public class Feed implements Iterable{
         this.userID = userID;
     }
 
-
-
 }
