@@ -1,6 +1,10 @@
-package user_use_case;
+package use_cases.user_use_case;
 
-import user.*;
+import controller_presenter_gateway.hompage_controller_presenter.HomePageOutputBoundary;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserOutputBoundary;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoGateway;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoRequestModel;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRequestModel;
 import entities.User;
 import entities.UserFactory;
 
@@ -10,13 +14,13 @@ public class AddUser implements AddUserInputBoundary {
 
     private final UserFactory userFactory;
 
-    private final UserOutputBoundary userOutputBoundary;
+    private final HomePageOutputBoundary homePageOutputBoundary;
     private final UserRepoGateway userRepoGateway;
 
-    public AddUser(UserFactory userFactory, UserOutputBoundary userOutputBoundary,
+    public AddUser(UserFactory userFactory, HomePageOutputBoundary homePageOutputBoundary,
                        UserRepoGateway userRepoGateway) {
         this.userFactory = userFactory;
-        this.userOutputBoundary = userOutputBoundary;
+        this.homePageOutputBoundary = homePageOutputBoundary;
         this.userRepoGateway = userRepoGateway;
     }
 
@@ -29,6 +33,7 @@ public class AddUser implements AddUserInputBoundary {
     public void save(UserRequestModel requestModel) throws IOException {
         UserRepoRequestModel userRepoRequestModel = getUserRepoRequestModel(requestModel);
         userRepoGateway.save(userRepoRequestModel);
+        homePageOutputBoundary.openHome(userRepoRequestModel.getUserId());
     }
 
     /**

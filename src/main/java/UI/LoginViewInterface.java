@@ -1,4 +1,4 @@
-package userUI;
+package ui;
 
 public interface LoginViewInterface {
 }

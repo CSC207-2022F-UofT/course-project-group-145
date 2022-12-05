@@ -2,10 +2,13 @@ package controller_presenter_gateway.chat_list_controller_presenter_gateway;
 
 import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoGateway;
 import ui.ChatListViewInterface;
-import user.UserRepoGateway;
-import user.UserRepoRequestModel;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoGateway;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoRequestModel;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ChatListPresenter implements ChatDeletionOutputBoundary {
 
@@ -41,7 +44,14 @@ public class ChatListPresenter implements ChatDeletionOutputBoundary {
     public void openChatList(int userId) throws IOException {
         //call the User repository
         UserRepoRequestModel u = userRepoGateway.getUser(userId);
-        this.chatListViewInterface.openChatList(userId, u.getListOfChatIds());
+        List<Integer> chatIds = new ArrayList<>(u.getListOfChatIds().keySet());
+        Map<Integer, Integer> chatToUser = u.getListOfChatIds();
+        for(int id: chatIds) {
+            if (chatRepoGateway.getAllChats().get(id).isDeleted()) {
+               chatToUser.remove(id);
+            }
+        }
+        this.chatListViewInterface.openChatList(userId, chatToUser);
     }
 }
 

@@ -1,10 +1,8 @@
-package user_use_case;
+package use_cases.user_use_case;
 
-import user.UserRepoRequestModel;
-import user.UserRequestModel;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoRequestModel;
 
 import java.io.IOException;
-import java.util.List;
 
 public interface GetUserObjectInputBoundary {
 

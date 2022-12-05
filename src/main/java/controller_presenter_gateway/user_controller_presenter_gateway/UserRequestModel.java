@@ -1,13 +1,11 @@
-package user;
-
-import entities.User;
+package controller_presenter_gateway.user_controller_presenter_gateway;
 
 import java.util.List;
 import java.util.Map;
 
-public class UserRepoRequestModel {
-
+public class UserRequestModel {
     private static int numUsers = 0;
+
     private int userId;
 
     private String username;
@@ -22,8 +20,7 @@ public class UserRepoRequestModel {
 
     private boolean isDeleted;
 
-    public UserRepoRequestModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
-        this.userId = userId;
+    public UserRequestModel(String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -32,6 +29,7 @@ public class UserRepoRequestModel {
         this.isDeleted = isDeleted;
 
     }
+
     public int getUserId() {
         return userId;
     }
@@ -64,10 +62,12 @@ public class UserRepoRequestModel {
         this.email = email;
     }
 
-    public Map<Integer, Integer>  getListOfChatIds() {return mapOfChatToOtherUser;}
+    public Map<Integer, Integer> getListOfChatIds() {
+        return mapOfChatToOtherUser;
+    }
 
     public void setListOfChatIds(Map<Integer, Integer> mapOfChatToOtherUser) {
-        this.mapOfChatToOtherUser = mapOfChatToOtherUser;
+        this.mapOfChatToOtherUser= mapOfChatToOtherUser;
     }
 
     public List<Integer> getListOfFeedIds() {
@@ -97,6 +97,5 @@ public class UserRepoRequestModel {
     public boolean isDeleted() {
         return isDeleted;
     }
-
 
 }

@@ -1,6 +1,6 @@
-package user_use_case;
+package use_cases.user_use_case;
 
-import user.UserRequestModel;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRequestModel;
 
 import java.io.IOException;
 

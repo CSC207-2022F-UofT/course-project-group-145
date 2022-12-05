@@ -1,7 +1,7 @@
-package user_use_case;
+package use_cases.user_use_case;
 
-import user.UserOutputBoundary;
-import user.UserRepoGateway;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserOutputBoundary;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoGateway;
 
 import java.io.IOException;
 

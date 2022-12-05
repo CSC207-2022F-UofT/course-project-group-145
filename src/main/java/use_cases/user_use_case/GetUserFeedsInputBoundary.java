@@ -1,6 +1,4 @@
-package user_use_case;
-
-import user.UserRequestModel;
+package use_cases.user_use_case;
 
 import java.io.IOException;
 import java.util.List;

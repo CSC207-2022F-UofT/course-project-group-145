@@ -1,4 +1,4 @@
-package user;
+package controller_presenter_gateway.user_controller_presenter_gateway;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
