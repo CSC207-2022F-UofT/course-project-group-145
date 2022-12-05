@@ -20,7 +20,7 @@ public class FeedGatewayRequestModel {
         this.tags = tags;
         this.curr = curr;
         this.userId = userId;
-        this.feedId = feedId;
+        this.feedID = feedId;
 
     }
 
@@ -60,7 +60,7 @@ public class FeedGatewayRequestModel {
 
     public void setUserId(int userId){this.userId = userId;}
     public String getFeedId() {
-        return feedId;
+        return feedID;
     }
-    public void setFeedId(String id){this.feedId = id;}
+    public void setFeedId(String id){this.feedID = id;}
 }

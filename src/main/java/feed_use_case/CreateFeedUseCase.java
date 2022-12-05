@@ -60,7 +60,7 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         allSnippets.sort(new TagComparator(tagList));
 
         //Create a feed using feedFactory
-        Feed feed = this.feedFactory.create(allSnippets.subList(0, model.getSize()), tagList);
+        Feed feed = this.feedFactory.create(allSnippets.subList(0, model.getSize()), tagList, model.getUserID());
 
         //Save feed to repository
         //Get Snippet IDs

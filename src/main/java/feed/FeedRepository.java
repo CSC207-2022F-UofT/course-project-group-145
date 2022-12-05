@@ -98,6 +98,11 @@ public class FeedRepository implements FeedDSRepository{
         }
     }
 
+    @Override
+    public int numFeeds() {
+        return feeds.size();
+    }
+
     private void saveJSON() throws IOException {
         FileWriter writer = new FileWriter(filePath);
         Gson gson = new GsonBuilder().create();
