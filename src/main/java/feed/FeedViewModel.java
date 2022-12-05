@@ -17,8 +17,8 @@ public class FeedViewModel {
     private List<ViewInterface> listeners;
 
     //Feeds organised by their id and tags, maybe will implement a creation date system
-    private Map<Integer, List<String>> feeds;
-
+    private List<Integer> idList;
+    private List<List<String>> tagList;
     /**
      * Creates a new FeedViewModel
      * FeedViewModel contains all the information necessary for constructing a view for the user.
@@ -45,16 +45,20 @@ public class FeedViewModel {
      * @param tags the tags of the feed
      */
     public void addFeed(int id, List<String> tags){
-        feeds.put(id, tags);
+        this.idList.add(id);
+        this.tagList.add(tags);
         update();
     }
 
     /**
      * changes feeds to the new incoming lists
-     * @param feeds map that maps a feed ID to a list of its tags as strings
+     * @param idList List of the feedIDs of the feeds
+     * @param tagsList List of tags of each of the feeds
+     *                 Lists are parallel
      */
-    public void updateFeedMap(Map<Integer, List<String>> feeds){
-        this.feeds = feeds;
+    public void updateFeedMap(List<Integer> idList, List<List<String>> tagsList) {
+        this.idList = idList;
+        this.tagList = tagsList;
         update();
     }
 
@@ -76,5 +80,13 @@ public class FeedViewModel {
      */
     public void addListener(ViewInterface listener){
         this.listeners.add(listener);
+    }
+
+    public List<Integer> getIdList() {
+        return idList;
+    }
+
+    public List<List<String>> getTagList() {
+        return tagList;
     }
 }

@@ -3,10 +3,14 @@ package feed;
 import ui.ViewInterface;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.LineNumberInputStream;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,17 +20,20 @@ import java.util.List;
  * Implements ActionListener for user inputs
  * Implements ViewInterface, which is a custom interface to mimic the deprecated Observer interface.
  */
-public class FeedView extends JPanel implements ActionListener, ViewInterface {
+public class FeedView extends JPanel implements ActionListener, ViewInterface, ListSelectionListener {
     private FeedControllerInputBoundary controller;
     private FeedViewModel model;
     private JLabel title;
     private JButton generateNew;
     private JTextField tagInput;
     private JFormattedTextField lengthInput;
-    private JList feedList;
+    private JList<String> feedList;
     private int userID;
     private int panelX;
     private int panelY;
+
+    private List<Integer> feedIDs;
+    private List<List<String>> feedTags;
 
     public FeedView(FeedControllerInputBoundary controller, FeedViewModel model, int sizeX, int sizeY){
         this.controller = controller;
@@ -56,10 +63,23 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface {
     }
 
     /**
+     * Listener for feedList JList
+     * @param e the event that characterizes the change.
+     */
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        int index = feedList.getSelectedIndex();
+        int feedID = feedIDs.get(index);
+        //TODO: Switch to Angel's screen
+    }
+
+    /**
      * Called whenever FeedViewModel is updated
      **/
     @Override
     public void update() {
+        this.feedIDs = model.getIdList();
+        this.feedTags = model.getTagList();
         this.draw();
     }
 
@@ -77,7 +97,7 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface {
 
         JLabel tagsLabel = new JLabel();
         tagsLabel.setFont(new Font("Serif", Font.PLAIN, 12));
-        tagsLabel.setText("Search Tags");
+        tagsLabel.setText("Search Tags (separated by spaces)");
         tagsLabel.setBounds(180, 65, 100, 30);
         this.add(tagsLabel);
 
@@ -96,8 +116,32 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface {
         this.lengthInput.setText("30");
         this.add(this.lengthInput);
 
-        this.feedList = new JList();
+        this.feedList = new JList<String>();
         this.feedList.setBounds(20, 120, panelX-40, panelY-140);
+        this.feedList.setModel(new AbstractListModel<String>() {
+            @Override
+            public int getSize() {
+                return feedIDs.size();
+            }
+
+            @Override
+            public String getElementAt(int index) {
+                return feedIDs.get(index) + " " + feedTagsToList(index);
+            }
+        });
+        this.feedList.addListSelectionListener(this);
+    }
+
+    /**
+     * Returns the feedTags as a single String representation, with the feed's tags being represented as a word separated by spaces
+     * @return A string that contains each of the feed's tags as words separated by spaces
+     */
+    private String feedTagsToList(int index){
+        StringBuilder tagsString = new StringBuilder();
+        for (String tag : feedTags.get(index)){
+            tagsString.append(tag).append(" ");
+        }
+        return tagsString.toString().strip();
     }
 
     /**

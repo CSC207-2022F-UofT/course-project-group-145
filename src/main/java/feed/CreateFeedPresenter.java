@@ -42,12 +42,12 @@ public class CreateFeedPresenter implements CreateFeedOutputBoundary{
         //Get list of feed IDs from repo
         try {
             List<Integer> feedIDs = userRepo.getFeeds(userID);
-            Map<Integer, List<String>> feedMap = new HashMap<>();
+            List<List<String>> tagsList = new ArrayList<>();
             for (int id : feedIDs){
                 FeedGatewayResponseModel feedModel = feedRepo.load(String.valueOf(id));
-                feedMap.put(id, feedModel.getTags());
+                tagsList.add(feedModel.getTags());
             }
-            viewModel.updateFeedMap(feedMap);
+            viewModel.updateFeedMap(feedIDs, tagsList);
         }
         catch (IOException e){
             failView("Unable to load feeds, please refresh and try again");
