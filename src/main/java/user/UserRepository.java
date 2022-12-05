@@ -39,6 +39,8 @@ public class UserRepository implements UserRepoGateway {
         return numUsers;
     }
 
+    @Override
+    public Map<Integer, UserRepoRequestModel> getAllUsers() {return this.users;}
 
 
     /**
