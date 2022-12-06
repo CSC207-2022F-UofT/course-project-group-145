@@ -3,6 +3,7 @@ package feed_interaction_use_case;
 import DetailedFeedView.DetailedFeedViewModel;
 import codesnippet.CodeSnippetRepoGateway;
 import codesnippet.CodeSnippetRequestModel;
+import codesnippet.CodeSnippetResponseModel;
 import feed.FeedDSRepository;
 import feed.FeedGatewayResponseModel;
 
@@ -36,7 +37,7 @@ public class NextSnippetPresenter implements NextSnippetOutputBoundary{
         List<String> SnippetIDs = feed.getSnippetIDs();
         List<String> SnippetLocations = new ArrayList<>();
         for(String s: SnippetIDs){
-            CodeSnippetRequestModel codeSnippetRequestModel = codeSnippetRepoGateway.retrieve(parseInt(s));
+            CodeSnippetResponseModel codeSnippetRequestModel = codeSnippetRepoGateway.retrieve(parseInt(s));
             String location = codeSnippetRequestModel.getFileUrl();
             SnippetLocations.add(location);
         }
