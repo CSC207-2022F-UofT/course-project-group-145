@@ -24,41 +24,43 @@ import use_cases.user_use_case.AddUserInputBoundary;
 import use_cases.user_use_case.Login;
 import use_cases.user_use_case.LoginInputBoundary;
 
+import java.awt.*;
 import java.io.IOException;
 import javax.swing.*;
-import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         // this is for set up for a demo
-//        ChatRepository chatRepo = new ChatRepository("chat.json");
-//        List<Integer> ids = new ArrayList<>();
-//        ids.add(0);
-//        ids.add(1);
-//
-//        List<Integer> ids1 = new ArrayList<>();
-//        ids1.add(2);
-//        ids1.add(3);
-//
-//        chatRepo.save(new ChatRepoRequestModel(0, ids, false));
-//        chatRepo.save(new ChatRepoRequestModel(1, ids1, false));
-//        UserRepoGateway userRepo = new UserRepository("user.json");
-//        Map<Integer, Integer> idToId = new HashMap<>();
-//        idToId.put(0, 1);
-//        idToId.put(1, 2);
-//        UserRepoRequestModel user = new UserRepoRequestModel(0, "bob", "joe", "blah@blah.com", idToId, ids, false);
-//        userRepo.save(user);
-//
-//        MessageRepoGateway messageGateway = new MessageRepository("message.json");
-//        MessageRepoRequestModel message = new MessageRepoRequestModel(0, "hello", 0, 1, new Date(), new Date(), false, false, false , -1);
-//        messageGateway.save(message);
-//        MessageRepoRequestModel message1 = new MessageRepoRequestModel(1, "hello there", 1, 0, new Date(), new Date(), false, false, false , -1);
-//        messageGateway.save(message1);
-//        MessageRepoRequestModel message2 = new MessageRepoRequestModel(2, "hi", 0, 2, new Date(), new Date(), false, false, false , -1);
-//        messageGateway.save(message2);
-//        MessageRepoRequestModel message3 = new MessageRepoRequestModel(3, "bonjour", 2, 0, new Date(), new Date(), false, false, false , -1);
-//        messageGateway.save(message3);
+        ChatRepository chatRepo = new ChatRepository("chat.json");
+        List<Integer> ids = new ArrayList<>();
+        ids.add(0);
+        ids.add(1);
+
+        List<Integer> ids1 = new ArrayList<>();
+        ids1.add(2);
+        ids1.add(3);
+
+        chatRepo.save(new ChatRepoRequestModel(0, ids, false));
+        chatRepo.save(new ChatRepoRequestModel(1, ids1, false));
+        UserRepoGateway userRepo = new UserRepository("user.json");
+        Map<Integer, Integer> idToId = new HashMap<>();
+        idToId.put(0, 1);
+        idToId.put(1, 2);
+        UserRepoRequestModel user = new UserRepoRequestModel(0, "bob", "joe", "blah@blah.com", idToId, ids, false);
+        userRepo.save(user);
+
+        MessageRepoGateway messageGateway = new MessageRepository("message.json");
+        MessageRepoRequestModel message = new MessageRepoRequestModel(0, "hello", 0, 1, new Date(), new Date(), false, false, false , -1);
+        messageGateway.save(message);
+        MessageRepoRequestModel message1 = new MessageRepoRequestModel(1, "hello there", 1, 0, new Date(), new Date(), false, false, false , -1);
+        messageGateway.save(message1);
+        MessageRepoRequestModel message2 = new MessageRepoRequestModel(2, "hi", 0, 2, new Date(), new Date(), false, false, false , -1);
+        messageGateway.save(message2);
+        MessageRepoRequestModel message3 = new MessageRepoRequestModel(3, "bonjour", 2, 0, new Date(), new Date(), false, false, false , -1);
+        messageGateway.save(message3);
 
         JFrame application = new JFrame("CodeR");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
