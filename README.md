@@ -1,3 +1,21 @@
+
+
+# CodeR Social Network App
+In this project we created an app that helps CS students find group members by reviewing and swiping on each other's code snippets. The program allows a user to create a profile, upload code snippets, create and view feeds to look at other people's code snippets, and to chat with other users. 
+
+## Setup instructions 
+Firstly, ensure that the Java Development Kit and a Java Capable IDE is installed in your machine. Also, ensure that Gradle is installed/built into your IDE.
+Clone the repository from GitHub onto your machine, and run the main. The user will be prompted to login 
+
+## How to run the program 
+
+
+
+
+
+
+
+
 # Project Template
 
 This is a template repository for CSC 207 projects. 
