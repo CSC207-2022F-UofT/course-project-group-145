@@ -1,21 +1,16 @@
 package feed_use_case;
 
 import codesnippet.CodeSnippetRepoGateway;
-import codesnippet.CodeSnippetRequestModel;
 import codesnippet.CodeSnippetResponseModel;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoGateway;
 import entities.*;
 import feed.CreateFeedOutputBoundary;
 import feed.CreateFeedResponseModel;
 import feed.FeedDSRepository;
 import feed.FeedGatewayRequestModel;
-import user.UserRepoGateway;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import java.util.Map;
+import java.util.*;
 
 public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
     private FeedDSRepository feedRepo;
@@ -51,10 +46,10 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         }
 
         //Get snippets list from snippet repository and sort the snippets by tags
-        Map<Integer, CodeSnippetRequestModel> allSnippetsRaw = snippetRepo.getAllCodeSnippets();
+        Map<Integer, CodeSnippetResponseModel> allSnippetsRaw = snippetRepo.getAllCodeSnippets();
         List<CodeSnippet> allSnippets = new ArrayList<>();
-        for(CodeSnippetRequestModel entry: allSnippetsRaw.values()){
-            CodeSnippet snippet = snippetFactory.create(entry.getId(), entry.getUserId(), entry.getTitle(), entry.getFileUrl());
+        for(CodeSnippetResponseModel entry: allSnippetsRaw.values()){
+            CodeSnippet snippet = snippetFactory.create(entry.getId(), entry.getUserId(), entry.getTitle(), entry.getFileUrl(), new Date());
             allSnippets.add(snippet);
         }
         allSnippets.sort(new TagComparator(tagList));
