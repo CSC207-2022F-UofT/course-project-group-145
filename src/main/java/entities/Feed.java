@@ -14,16 +14,20 @@ public class Feed implements Iterable{
     private List<CodeSnippet> snippets;
     private List<CodeSnippet> matched;
 
-    public Feed(List<CodeSnippet> lst, List<Tag> tags){
+    private int userId;
+
+    public Feed(List<CodeSnippet> lst, List<Tag> tags, int userId){
         this.snippets = lst;
         this.tags = tags;
         this.matched = new ArrayList<>();
+        this.userId = userId;
     }
 
-    public Feed(List<CodeSnippet> snippets, List<Tag> tags, List<CodeSnippet> matched){
+    public Feed(List<CodeSnippet> snippets, List<Tag> tags, List<CodeSnippet> matched, int userId){
         this.matched = matched;
         this.tags = tags;
         this.snippets = snippets;
+        this.userId = userId;
     }
 
     public List<Tag> getTags() {
@@ -41,6 +45,12 @@ public class Feed implements Iterable{
     public void setId(String id) {
         this.id = id;
     }
+
+
+    public int getUserId(){return this.userId;}
+
+    public void setUserId(int userId){this.userId = userId;}
+
 
     @Override
     public FeedIterator iterator() {

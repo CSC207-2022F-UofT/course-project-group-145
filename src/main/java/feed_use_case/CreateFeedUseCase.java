@@ -60,7 +60,7 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         allSnippets.sort(new TagComparator(tagList));
 
         //Create a feed using feedFactory
-        Feed feed = this.feedFactory.create(allSnippets.subList(0, model.getSize()), tagList);
+        Feed feed = this.feedFactory.create(allSnippets.subList(0, model.getSize()), tagList, model.getUserID());
 
         //Save feed to repository
         //Get Snippet IDs
@@ -76,7 +76,7 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
             tagStrings.add(tag.toString());
         }
         int feedID = feedRepo.numFeeds();
-        FeedGatewayRequestModel fgModel = new FeedGatewayRequestModel(String.valueOf(feedID), snippetIDs, new ArrayList<String>(), tagStrings, 0);
+        FeedGatewayRequestModel fgModel = new FeedGatewayRequestModel(snippetIDs, new ArrayList<String>(), tagStrings, 0, model.getUserID(), String.valueOf(feedID));
         try {
             //Save feed to feedRepo, and save user to userRepo
             feedRepo.save(fgModel);

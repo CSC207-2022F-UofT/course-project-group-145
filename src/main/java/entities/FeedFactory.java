@@ -7,10 +7,10 @@ public class FeedFactory {
 
     private TagFactory tagFactory;
 
-    public Feed create(List<CodeSnippet> snippets, List<Tag> tags){
-        return new Feed(snippets, tags);
+    public Feed create(List<CodeSnippet> snippets, List<Tag> tags, int userId){
+        return new Feed(snippets, tags, userId);
     }
-    public Feed create(List<CodeSnippet> snippets, List<Tag> tags, List<CodeSnippet> matched){
-        return new Feed(snippets, tags, matched);
+    public Feed create(List<CodeSnippet> snippets, List<Tag> tags, List<CodeSnippet> matched, int userId){
+        return new Feed(snippets, tags, matched, userId);
     }
 }
