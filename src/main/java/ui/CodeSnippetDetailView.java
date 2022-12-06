@@ -1,9 +1,8 @@
 package ui;
 
-import codesnippet.CodeSnippetRequestModel;
-import codesnippet.CodeSnippetResponseModel;
-import codesnippet_controller.CodeSnippetListViewController;
-import codesnippet_controller.CodeSnippetViewController;
+import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetRequestModel;
+import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetResponseModel;
+import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetListViewController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

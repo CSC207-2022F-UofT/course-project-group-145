@@ -1,6 +1,6 @@
 package ui;
 
-import codesnippet_controller.CodeSnippetViewController;
+import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetViewController;
 
 import javax.swing.*;
 import java.awt.*;

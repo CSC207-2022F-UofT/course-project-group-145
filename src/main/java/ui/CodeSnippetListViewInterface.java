@@ -1,7 +1,7 @@
 package ui;
 
-import codesnippet.CodeSnippetRequestModel;
-import codesnippet.CodeSnippetResponseModel;
+import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetRequestModel;
+import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetResponseModel;
 
 import java.util.List;
 
