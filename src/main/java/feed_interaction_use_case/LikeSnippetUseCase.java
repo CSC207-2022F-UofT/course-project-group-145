@@ -6,12 +6,12 @@ import codesnippet.CodeSnippetRequestModel;
 import controller_presenter_gateway.chat_controller_presenter_gateway.ChatOutputBoundary;
 import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoGateway;
 import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoRequestModel;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoGateway;
 import entities.Chat;
 import entities.ChatFactory;
 import entities.FeedFactory;
 import feed.FeedDSRepository;
 import feed.FeedGatewayResponseModel;
-import user.UserRepoGateway;
 
 import java.io.IOException;
 import java.util.ArrayList;

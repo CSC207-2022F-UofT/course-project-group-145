@@ -3,12 +3,13 @@ package feed_use_case;
 import codesnippet.CodeSnippetRepoGateway;
 import codesnippet.CodeSnippetRequestModel;
 import codesnippet.CodeSnippetResponseModel;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoGateway;
 import entities.*;
 import feed.CreateFeedOutputBoundary;
 import feed.CreateFeedResponseModel;
 import feed.FeedDSRepository;
 import feed.FeedGatewayRequestModel;
-import user.UserRepoGateway;
+
 
 import java.io.IOException;
 import java.util.ArrayList;

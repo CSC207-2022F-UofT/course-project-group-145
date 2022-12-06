@@ -1,6 +1,6 @@
 package feed;
 
-import user.UserRepoGateway;
+import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoGateway;
 
 import java.io.IOException;
 import java.util.ArrayList;
