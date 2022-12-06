@@ -1,36 +1,32 @@
 package codesnippet;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class CodeSnippetResponseModel {
-
     private final int codeSnippetId;
     private final int userId;
     private String title;
     private String fileUrl;
-    private final LocalDateTime creationTime;
+    private Date creationTime;
 
-    public CodeSnippetResponseModel(int codeSnippetId, String title, String fileUrl, int userId, LocalDateTime creationTime) {
+    public CodeSnippetResponseModel(int codeSnippetId, int userId, String title, String fileUrl, Date creationTime) {
         this.codeSnippetId = codeSnippetId;
+        this.userId = userId;
         this.title = title;
         this.fileUrl = fileUrl;
-        this.userId = userId;
         this.creationTime = creationTime;
     }
 
     public int getId() {
         return codeSnippetId;
     }
-
-    public String getTitle() {
-        return title;
-    }
-
     public int getUserId() { return userId; }
-
+    public String getTitle() { return title; }
     public String getFileUrl() { return fileUrl; }
-
-    public LocalDateTime getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
+    }
+    public void setIsDeleted() {
+
     }
 }

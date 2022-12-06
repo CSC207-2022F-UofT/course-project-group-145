@@ -3,6 +3,7 @@ package codesnippet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import controller_presenter_gateway.chat_controller_presenter_gateway.ChatRepoRequestModel;
 import entities.CodeSnippet;
 
 import java.io.File;
@@ -12,11 +13,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CodeSnippetRepository implements CodeSnippetRepoGateway {
     private final String filePath;
 
-    private Map<Integer, CodeSnippetRequestModel> codeSnippets = new HashMap<>();
+    private Map<Integer, CodeSnippetResponseModel> codeSnippets = new HashMap<>();
     private int numCodeSnippets;
 
     public CodeSnippetRepository(String filePath) throws IOException {
@@ -26,7 +28,7 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
         if (JSONFile.length() > 0) {
             FileReader reader = new FileReader(JSONFile);
             Gson gson = new GsonBuilder().create();
-            codeSnippets = gson.fromJson(reader, new TypeToken<List<CodeSnippet>>() {}.getType());
+            codeSnippets = gson.fromJson(reader, new TypeToken<HashMap<Integer, CodeSnippetResponseModel>>() {}.getType());
             reader.close();
             this.numCodeSnippets = codeSnippets.size();
         }
@@ -41,23 +43,43 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
 
     @Override
     public int getNumCodeSnippets() {
-        return 0;
+        return numCodeSnippets;
     }
 
     @Override
-    public void save(CodeSnippetRequestModel requestModel) throws IOException {
-        codeSnippets.put(requestModel.getId(), requestModel);
-        this.numCodeSnippets = numCodeSnippets + 1;
+    public void save(CodeSnippetResponseModel responseModel) throws IOException {
+        codeSnippets.put(responseModel.getId(), responseModel);
+        this.numCodeSnippets = this.numCodeSnippets + 1;
+        saveJSON();
+    }
+
+    /**
+     * Deletes the chat by changing is_deleted to true (even if already deleted).
+     * Then saves to the JSON file.
+     *
+     * @param codeSnippetId the id of the chat that is being deleted
+     */
+    @Override
+    public void delete(int codeSnippetId) throws IOException {
+        CodeSnippetResponseModel codeSnippet = codeSnippets.remove(codeSnippetId);
+        codeSnippet.setIsDeleted();
+        codeSnippets.put(codeSnippetId, codeSnippet);
         saveJSON();
     }
 
     @Override
-    public CodeSnippetRequestModel retrieve(int codeSnippetId) {
+    public CodeSnippetResponseModel retrieve(int codeSnippetId) {
         return this.codeSnippets.get(codeSnippetId);
     }
 
     @Override
-    public Map<Integer, CodeSnippetRequestModel> getAllCodeSnippets() {
+    public Map<Integer, CodeSnippetResponseModel> getAllCodeSnippets() {
         return this.codeSnippets;
+    }
+
+    @Override
+    public List<CodeSnippetResponseModel> getCodeSnippetsByUserId(int userId) {
+        return this.codeSnippets.values().stream().filter(x -> x.getUserId() == userId)
+                .collect(Collectors.toList());
     }
 }

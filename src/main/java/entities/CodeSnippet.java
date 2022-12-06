@@ -1,6 +1,6 @@
 package entities;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ public class CodeSnippet implements Taggable{
     private int userId;
     private String title;
     private String fileUrl;
-    private LocalDateTime creationTime;
+    private Date creationTime;
     private List<Tag> tags;
     private List<String> languages;
     private Boolean isDrafted;
@@ -17,11 +17,12 @@ public class CodeSnippet implements Taggable{
     private Boolean isPublished;
 
 
-    public CodeSnippet(int id, int userId, String title, String fileUrl) {
+    public CodeSnippet(int id, int userId, String title, String fileUrl, Date creationTime) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.fileUrl = fileUrl;
+        this.creationTime = creationTime;
         this.tags = new ArrayList<Tag>();
         this.languages = new ArrayList<String>();
         this.isDrafted = true;
@@ -45,7 +46,7 @@ public class CodeSnippet implements Taggable{
         return this.fileUrl;
     }
 
-    public LocalDateTime getCreationTime() {
+    public Date getCreationTime() {
         return this.creationTime;
     }
     
