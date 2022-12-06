@@ -54,7 +54,7 @@ public class HomePageView extends JPanel implements HomePageViewInterface, Actio
             this.setVisible(false);
         } else if (evt.getActionCommand().equals("Log Out")) {
             this.controller.logOut();
-            //this.setVisible(false);
+            this.setVisible(false);
         }
     }
 

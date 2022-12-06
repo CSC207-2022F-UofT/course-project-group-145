@@ -6,10 +6,10 @@ import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatL
 import controller_presenter_gateway.hompage_controller_presenter.HomePageController;
 import controller_presenter_gateway.hompage_controller_presenter.HomePageOutputBoundary;
 import controller_presenter_gateway.hompage_controller_presenter.HomePagePresenter;
+import controller_presenter_gateway.user_controller_presenter_gateway.*;
 import entities.MessageFactory;
-import ui.ChatListView;
-import ui.ChatView;
-import ui.HomePageView;
+import entities.UserFactory;
+import ui.*;
 import use_cases.chat_list_use_cases.DeleteChat;
 import use_cases.chat_list_use_cases.DeleteChatInputBoundary;
 import use_cases.chat_list_use_cases.OpenChat;
@@ -19,48 +19,46 @@ import use_cases.homepage_use_cases.OpenChatList;
 import use_cases.homepage_use_cases.OpenChatListInputBoundary;
 import use_cases.homepage_use_cases.OpenHomePage;
 import use_cases.homepage_use_cases.OpenHomePageInputBoundary;
-import user.UserRepoGateway;
-import user.UserRepoRequestModel;
-import user.UserRepository;
+import use_cases.user_use_case.AddUser;
+import use_cases.user_use_case.AddUserInputBoundary;
+import use_cases.user_use_case.Login;
+import use_cases.user_use_case.LoginInputBoundary;
 
 import java.io.IOException;
-import java.util.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
-        // this is to set up something to demo, comment out later
-        ChatRepository chatRepo = new ChatRepository("chat.json");
-        List<Integer> ids = new ArrayList<>();
-        ids.add(0);
-        ids.add(1);
-
-        List<Integer> ids1 = new ArrayList<>();
-        ids1.add(2);
-        ids1.add(3);
-
-        chatRepo.save(new ChatRepoRequestModel(0, ids, false));
-        chatRepo.save(new ChatRepoRequestModel(1, ids1, false));
-        UserRepoGateway userRepo = new UserRepository("user.json");
-        Map<Integer, Integer> idToId = new HashMap<>();
-        idToId.put(0, 1);
-        idToId.put(1, 2);
-        UserRepoRequestModel user = new UserRepoRequestModel(0, "bob", "joe", "blah@blah.com", idToId, ids, false);
-        userRepo.save(user);
-
-        MessageRepoGateway messageGateway = new MessageRepository("message.json");
-        MessageRepoRequestModel message = new MessageRepoRequestModel(0, "hello", 0, 1, new Date(), new Date(), false, false, false , -1);
-        messageGateway.save(message);
-        MessageRepoRequestModel message1 = new MessageRepoRequestModel(1, "hello there", 1, 0, new Date(), new Date(), false, false, false , -1);
-        messageGateway.save(message1);
-        MessageRepoRequestModel message2 = new MessageRepoRequestModel(2, "hi", 0, 2, new Date(), new Date(), false, false, false , -1);
-        messageGateway.save(message2);
-        MessageRepoRequestModel message3 = new MessageRepoRequestModel(3, "bonjour", 2, 0, new Date(), new Date(), false, false, false , -1);
-        messageGateway.save(message3);
+        // this is for set up for a demo
+//        ChatRepository chatRepo = new ChatRepository("chat.json");
+//        List<Integer> ids = new ArrayList<>();
+//        ids.add(0);
+//        ids.add(1);
+//
+//        List<Integer> ids1 = new ArrayList<>();
+//        ids1.add(2);
+//        ids1.add(3);
+//
+//        chatRepo.save(new ChatRepoRequestModel(0, ids, false));
+//        chatRepo.save(new ChatRepoRequestModel(1, ids1, false));
+//        UserRepoGateway userRepo = new UserRepository("user.json");
+//        Map<Integer, Integer> idToId = new HashMap<>();
+//        idToId.put(0, 1);
+//        idToId.put(1, 2);
+//        UserRepoRequestModel user = new UserRepoRequestModel(0, "bob", "joe", "blah@blah.com", idToId, ids, false);
+//        userRepo.save(user);
+//
+//        MessageRepoGateway messageGateway = new MessageRepository("message.json");
+//        MessageRepoRequestModel message = new MessageRepoRequestModel(0, "hello", 0, 1, new Date(), new Date(), false, false, false , -1);
+//        messageGateway.save(message);
+//        MessageRepoRequestModel message1 = new MessageRepoRequestModel(1, "hello there", 1, 0, new Date(), new Date(), false, false, false , -1);
+//        messageGateway.save(message1);
+//        MessageRepoRequestModel message2 = new MessageRepoRequestModel(2, "hi", 0, 2, new Date(), new Date(), false, false, false , -1);
+//        messageGateway.save(message2);
+//        MessageRepoRequestModel message3 = new MessageRepoRequestModel(3, "bonjour", 2, 0, new Date(), new Date(), false, false, false , -1);
+//        messageGateway.save(message3);
 
         JFrame application = new JFrame("CodeR");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,13 +72,26 @@ public class Main {
         ChatRepoGateway chatRepoGateway = new ChatRepository("chat.json");
         UserRepoGateway userRepoGateway = new UserRepository("user.json");
 
+        LoginView login = new LoginView();
+        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(login);
+
         HomePageView homePage = new HomePageView();
         HomePageOutputBoundary homePagePresenter = new HomePagePresenter(homePage);
         ChatListView chatListView = new ChatListView();
         ChatDeletionOutputBoundary chatDeletionOutputBoundary = new ChatListPresenter(chatListView, chatRepoGateway, userRepoGateway);
         OpenChatListInputBoundary openChatListInputBoundary = new OpenChatList(chatDeletionOutputBoundary);
-        HomePageController homePageController = new HomePageController(openChatListInputBoundary);
+        HomePageController homePageController = new HomePageController(openChatListInputBoundary, loginOutputBoundary);
         homePage.setController(homePageController);
+
+        RegisterView register = new RegisterView();
+        RegisterOutputBoundary registerOutputBoundary = new RegisterPresenter(register);
+        LoginInputBoundary loginInputBoundary = new Login(userRepoGateway, homePagePresenter);
+        LoginController loginController = new LoginController(loginInputBoundary, registerOutputBoundary);
+        login.setController(loginController);
+        UserFactory userFactory = new UserFactory();
+        AddUserInputBoundary addUserInputBoundary = new AddUser(userFactory, homePagePresenter, userRepoGateway);
+        UserController userController = new UserController(addUserInputBoundary);
+        register.setController(userController);
 
 
         ChatView chat = new ChatView();
@@ -102,7 +113,9 @@ public class Main {
         screens.add(chat, "Chat");
         screens.add(homePage, "Home");
         screens.add(chatListView, "Chat List");
-        cardLayout.show(screens, "Home");
+        screens.add(register, "Register");
+        screens.add(login, "Login");
+        cardLayout.show(screens, "Login");
         application.pack();
         application.setVisible(true);
 
