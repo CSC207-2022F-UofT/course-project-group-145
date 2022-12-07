@@ -22,15 +22,13 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
     JLabel errorLabel;
 
     public DetailedFeedView() throws IOException {
-        this.viewModel = new DetailedFeedViewModel();
-        this.viewModel.addListener(this);
         this.likeButton = new JButton("Like");
         this.add(likeButton);
         this.nextButton = new JButton("Next");
         this.add(nextButton);
         this.picture = new JLabel();
+        this.add(picture);
         picture.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setBackground(new Color(200, 200, 100));
         likeButton.addActionListener(this);
         nextButton.addActionListener(this);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -51,12 +49,17 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
     public void setCurrentSnippetController(CurrentSnippetController currentSnippetController){
         this.currentSnippetController = currentSnippetController;
     }
+    
+    public void setViewModel(DetailedFeedViewModel detailedFeedViewModel){
+        this.viewModel = detailedFeedViewModel;
+        detailedFeedViewModel.addListener(this);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
         String label = button.getText();
-        if(label=="Like"){
+        if(label.equals("Like")){
             try {
                 likeSnippetController.like(this.feedId);
                 this.setVisible(false);
@@ -77,23 +80,16 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
     public void update() {
         String location = viewModel.getSnippetLocation();
         this.picture.setIcon(new ImageIcon(location));
-    }
-
-    public void draw() throws IOException {
-        this.open();
-        this.add(picture);
-    }
-
-    public void open() throws IOException {
-        currentSnippetController.getCurrent(feedId);
+        this.revalidate();
     }
 
     @Override
     public void reportFail(String errMsg) {
         errorLabel = new JLabel(errMsg);
-        remove(likeButton);
-        remove(nextButton);
-        remove(picture);
-        add(errorLabel);
+        this.removeAll();
+        this.repaint();
+        errorLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        this.add(errorLabel);
+        this.revalidate();
     }
 }
