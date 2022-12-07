@@ -26,7 +26,8 @@ The chat is accessed from the chat list if the chat was already previously creat
 
 ##The Feed List
 The user is shown a list of feeds that they have, and are able to generate a new feed. The user can enter tags in a textbox to set keywords to search for within the snippets inside the feed. The user can also set the length of the feed. Within the list of feeds, users can click on any feed and be taken to a screen to allow them to more closely see each feed (discussed on the next paragraph). 
-![image](https://user-images.githubusercontent.com/46763768/206085316-867b3e15-7387-4f38-ad80-0de29821cf6a.png)
+![image](https://user-images.githubusercontent.com/46763768/206085545-39dc982f-31f1-4a77-a986-660c7bcb65a8.png)
+
 
 
 ## The Feed
