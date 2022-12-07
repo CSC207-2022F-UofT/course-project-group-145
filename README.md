@@ -24,6 +24,11 @@ you have with a user (delete button) or go back to the homepage (back button).
 ## The chat
 The chat is accessed from the chat list if the chat was already previously created, or newly created by after liking a code snippet in the feed. This is where you communicate with other users. In the chat, you may send messages by typing in the message box and pressing send, edit messages by typing in the message box and clicking edit on the message you wish to edit, deleting messages by clicking delete beside whichever message you wish to delete, or replying to the other user's message by typing in the message box and clicking reply to the message you wish to reply to.
 
+##The Feed List
+The user is shown a list of feeds that they have, and are able to generate a new feed. The user can enter tags in a textbox to set keywords to search for within the snippets inside the feed. The user can also set the length of the feed. Within the list of feeds, users can click on any feed and be taken to a screen to allow them to more closely see each feed (discussed on the next paragraph). 
+![image](https://user-images.githubusercontent.com/46763768/206085316-867b3e15-7387-4f38-ad80-0de29821cf6a.png)
+
+
 ## The Feed
 Once the user chooses which of his feeds to view, they will be prompted to a new screen that displays the code snippets in the feed. Here, the user has the option to like the snippet being displayed in the screen or to go to the next code snippet by clicking one of two buttons. If the user decides to like the code snippet being displayed in the screen, a chat will automatically be created between the two users, and the user will be taken to the chat view, where they will be able to start a conersation. The user can only move forward in the feed, and once they reach the end of the feed, a message saying "You have scrolled through all code snippets in the feed!" will be displayed. The current implementation of the UI does not allow the user go to from the Home Page to the feeds, as we did not have time to put all the Views together. However, a demo that shows a detailed feed view can be found at the following branch: (add). 
 
