@@ -13,7 +13,7 @@ import java.io.IOException;
 public class DetailedFeedView extends JPanel implements ActionListener, ViewInterface {
     LikeSnippetController likeSnippetController;
     NextSnippetController nextSnippetController;
-    CurrentSnippetController currentSnippetController;
+    public CurrentSnippetController currentSnippetController;
     DetailedFeedViewModel viewModel;
     String feedId;
     JButton likeButton;
@@ -92,4 +92,6 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.add(errorLabel);
         this.revalidate();
     }
+
+
 }
