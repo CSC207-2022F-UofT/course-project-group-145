@@ -17,7 +17,9 @@ Run main.java. Main will also build some fake data into persistence so you may l
 The homepage is where you can logout which brings you back to the login screen and to go to our chat list and other features that will be connected. It is a UI with buttons that will bring you to what you click on.
 
 ## The chat list
-
+The chat list can be pulled up from the homepage by clicking the Chat List button. It displays the user's (non-deleted) 
+chats by user id. Once the chat list page has opened, you can open a chat with a user (open button), delete a chat that 
+you have with a user (delete button) or go back to the homepage (back button).
 
 ## The chat
 The chat is accessed from the chat list if the chat was already previously created, or newly created by after liking a code snippet in the feed. This is where you communicate with other users. In the chat, you may send messages by typing in the message box and pressing send, edit messages by typing in the message box and clicking edit on the message you wish to edit, deleting messages by clicking delete beside whichever message you wish to delete, or replying to the other user's message by typing in the message box and clicking reply to the message you wish to reply to.
