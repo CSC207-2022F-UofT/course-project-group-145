@@ -6,6 +6,8 @@ import com.google.gson.GsonBuilder;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedDSRepository;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedGatewayRequestModel;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedRepository;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.NextSnippetOutputBoundary;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.NextSnippetResponseModel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

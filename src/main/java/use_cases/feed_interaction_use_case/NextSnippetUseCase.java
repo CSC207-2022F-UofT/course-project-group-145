@@ -2,6 +2,8 @@ package use_cases.feed_interaction_use_case;
 
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedDSRepository;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedGatewayResponseModel;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.NextSnippetOutputBoundary;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.NextSnippetResponseModel;
 
 import java.io.IOException;
 
@@ -27,12 +29,12 @@ public class NextSnippetUseCase implements NextSnippetInputBoundary{
     public void next(NextSnippetRequestModel nextSnippetRequestModel) throws IOException {
         FeedGatewayResponseModel feed = feedDSRepository.load(nextSnippetRequestModel.getFeedId());
 
-        if(feed.getCurr() < (feed.getSnippetIDs().size()-1)) {
+        if((feed.getCurr()+1) < (feed.getSnippetIDs().size()-1)) {
             NextSnippetResponseModel responseModel = new NextSnippetResponseModel(nextSnippetRequestModel.getFeedId());
             feedDSRepository.advanceFeed(nextSnippetRequestModel.getFeedId());
             outputBoundary.showNextSnippet(responseModel);
         } else {
-            outputBoundary.prepareFailView("You have scrolled through all code snippets in the feed.");
+            outputBoundary.prepareFailView("You have scrolled through all code snippets in the feed!");
         }
     }
 }

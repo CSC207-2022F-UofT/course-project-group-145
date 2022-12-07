@@ -1,7 +1,5 @@
 package ui;
 
-import ui.ViewInterface;
-
 import java.util.List;
 
 public class DetailedFeedViewModel {

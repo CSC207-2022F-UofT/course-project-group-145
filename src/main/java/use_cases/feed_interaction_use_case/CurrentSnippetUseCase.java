@@ -2,6 +2,8 @@ package use_cases.feed_interaction_use_case;
 
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedDSRepository;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedGatewayResponseModel;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.CurrentSnippetOutputBoundary;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.CurrentSnippetResponseModel;
 
 import java.io.IOException;
 

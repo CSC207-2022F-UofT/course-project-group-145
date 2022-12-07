@@ -1,4 +1,7 @@
-package use_cases.feed_interaction_use_case;
+package controller_presenter_gateway.feed_interaction_controller_presenter_gateway;
+
+import use_cases.feed_interaction_use_case.LikeSnippetInputBoundary;
+import use_cases.feed_interaction_use_case.LikeSnippetRequestModel;
 
 import java.io.IOException;
 
