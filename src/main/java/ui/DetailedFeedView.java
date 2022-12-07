@@ -1,7 +1,7 @@
-package ui;
-import use_cases.feed_interaction_use_case.CurrentSnippetController;
-import use_cases.feed_interaction_use_case.LikeSnippetController;
-import use_cases.feed_interaction_use_case.NextSnippetController;
+package UI;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.CurrentSnippetController;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.LikeSnippetController;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.NextSnippetController;
 
 
 import javax.swing.*;

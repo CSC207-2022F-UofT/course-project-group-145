@@ -1,4 +1,4 @@
-package use_cases.feed_interaction_use_case;
+package controller_presenter_gateway.feed_interaction_controller_presenter_gateway;
 
 public interface NextSnippetOutputBoundary {
     void showNextSnippet(NextSnippetResponseModel responseModel);

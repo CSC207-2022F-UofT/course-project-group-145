@@ -1,6 +1,6 @@
-package use_cases.feed_interaction_use_case;
+package controller_presenter_gateway.feed_interaction_controller_presenter_gateway;
 
-import ui.DetailedFeedViewModel;
+import UI.DetailedFeedViewModel;
 import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetRepoGateway;
 import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetResponseModel;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedDSRepository;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class NextSnippetPresenter implements NextSnippetOutputBoundary{
+public class NextSnippetPresenter implements NextSnippetOutputBoundary {
 
     final FeedDSRepository repository;
     final CodeSnippetRepoGateway codeSnippetRepoGateway;

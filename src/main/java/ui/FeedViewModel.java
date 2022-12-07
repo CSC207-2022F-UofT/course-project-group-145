@@ -1,6 +1,6 @@
-package ui;
+package UI;
 
-import ui.ViewInterface;
+import UI.ViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;

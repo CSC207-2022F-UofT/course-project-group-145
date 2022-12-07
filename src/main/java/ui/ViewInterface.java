@@ -1,4 +1,4 @@
-package ui;
+package UI;
 
 /**
  * Interface that can be used for views to observe view models (since Observer is deprecated)
