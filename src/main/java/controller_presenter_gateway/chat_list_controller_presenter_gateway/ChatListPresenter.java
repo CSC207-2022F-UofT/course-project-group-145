@@ -24,6 +24,11 @@ public class ChatListPresenter implements ChatDeletionOutputBoundary {
         this.userRepoGateway = userRepoGateway;
     }
 
+    /**
+     * Makes sure the ChatListView is successful.
+     *
+     * @param responseModel is the response model passed in.
+     */
     @Override
     public void successView(ChatDeletionResponseModel responseModel) {
 
@@ -40,9 +45,14 @@ public class ChatListPresenter implements ChatDeletionOutputBoundary {
     }
 
 
+    /**
+     * Opens the list of chats based on the user logged in.
+     *
+     * @param userId is the id of the user logged in.
+     * @throws IOException in case of an error.
+     */
     @Override
     public void openChatList(int userId) throws IOException {
-        //call the User repository
         UserRepoRequestModel u = userRepoGateway.getUser(userId);
         List<Integer> chatIds = new ArrayList<>(u.getListOfChatIds().keySet());
         Map<Integer, Integer> chatToUser = u.getListOfChatIds();
