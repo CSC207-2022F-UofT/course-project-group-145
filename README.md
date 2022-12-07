@@ -5,11 +5,24 @@ In this project we created an app that helps CS students find group members by r
 
 ## Setup instructions 
 Firstly, ensure that the Java Development Kit and a Java Capable IDE is installed in your machine. Also, ensure that Gradle is installed/built into your IDE.
-Clone the repository from GitHub onto your machine, and run the main. The user will be prompted to login 
+Clone the repository from GitHub onto your machine, and run the main. The user will be prompted to login. 
 
 ## How to run the program 
+Run main.java. Main will also build some fake data into persistence so you may login with username bob and password joe to see how our program works and see some of our implemented features such as our chat list and chat system. 
+
+## The login screen and register screen
 
 
+## The homepage
+The homepage is where you can logout which brings you back to the login screen and to go to our chat list and other features that will be connected. It is a UI with buttons that will bring you to what you click on.
+
+## The chat list
+
+
+## The chat
+The chat is accessed from the chat list if the chat was already previously created, or newly created by after liking a code snippet in the feed. This is where you communicate with other users. In the chat, you may send messages by typing in the message box and pressing send, edit messages by typing in the message box and clicking edit on the message you wish to edit, deleting messages by clicking delete beside whichever message you wish to delete, or replying to the other user's message by typing in the message box and clicking reply to the message you wish to reply to.
+
+## The Feed
 
 
 
