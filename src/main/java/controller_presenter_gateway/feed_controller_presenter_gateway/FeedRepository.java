@@ -89,7 +89,7 @@ public class FeedRepository implements FeedDSRepository{
     public void match(String FeedId) throws IOException {
         if(feeds.containsKey(FeedId)){
             FeedGatewayRequestModel requestModel = feeds.get(FeedId);
-            String snippetId = requestModel.getSnippetIDs().get(requestModel.getCurr()+1);
+            String snippetId = requestModel.getSnippetIDs().get(requestModel.getCurr());
             List<String> newMatched = new ArrayList<>(requestModel.getMatchedIDs());
             newMatched.add(snippetId);
             requestModel.setMatchedIDs(newMatched);
