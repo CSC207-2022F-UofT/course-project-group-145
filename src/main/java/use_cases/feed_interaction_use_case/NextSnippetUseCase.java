@@ -27,12 +27,12 @@ public class NextSnippetUseCase implements NextSnippetInputBoundary{
     public void next(NextSnippetRequestModel nextSnippetRequestModel) throws IOException {
         FeedGatewayResponseModel feed = feedDSRepository.load(nextSnippetRequestModel.getFeedId());
 
-        if(feed.getCurr() < (feed.getSnippetIDs().size()-1)) {
+        if((feed.getCurr()+1) < (feed.getSnippetIDs().size()-1)) {
             NextSnippetResponseModel responseModel = new NextSnippetResponseModel(nextSnippetRequestModel.getFeedId());
             feedDSRepository.advanceFeed(nextSnippetRequestModel.getFeedId());
             outputBoundary.showNextSnippet(responseModel);
         } else {
-            outputBoundary.prepareFailView("You have scrolled through all code snippets in the feed.");
+            outputBoundary.prepareFailView("You have scrolled through all code snippets in the feed!");
         }
     }
 }
