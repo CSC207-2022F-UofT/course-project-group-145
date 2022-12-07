@@ -25,7 +25,7 @@ you have with a user (delete button) or go back to the homepage (back button).
 The chat is accessed from the chat list if the chat was already previously created, or newly created by after liking a code snippet in the feed. This is where you communicate with other users. In the chat, you may send messages by typing in the message box and pressing send, edit messages by typing in the message box and clicking edit on the message you wish to edit, deleting messages by clicking delete beside whichever message you wish to delete, or replying to the other user's message by typing in the message box and clicking reply to the message you wish to reply to.
 
 ## The Feed List View and Feed Creation
-The user is shown a list of feeds that they have, and are given the option to generate a new feed. The user can enter keywords in a textbox to set keywords to search for within the snippets inside the feed. The user can also set the length of the feed. Within the list of feeds, users can click on any feed and be taken to a screen to allow them to more closely see each feed (discussed on the next paragraph). 
+The user is shown a list of feeds that they have, and are given the option to generate a new feed. The user can enter keywords in a textbox to set keywords to search for within the snippets inside the feed. The user can also set the length of the feed. Within the list of feeds, users can click on any feed and be taken to a screen to allow them to more closely see each feed (discussed on the next paragraph). A demo of the create feed function can be found on the branch Create-Feed-Demo
 ![image](https://user-images.githubusercontent.com/46763768/206085545-39dc982f-31f1-4a77-a986-660c7bcb65a8.png)
 
 ## The Feed
