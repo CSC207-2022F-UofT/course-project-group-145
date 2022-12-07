@@ -1,10 +1,7 @@
-package UI;
-
-import UI.ViewInterface;
+package ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * FeedViewModel contains all the information necessary for constructing a view for the user.

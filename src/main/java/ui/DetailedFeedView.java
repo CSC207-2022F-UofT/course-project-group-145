@@ -1,4 +1,4 @@
-package UI;
+package ui;
 import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.CurrentSnippetController;
 import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.LikeSnippetController;
 import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.NextSnippetController;

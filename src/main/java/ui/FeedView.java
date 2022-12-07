@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedControllerInputBoundary;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedControllerInputModel;

@@ -2,7 +2,7 @@ package controller_presenter_gateway.feed_controller_presenter_gateway;
 
 
 import controller_presenter_gateway.user_controller_presenter_gateway.UserRepoGateway;
-import UI.FeedViewModel;
+import ui.FeedViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;

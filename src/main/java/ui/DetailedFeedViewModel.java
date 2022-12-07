@@ -1,6 +1,4 @@
-package UI;
-
-import UI.ViewInterface;
+package ui;
 
 import java.util.List;
 

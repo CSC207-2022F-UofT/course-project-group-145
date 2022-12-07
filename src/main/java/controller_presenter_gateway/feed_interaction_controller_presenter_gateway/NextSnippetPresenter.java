@@ -1,6 +1,6 @@
 package controller_presenter_gateway.feed_interaction_controller_presenter_gateway;
 
-import UI.DetailedFeedViewModel;
+import ui.DetailedFeedViewModel;
 import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetRepoGateway;
 import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetResponseModel;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedDSRepository;
