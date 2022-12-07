@@ -9,50 +9,69 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class CodeSnippetView extends JPanel implements CodeSnippetViewInterface, ActionListener {
+    public class CodeSnippetView extends JPanel implements CodeSnippetViewInterface, ActionListener {
+        static private final String newline = "\n";
+        private int userId;
+        private CodeSnippetViewController viewController;
+        private CodeSnippetListViewController listController;
+        JButton uploadButton;
 
-    private int userId;
+        JTextArea log;
 
-    private JButton uploadButton;
-    private JFileChooser fc;
+        JFileChooser fc;
 
-    private CodeSnippetViewController viewController;
-    private CodeSnippetListViewController listController;
+        public CodeSnippetView() {
+            super(new BorderLayout());
 
-    public CodeSnippetView(){
-        JLabel title = new JLabel("Code Snippet Main");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JButton chatList = new JButton("View code snippets");
-        JPanel chatListButton = new JPanel();
-        chatListButton.add(chatList);
-        JPanel logOutButton = new JPanel();
-        chatList.addActionListener(this);
-        chatList.setActionCommand("List");
+            //Create the log first, because the action listeners
+            //need to refer to it.
+            log = new JTextArea(5, 20);
+            log.setMargin(new Insets(5, 5, 5, 5));
+            log.setEditable(false);
+            JScrollPane logScrollPane = new JScrollPane(log);
 
-        this.uploadButton = new JButton("Upload Code Snippet");
-        this.uploadButton.addActionListener(this);
-        this.uploadButton.setBounds(100, 100, 100, 100);
-        this.add(uploadButton);
-        this.fc = new JFileChooser();
+            //Create a file chooser
+            fc = new JFileChooser();
 
+            uploadButton = new JButton("Upload a Code Snippet...",
+                    createImageIcon("images/Open16.gif"));
+            uploadButton.addActionListener(this);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(title);
-        this.add(chatListButton);
-        this.add(logOutButton);
-    }
+            //For layout purposes, put the buttons in a separate panel
+            JPanel buttonPanel = new JPanel(); //use FlowLayout
+            buttonPanel.add(uploadButton);
 
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-//        if(evt.getActionCommand().equals("List")) {
-//            this.controller.openList(this.userId);
-//            this.setVisible(false);
-//        }
-        if (evt.getSource().equals(uploadButton)){
-            File file = fc.getSelectedFile();
-            this.listController.uploadCodeSnippet(userId, file.getName(), file.getPath());
+            //Add the buttons and the log to this panel.
+            add(buttonPanel, BorderLayout.PAGE_START);
+            add(logScrollPane, BorderLayout.CENTER);
         }
-    }
+
+        public void actionPerformed(ActionEvent e) {
+            //Handle upload button action.
+            if (e.getSource() == uploadButton) {
+                int returnVal = fc.showOpenDialog(CodeSnippetView.this);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = fc.getSelectedFile();
+                    log.append("Uploading: " + file.getName() + "." + newline);
+                    this.listController.uploadCodeSnippet(userId, file.getName(), file.getPath());
+                } else {
+                    log.append("Upload command cancelled by user." + newline);
+                }
+                log.setCaretPosition(log.getDocument().getLength());
+            }
+        }
+
+        /** Returns an ImageIcon, or null if the path was invalid. */
+        protected static ImageIcon createImageIcon(String path) {
+            java.net.URL imgURL = CodeSnippetView.class.getResource(path);
+            if (imgURL != null) {
+                return new ImageIcon(imgURL);
+            } else {
+                System.err.println("Couldn't find file: " + path);
+                return null;
+            }
+        }
 
     @Override
     public void open(int userId) {
