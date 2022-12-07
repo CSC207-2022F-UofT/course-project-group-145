@@ -11,7 +11,7 @@ public class LoginView extends JPanel implements ActionListener, LoginViewInterf
     private LoginController controller;
 
     JTextField textField1;
-    JTextField textField2;
+    JPasswordField textField2;
 
 
 
@@ -35,7 +35,7 @@ public class LoginView extends JPanel implements ActionListener, LoginViewInterf
         textField1.setBounds(170, 100, 200, 20);
         this.add(textField1);
 
-        this.textField2 = new JTextField();
+        this.textField2 = new JPasswordField();
         textField2.setBounds(170, 150, 200, 20);
         this.add(textField2);
 
@@ -59,7 +59,7 @@ public class LoginView extends JPanel implements ActionListener, LoginViewInterf
     }
     public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("Submit")){
-            this.controller.login(textField1.getText(), textField2.getText());
+            this.controller.login(textField1.getText(), new String(textField2.getPassword()));
             this.setVisible(false);
         } else if (e.getActionCommand().equals("Register")) {
             this.controller.openRegister();
