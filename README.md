@@ -35,4 +35,6 @@ Once the user chooses which of his feeds to view, they will be prompted to a new
 The Code Snippet feature allows users to upload code snippets for users in the app. This enables users to share their favorite code samples with other users on the platform. For example, if you're working on a project and you have a particular piece of code in Java that you really like, you can upload your code snippet and share it with other users via the Feed feature.
 ![image](https://user-images.githubusercontent.com/113304652/206086134-28959750-214e-4b0a-92d4-de6fbacc81ec.png)
 
+The source code for this demo isn't merged to the `main` branch and can be find in the `feat/code-snippet-demo` branch. To run the feature, please navigate to `CodeSnippetView` class and run `main` method.
+
 
