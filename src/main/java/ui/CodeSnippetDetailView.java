@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Java swing UI that shows the details of a code snippet to a user
+ * Allows user to upload, edit, and delete code snippets
+ */
 public class CodeSnippetDetailView extends JPanel implements CodeSnippetListViewInterface, ActionListener {
 
     private CodeSnippetListViewController controller;

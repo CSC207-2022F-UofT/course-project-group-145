@@ -2,6 +2,10 @@ package entities;
 
 import java.util.Date;
 
+/**
+ * Entity representing a message sent between 2 users. Has the ability to be edited, or deleted
+ * Messages are stored in the chat entity
+ */
 public class Message {
 
     private static int numMessages = 0;
@@ -26,6 +30,13 @@ public class Message {
 
     private boolean isDeleted;
 
+    /**
+     * Creates a new message
+     * @param content message contents as a string
+     * @param sendTime time the message was sent
+     * @param authorId user id of the user who sent the message
+     * @param receiverId user id of the user who is the recipient
+     */
     Message(String content, Date sendTime, int authorId, int receiverId) {
         this.messageId = numMessages;
         this.content = content;

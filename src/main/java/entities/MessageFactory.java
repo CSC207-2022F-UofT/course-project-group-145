@@ -2,6 +2,9 @@ package entities;
 
 import java.util.Date;
 
+/**
+ * Factory object that creates messages
+ */
 public class MessageFactory {
 
     /**

@@ -65,6 +65,10 @@ public class FeedViewModel {
         }
     }
 
+    /**
+     * Tells view to report an error to user with the given message
+     * @param errMsg message to show to user
+     */
     public void reportFailure(String errMsg){
         for (ViewInterface listener: listeners){
             listener.reportFail(errMsg);

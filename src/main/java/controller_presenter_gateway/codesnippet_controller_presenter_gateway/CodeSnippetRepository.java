@@ -13,12 +13,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Repository that stores code snippet information in persistent as a JSON
+ */
 public class CodeSnippetRepository implements CodeSnippetRepoGateway {
     private final String filePath;
 
     private Map<Integer, CodeSnippetResponseModel> codeSnippets = new HashMap<>();
     private int numCodeSnippets;
 
+    /**
+     * Constructor that initialises a new CodeSnippetRepository
+     * @param filePath file path to the storage file
+     * @throws IOException if file reader does not read properly when initialising the repo
+     */
     public CodeSnippetRepository(String filePath) throws IOException {
         this.filePath = filePath;
 
@@ -39,11 +47,20 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
         writer.close();
     }
 
+    /**
+     * Returns the number of code snippets
+     * @return the number of code snippets currently saved
+     */
     @Override
     public int getNumCodeSnippets() {
         return numCodeSnippets;
     }
 
+    /**
+     * Save a code snippet to persistent based on the data in CodeSnippetResponseModel
+     * @param responseModel model containing info about snippet
+     * @throws IOException returned if there's an error in saving to json file
+     */
     @Override
     public void save(CodeSnippetResponseModel responseModel) throws IOException {
         codeSnippets.put(responseModel.getId(), responseModel);
@@ -52,7 +69,7 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
     }
 
     /**
-     * Deletes the chat by changing is_deleted to true (even if already deleted).
+     * Deletes the snippet by changing is_deleted to true (even if already deleted).
      * Then saves to the JSON file.
      *
      * @param codeSnippetId the id of the chat that is being deleted
@@ -65,16 +82,30 @@ public class CodeSnippetRepository implements CodeSnippetRepoGateway {
         saveJSON();
     }
 
+    /**
+     * Retrieves the code snippet from persistence
+     * @param codeSnippetId id of snippet to retrieve
+     * @return CodeSnippetResponseModel containing info of the snippet
+     */
     @Override
     public CodeSnippetResponseModel retrieve(int codeSnippetId) {
         return this.codeSnippets.get(codeSnippetId);
     }
 
+    /**
+     * Returns all code snippets
+     * @return A map of code snippet ID to their information in a response model
+     */
     @Override
     public Map<Integer, CodeSnippetResponseModel> getAllCodeSnippets() {
         return this.codeSnippets;
     }
 
+    /**
+     * Returns all code snippets from a user
+     * @param userId id of user
+     * @return A map of code snippet ID to their information in a response model
+     */
     @Override
     public List<CodeSnippetResponseModel> getCodeSnippetsByUserId(int userId) {
         return this.codeSnippets.values().stream().filter(x -> x.getUserId() == userId)

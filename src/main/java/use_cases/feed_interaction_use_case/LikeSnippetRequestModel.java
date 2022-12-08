@@ -1,5 +1,8 @@
 package use_cases.feed_interaction_use_case;
 
+/**
+ * Request model that passes info to like snippet use case
+ */
 public class LikeSnippetRequestModel {
 
     private String feedId;

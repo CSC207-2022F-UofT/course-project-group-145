@@ -3,6 +3,9 @@ package controller_presenter_gateway.user_controller_presenter_gateway;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Request model for sending and retrieving information to and from the user repository
+ */
 public class UserRepoRequestModel {
 
     private static int numUsers = 0;
@@ -20,6 +23,16 @@ public class UserRepoRequestModel {
 
     private boolean isDeleted;
 
+    /**
+     * Creates a new UserRepoRequestModel
+     * @param userId id of user to save
+     * @param username username of user
+     * @param password password of user
+     * @param email email of user
+     * @param mapOfChatToOtherUser map of chat ids, mapped to the id of user the chat is with
+     * @param listOfFeedIds list of ids of feeds this user owns
+     * @param isDeleted flag if this user is deleted
+     */
     public UserRepoRequestModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
         this.userId = userId;
         this.username = username;

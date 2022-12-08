@@ -10,6 +10,9 @@ import entities.UserFactory;
 
 import java.io.IOException;
 
+/**
+ * Use case that creates a new user and saves it to persistence
+ */
 public class AddUser implements AddUserInputBoundary {
 
     private final UserFactory userFactory;
@@ -17,6 +20,12 @@ public class AddUser implements AddUserInputBoundary {
     private final HomePageOutputBoundary homePageOutputBoundary;
     private final UserRepoGateway userRepoGateway;
 
+    /**
+     * Creates a new AddUser use case
+     * @param userFactory factory for creating new users
+     * @param homePageOutputBoundary presenter instance for the home page
+     * @param userRepoGateway repository for users
+     */
     public AddUser(UserFactory userFactory, HomePageOutputBoundary homePageOutputBoundary,
                        UserRepoGateway userRepoGateway) {
         this.userFactory = userFactory;

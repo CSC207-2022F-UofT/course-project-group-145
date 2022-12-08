@@ -6,6 +6,9 @@ import java.util.*;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * MessageRepository that keeps track of all messages and also saves and updates the JSON file
+ */
 public class MessageRepository implements MessageRepoGateway {
 
     private final String filePath;
