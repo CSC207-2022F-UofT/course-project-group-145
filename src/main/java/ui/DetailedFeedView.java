@@ -92,6 +92,7 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
      */
     @Override
     public void update() {
+        this.feedId = String.valueOf(viewModel.getFeedId());
         String location = viewModel.getSnippetLocation();
         this.picture.setIcon(new ImageIcon(location));
         this.revalidate();

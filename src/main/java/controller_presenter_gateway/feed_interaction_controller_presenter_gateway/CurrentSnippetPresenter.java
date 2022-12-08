@@ -49,6 +49,7 @@ public class CurrentSnippetPresenter implements CurrentSnippetOutputBoundary {
             SnippetLocations.add(location);
         }
         // we need to add 1 because the variable curr starts from -1.
+        viewModel.setFeedId(Integer.parseInt(responseModel.getFeedId()));
         viewModel.nextSnippet(SnippetLocations, current+1);
     }
 

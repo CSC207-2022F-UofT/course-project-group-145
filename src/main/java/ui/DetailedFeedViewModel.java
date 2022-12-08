@@ -10,6 +10,8 @@ public class DetailedFeedViewModel {
 
     private String snippetLocation;
 
+    private int feedId;
+
     /**
      * Creates a new DetailedFeedViewModel, and adds a view to for this view model to update as a listener
      * @param listener
@@ -57,5 +59,12 @@ public class DetailedFeedViewModel {
 
     public String getSnippetLocation() {
         return snippetLocation;
+    }
+
+    public int getFeedId(){
+        return feedId;
+    }
+    public void setFeedId(int id){
+        this.feedId = id;
     }
 }
