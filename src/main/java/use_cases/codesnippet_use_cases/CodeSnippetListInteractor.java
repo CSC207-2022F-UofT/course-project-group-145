@@ -10,18 +10,33 @@ import entities.CodeSnippetFactory;
 import java.io.IOException;
 import java.util.Date;
 
+/**
+ * Use case interactor for uploading a code snippet
+ */
 public class CodeSnippetListInteractor implements CodeSnippetListInputBoundary {
 
     final CodeSnippetRepoGateway codeSnippetGateway;
     final CodeSnippetOutputBoundary codeSnippetOutputBoundary;
     final CodeSnippetFactory codeSnippetFactory;
 
+    /**
+     * Creates a new instance
+     * @param codeSnippetFactory factory for creating code snippets
+     * @param codeSnippetGateway repository for storing code snippets
+     * @param codeSnippetOutputBoundary presenter for updating with info
+     */
     public CodeSnippetListInteractor(CodeSnippetFactory codeSnippetFactory, CodeSnippetRepoGateway codeSnippetGateway, CodeSnippetOutputBoundary codeSnippetOutputBoundary) {
         this.codeSnippetFactory = codeSnippetFactory;
         this.codeSnippetGateway = codeSnippetGateway;
         this.codeSnippetOutputBoundary = codeSnippetOutputBoundary;
     }
 
+    /**
+     * Uploads a new code snippet and saves it to the persistence
+     * @param requestModel request model containing all relevant information about the snippet
+     * @return a response model containing information about the snippet
+     * @throws IOException
+     */
     @Override
     public CodeSnippetResponseModel create(CodeSnippetRequestModel requestModel) throws IOException {
         int nextId = codeSnippetGateway.getNumCodeSnippets() + 1;
@@ -44,6 +59,10 @@ public class CodeSnippetListInteractor implements CodeSnippetListInputBoundary {
         return null;
     }
 
+    /**
+     * Deletes a code snippet from the persistence
+     * @param codeSnippetId
+     */
     @Override
     public void delete(int codeSnippetId) {
 //        codeSnippetGateway.delete(codeSnippetId);

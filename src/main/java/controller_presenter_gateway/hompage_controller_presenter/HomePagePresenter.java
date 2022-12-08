@@ -2,6 +2,9 @@ package controller_presenter_gateway.hompage_controller_presenter;
 
 import ui.HomePageViewInterface;
 
+/**
+ * Presenter for the homepage screen, updates the home page screen with results from use cases
+ */
 public class HomePagePresenter implements HomePageOutputBoundary {
 
     private final HomePageViewInterface homePageViewInterface;

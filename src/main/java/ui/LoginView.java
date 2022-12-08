@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Java swing ui that allows the user to log in with their username and password
+ */
 public class LoginView extends JPanel implements ActionListener, LoginViewInterface {
 
     private LoginController controller;
@@ -14,7 +17,9 @@ public class LoginView extends JPanel implements ActionListener, LoginViewInterf
     JTextField textField2;
 
 
-
+    /**
+     * initialises a new login view
+     */
     public LoginView() {
         setLayout(null);
 
@@ -57,6 +62,11 @@ public class LoginView extends JPanel implements ActionListener, LoginViewInterf
         this.setVisible(true);
 
     }
+
+    /**
+     * Method called by the elements of this UI whenever a user performs an action
+     * @param e the event to be processed
+     */
     public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("Submit")){
             this.controller.login(textField1.getText(), textField2.getText());
@@ -73,6 +83,9 @@ public class LoginView extends JPanel implements ActionListener, LoginViewInterf
         this.controller = controller;
     }
 
+    /**
+     * Makes this screen visible
+     */
     @Override
     public void open(){
         this.setVisible(true);

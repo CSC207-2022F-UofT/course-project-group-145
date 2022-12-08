@@ -3,6 +3,9 @@ package entities;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Entity representing a user of the program
+ */
 public class User {
 
     private static int numUsers = 0;
@@ -21,6 +24,14 @@ public class User {
 
     private boolean isDeleted;
 
+    /**
+     * Creates a new user entity
+     * @param username username of user
+     * @param password password of user
+     * @param email email of user
+     * @param chats map mapping id of chats of user with the id of other user in the chat
+     * @param feeds list of ids of feeds this user owns
+     */
     User(String username, String password, String email, Map<Integer, Integer> chats, List<Integer> feeds){
         this.username = username;
         this.password = password;

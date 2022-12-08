@@ -11,12 +11,21 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * NextSnippetPresenter, which updates the detailed feed view model with data from the next feed use case
+ */
 public class NextSnippetPresenter implements NextSnippetOutputBoundary {
 
     final FeedDSRepository repository;
     final CodeSnippetRepoGateway codeSnippetRepoGateway;
     private DetailedFeedViewModel viewModel;
 
+    /**
+     * Creates a new NextSnippetPresenter, which updates the detailed feed view model
+     * @param repository repository that stores feed data
+     * @param codeSnippetRepoGateway repository that stores code snippet data
+     * @param viewModel view model for detailed feed view
+     */
     public NextSnippetPresenter(FeedDSRepository repository, CodeSnippetRepoGateway codeSnippetRepoGateway, DetailedFeedViewModel viewModel) {
         this.repository = repository;
         this.codeSnippetRepoGateway = codeSnippetRepoGateway;

@@ -10,13 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Presenter that connects to the ChatListView through ChatListViewInterface
+ * Implements the ChatDeletionOutputBoundary which is used by the DeleteChat use case
+ */
 public class ChatListPresenter implements ChatDeletionOutputBoundary {
+
 
     private final ChatListViewInterface chatListViewInterface;
 
     private final ChatRepoGateway chatRepoGateway;
     private final UserRepoGateway userRepoGateway;
 
+    /**
+     * Constructor for creating a new ChatListPresenter
+     * @param chatListViewInterface instance of ChatListView or another view that implements the ChatListViewInterface
+     * @param chatRepoGateway Gateway for the chatRepository
+     * @param userRepoGateway Gateway for the userRepository
+     */
     public ChatListPresenter(ChatListViewInterface chatListViewInterface, ChatRepoGateway chatRepoGateway,
                              UserRepoGateway userRepoGateway) {
         this.chatListViewInterface = chatListViewInterface;

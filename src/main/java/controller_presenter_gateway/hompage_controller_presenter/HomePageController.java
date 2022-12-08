@@ -5,6 +5,9 @@ import use_cases.homepage_use_cases.OpenChatListInputBoundary;
 
 import java.io.IOException;
 
+/**
+ * Controller that handles inputs from the home page
+ */
 public class HomePageController {
 
     private final OpenChatListInputBoundary openChatListInputBoundary;
@@ -30,6 +33,9 @@ public class HomePageController {
         this.openChatListInputBoundary.openList(userId);
     }
 
+    /**
+     * Logs out by calling the presenter for the login page
+     */
     public void logOut() {
         this.loginOutputBoundary.open();
     }

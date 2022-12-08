@@ -3,6 +3,9 @@ package controller_presenter_gateway.user_controller_presenter_gateway;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Response model for add user use case to send relevant information to presenter to update view
+ */
 public class UserResponseModel {
 
     private static int numUsers = 0;
@@ -21,6 +24,16 @@ public class UserResponseModel {
 
     private boolean isDeleted;
 
+    /**
+     * Creates a new UserResponseModel
+     * @param userId id of user added
+     * @param username username of user
+     * @param password password of user
+     * @param email email of user
+     * @param mapOfChatToOtherUser map of chat ids to the id of other user in chat
+     * @param listOfFeedIds  list of ids of feeds belonging to user
+     * @param isDeleted flag representing if this user is deleted or not
+     */
     public UserResponseModel(int userId, String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
         this.userId = userId;
         this.username = username;

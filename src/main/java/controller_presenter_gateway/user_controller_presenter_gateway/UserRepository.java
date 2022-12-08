@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+
+/**
+ * Repository for storing user data as a JSON and in memory
+ */
 public class UserRepository implements UserRepoGateway {
 
     private final File JSONFile;
@@ -21,6 +25,12 @@ public class UserRepository implements UserRepoGateway {
 
     private int numUsers;
 
+    /**
+     * Creates and initialises a new UserRepository
+     * Loads data from file into memory if it exists
+     * @param filePath path to persistent JSON file
+     * @throws IOException
+     */
     public UserRepository(String filePath) throws IOException {
         this.filePath = filePath;
         JSONFile = new File(filePath);
@@ -44,11 +54,10 @@ public class UserRepository implements UserRepoGateway {
 
 
     /**
-     * Saves the user being created to the JSON
-
+     * Saves user to repository, and saves it to JSON
+     * @param requestModel request model containing all relevant user data
+     * @throws IOException
      */
-
-
     @Override
     public void save(UserRepoRequestModel requestModel) throws IOException {
         users.put(requestModel.getUserId(), requestModel);
@@ -56,6 +65,12 @@ public class UserRepository implements UserRepoGateway {
         saveJSON();
     }
 
+    /**
+     * Deletes a user from the repository
+     * Soft delete - adds a deleted flag to the user entry in repo
+     * @param userId id of user to delete
+     * @throws IOException
+     */
     @Override
     public void delete(int userId) throws IOException {
         UserRepoRequestModel user = users.remove(userId);
@@ -64,6 +79,12 @@ public class UserRepository implements UserRepoGateway {
         saveJSON();
     }
 
+    /**
+     * Adds a chat to a user and saves the updated data
+     * @param userId ID of user
+     * @param chatId ID of chat to add to user
+     * @throws IOException
+     */
     @Override
     public void addChatId(int userId, int chatId) throws IOException{
         UserRepoRequestModel user = users.remove(userId);
@@ -74,6 +95,12 @@ public class UserRepository implements UserRepoGateway {
         saveJSON();
     }
 
+    /**
+     * Adds a feed to the user and saves the updated data
+     * @param userId id of user
+     * @param feedId id of feed to add to user
+     * @throws IOException
+     */
     @Override
     public void addFeedId(int userId, int feedId) throws IOException{
         UserRepoRequestModel user = users.remove(userId);
@@ -84,6 +111,12 @@ public class UserRepository implements UserRepoGateway {
         saveJSON();
     }
 
+    /**
+     * Get the id of all feeds of a user
+     * @param userId id of user to get feeds from
+     * @return a list containing the ID of feeds belonging to the user
+     * @throws IOException
+     */
     @Override
     public List<Integer> getFeeds(int userId) throws IOException{
         UserRepoRequestModel user = users.remove(userId);
@@ -93,6 +126,12 @@ public class UserRepository implements UserRepoGateway {
         return feedIds;
     }
 
+    /**
+     * Returns a UserRepoRequestModel containing all saved information about the user
+     * @param userId id of user to retrieve info about
+     * @return UserRepoRequestModel containing all saved information about the user
+     * @throws IOException
+     */
     @Override
     public UserRepoRequestModel getUser(int userId) throws IOException{
         UserRepoRequestModel user = users.remove(userId);

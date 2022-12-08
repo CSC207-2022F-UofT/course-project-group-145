@@ -4,6 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Entity representing a code snippet uploaded to the software as a user
+ * Code snippets can be added, edited, and deleted by the user that created them
+ * Code snippets can be added to feeds, and browsed by other users as part of a feed
+ */
 public class CodeSnippet implements Taggable{
     private int id;
     private int userId;
@@ -17,6 +22,14 @@ public class CodeSnippet implements Taggable{
     private Boolean isPublished;
 
 
+    /**
+     * Creates a new code snippet entity
+     * @param id id of code snippet
+     * @param userId id of user that uploaded the snippet
+     * @param title title of the snippet
+     * @param fileUrl URL of the snippet
+     * @param creationTime time of creation of the snippet, as a date object
+     */
     public CodeSnippet(int id, int userId, String title, String fileUrl, Date creationTime) {
         this.id = id;
         this.userId = userId;
@@ -62,6 +75,12 @@ public class CodeSnippet implements Taggable{
         this.isPublished = true;
     }
 
+    /**
+     * Method as part of the Taggable interface
+     * Returns the number of tags that are the same between the snippet and the inputted tags
+     * @param tags List of tags to compare this snippet to
+     * @return number of tags that are the same between this snippet and the given list of tags
+     */
     @Override
     public int similarity(List<Tag> tags) {
         int sim = 0;

@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
 
+/**
+ *
+ */
 public class RegisterView extends JPanel implements RegisterViewInterface, ActionListener{
 
     private UserController controller;

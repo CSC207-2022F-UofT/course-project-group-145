@@ -3,6 +3,9 @@ package controller_presenter_gateway.user_controller_presenter_gateway;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Request model for sending information to the add user use case
+ */
 public class UserRequestModel {
     private static int numUsers = 0;
 
@@ -20,6 +23,15 @@ public class UserRequestModel {
 
     private boolean isDeleted;
 
+    /**
+     * Creates a new UserRequestModel containing information needed to be passed to use case
+     * @param  username username of user
+     * @param password password of user
+     * @param email email of user
+     * @param mapOfChatToOtherUser map containing chatIDs of user mapped to user ids of other user in chat
+     * @param listOfFeedIds list of ids of feeds belonging to this user
+     * @param isDeleted flag representing if this user is deleted or not
+     */
     public UserRequestModel(String username, String password, String email, Map<Integer, Integer> mapOfChatToOtherUser, List<Integer> listOfFeedIds, Boolean isDeleted) {
         this.username = username;
         this.password = password;

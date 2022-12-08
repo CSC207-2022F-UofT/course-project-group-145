@@ -2,6 +2,9 @@ package use_cases.homepage_use_cases;
 
 import controller_presenter_gateway.hompage_controller_presenter.HomePageOutputBoundary;
 
+/**
+ * Use case that opens the home page
+ */
 public class OpenHomePage implements OpenHomePageInputBoundary {
 
     private final HomePageOutputBoundary homePageOutputBoundary;

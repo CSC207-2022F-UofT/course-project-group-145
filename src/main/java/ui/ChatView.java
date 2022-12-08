@@ -11,6 +11,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Java swing ui that shows a detailed view of a chat, displaying each message in the chat
+ * Users are able to send, edit, delete, and reply to messages
+ */
 public class ChatView extends JPanel implements ChatViewInterface, ActionListener {
 
     private final JTextArea textArea = new JTextArea(5, 20);

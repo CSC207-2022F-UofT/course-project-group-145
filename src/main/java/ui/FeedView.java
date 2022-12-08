@@ -35,6 +35,13 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
     private List<Integer> feedIDs = new ArrayList<>(); // = Arrays.asList(1,2);
     private List<List<String>> feedTags = new ArrayList<>(); // = Arrays.asList(Arrays.asList("hello","world"), Arrays.asList("UwU"));
 
+    /**
+     * Creates a new FeedView
+     * @param controller controller that passes inputs to the use cases
+     * @param model view model that contains data to create this view
+     * @param sizeX X size of this view
+     * @param sizeY Y size of this view
+     */
     public FeedView(FeedControllerInputBoundary controller, FeedViewModel model, int sizeX, int sizeY){
         this.controller = controller;
         this.panelX = sizeX;
@@ -44,6 +51,10 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
         draw();
     }
 
+    /**
+     * Method called by the elements of this UI whenever a user performs an action
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.generateNew){
@@ -171,6 +182,10 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
         }
     }
 
+    /**
+     * Called to switch to this view
+     * @param userID user id of currently active user
+     */
     public void switchToThis(int userID){
         this.userID = userID;
         //need some kind of way to load feeds upon switch, maybe a view feeds use case?

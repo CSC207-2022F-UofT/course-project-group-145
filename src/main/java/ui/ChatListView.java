@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * UI written in Java Swing that displays a list of chats owned by the user
+ */
 public class ChatListView extends JPanel implements ChatListViewInterface, ActionListener {
 
     private int userId;

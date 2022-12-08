@@ -1,7 +1,9 @@
 package controller_presenter_gateway.chat_controller_presenter_gateway;
 
 import java.util.Date;
-
+/**
+ * Request model for saving message information to the MessageRepository
+ */
 public class MessageRepoRequestModel {
 
     private int messageId;
@@ -24,6 +26,19 @@ public class MessageRepoRequestModel {
 
     private int replyId;
 
+    /**
+     * Constructor for creating new MessageRepoRequestModel
+     * @param messageId id of message to be saved
+     * @param content content of message
+     * @param author user id of author of message
+     * @param receiver user id of recipient of message
+     * @param sendTime send time of message
+     * @param lastEditTime last edit time of message
+     * @param isMessageSeen boolean flag if the receivever has seen message
+     * @param isDeleted boolean flag if message has been deleted
+     * @param isEdited flag if message is edited
+     * @param replyId id of message this message replies to
+     */
     public MessageRepoRequestModel(int messageId, String content, int author, int receiver, Date sendTime,
                                    Date lastEditTime, boolean isMessageSeen, boolean isDeleted, boolean isEdited,
                                    int replyId) {

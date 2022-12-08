@@ -10,6 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * Java swing UI that allows the user to view the code snippets inside of the feed
+ * user can swipe thorugh  code snippets, and can like them, which will bring up a chat with the author of code snippet
+ */
 public class DetailedFeedView extends JPanel implements ActionListener, ViewInterface {
     LikeSnippetController likeSnippetController;
     NextSnippetController nextSnippetController;
@@ -21,6 +25,10 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
     JLabel picture;
     JLabel errorLabel;
 
+    /**
+     * Initialises a new DetailedFeedView
+     * @throws IOException
+     */
     public DetailedFeedView() throws IOException {
         this.likeButton = new JButton("Like");
         this.add(likeButton);
@@ -54,7 +62,10 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.viewModel = detailedFeedViewModel;
         detailedFeedViewModel.addListener(this);
     }
-
+    /**
+     * Method called by the elements of this UI whenever a user performs an action
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
@@ -76,6 +87,9 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         }
     }
 
+    /**
+     * Method called by view model to update this UI
+     */
     @Override
     public void update() {
         String location = viewModel.getSnippetLocation();
@@ -83,6 +97,10 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.revalidate();
     }
 
+    /**
+     * Applies an error message to this ui
+     * @param errMsg message to display to user
+     */
     @Override
     public void reportFail(String errMsg) {
         errorLabel = new JLabel(errMsg);

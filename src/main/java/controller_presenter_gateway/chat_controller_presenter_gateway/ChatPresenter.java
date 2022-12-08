@@ -4,6 +4,9 @@ import ui.ChatViewInterface;
 
 import java.util.List;
 
+/**
+ * Presenter for chat-related use cases. Updates ChatView through the ChatViewInterface
+ */
 public class ChatPresenter implements ChatOutputBoundary {
 
     private final ChatViewInterface chatViewInterface;

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 
+/**
+ * Entity representing a user activity
+ * activities include multiple actions
+ */
 class Activity {
     private int userId;
     private List<Action> actions;

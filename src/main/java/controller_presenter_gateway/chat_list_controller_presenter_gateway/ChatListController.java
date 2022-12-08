@@ -6,12 +6,21 @@ import use_cases.homepage_use_cases.OpenHomePageInputBoundary;
 
 import java.io.IOException;
 
+/**
+ * controller that controls the OpenChatUseCase, DeleteChatUseCase amd OpenHomePageUseCase
+ */
 public class ChatListController {
     private final DeleteChatInputBoundary deleteChatInputBoundary;
     private final OpenChatInputBoundary openChatInputBoundary;
 
     private final OpenHomePageInputBoundary openHomePageInputBoundary;
 
+    /**
+     * Creates a new ChatListController
+     * @param deleteChatInputBoundary input boundary for DeleteChat
+     * @param openChatInputBoundary input boundary for OpenChat
+     * @param openHomePageInputBoundary input boundary for OpenHomePage
+     */
     public ChatListController(DeleteChatInputBoundary deleteChatInputBoundary,
                               OpenChatInputBoundary openChatInputBoundary,
                               OpenHomePageInputBoundary openHomePageInputBoundary) {

@@ -12,6 +12,9 @@ import controller_presenter_gateway.feed_controller_presenter_gateway.FeedGatewa
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Use case for creating a new feed
+ */
 public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
     private FeedDSRepository feedRepo;
     private CodeSnippetRepoGateway snippetRepo;
@@ -21,6 +24,16 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
     private CodeSnippetFactory snippetFactory;
     private CreateFeedOutputBoundary presenter;
 
+    /**
+     * Initialises a new CreateFeedUseCase
+     * @param presenter presenter instance that implements CreateFeedOutputBoundary
+     * @param feedRepo feed repository to save feed to persistent
+     * @param snippetRepo snippet repository for retrieving snippets from persistent
+     * @param userRepo user repository for adding feed to user
+     * @param tagFactory instance of TagFactory for creating tags
+     * @param feedFactory instance of FeedFactory for creating feeds
+     * @param snippetFactory instance of SnippetFactory for creating CodeSnippets
+     */
     public CreateFeedUseCase(CreateFeedOutputBoundary presenter, FeedDSRepository feedRepo, CodeSnippetRepoGateway snippetRepo, UserRepoGateway userRepo, TagFactory tagFactory, FeedFactory feedFactory, CodeSnippetFactory snippetFactory){
         this.presenter = presenter;
         this.feedRepo = feedRepo;
@@ -84,6 +97,7 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
 
         successView(model.getUserID());
     }
+
 
     private void successView(int userID){
         CreateFeedResponseModel model = new CreateFeedResponseModel(userID);

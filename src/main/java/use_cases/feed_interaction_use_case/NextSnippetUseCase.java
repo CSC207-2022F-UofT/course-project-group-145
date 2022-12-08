@@ -7,10 +7,18 @@ import controller_presenter_gateway.feed_interaction_controller_presenter_gatewa
 
 import java.io.IOException;
 
+/**
+ * Use case for user to advance onto next snippet in a feed
+ */
 public class NextSnippetUseCase implements NextSnippetInputBoundary{
     final FeedDSRepository feedDSRepository;
     final NextSnippetOutputBoundary outputBoundary;
 
+    /**
+     * Creates a new NextSnippetUseCase
+     * @param feedDSRepository repository for feeds
+     * @param outputBoundary presenter that implements NextSnippetOutputBoundary
+     */
     public NextSnippetUseCase(FeedDSRepository feedDSRepository, NextSnippetOutputBoundary outputBoundary) {
         this.feedDSRepository = feedDSRepository;
         this.outputBoundary = outputBoundary;
@@ -25,7 +33,6 @@ public class NextSnippetUseCase implements NextSnippetInputBoundary{
      * @throws IOException this exception is thrown in case the feed id does not exist
      */
     @Override
-
     public void next(NextSnippetRequestModel nextSnippetRequestModel) throws IOException {
         FeedGatewayResponseModel feed = feedDSRepository.load(nextSnippetRequestModel.getFeedId());
 
