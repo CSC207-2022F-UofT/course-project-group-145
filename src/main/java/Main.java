@@ -3,6 +3,8 @@ import controller_presenter_gateway.chat_controller_presenter_gateway.*;
 import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatDeletionOutputBoundary;
 import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatListController;
 import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatListPresenter;
+import controller_presenter_gateway.feed_controller_presenter_gateway.FeedDSRepository;
+import controller_presenter_gateway.feed_controller_presenter_gateway.FeedRepository;
 import controller_presenter_gateway.hompage_controller_presenter.HomePageController;
 import controller_presenter_gateway.hompage_controller_presenter.HomePageOutputBoundary;
 import controller_presenter_gateway.hompage_controller_presenter.HomePagePresenter;
@@ -61,6 +63,8 @@ public class Main {
         messageGateway.save(message2);
         MessageRepoRequestModel message3 = new MessageRepoRequestModel(3, "bonjour", 2, 0, new Date(), new Date(), false, false, false , -1);
         messageGateway.save(message3);
+
+        FeedDSRepository feedGateway = new FeedRepository("feed.json");
 
         JFrame application = new JFrame("CodeR");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
