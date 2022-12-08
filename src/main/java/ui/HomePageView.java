@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * Java swing UI of the homepage presented to user after they log in
+ */
 public class HomePageView extends JPanel implements HomePageViewInterface, ActionListener {
 
     private int userId;

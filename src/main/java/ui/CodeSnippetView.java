@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+/**
+ * Java Swing UI that allows the user to view their code snippets
+ */
 public class CodeSnippetView extends JPanel implements CodeSnippetViewInterface, ActionListener {
 
     private int userId;
@@ -19,6 +22,9 @@ public class CodeSnippetView extends JPanel implements CodeSnippetViewInterface,
     private CodeSnippetViewController viewController;
     private CodeSnippetListViewController listController;
 
+    /**
+     * Initialises a new CodeSnippetViewUI
+     */
     public CodeSnippetView(){
         JLabel title = new JLabel("Code Snippet Main");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -42,6 +48,10 @@ public class CodeSnippetView extends JPanel implements CodeSnippetViewInterface,
         this.add(logOutButton);
     }
 
+    /**
+     * Method called by the elements of this UI whenever a user performs an action
+     * @param evt the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
 //        if(evt.getActionCommand().equals("List")) {
@@ -54,6 +64,10 @@ public class CodeSnippetView extends JPanel implements CodeSnippetViewInterface,
         }
     }
 
+    /**
+     * Method called to open this UI
+     * @param userId
+     */
     @Override
     public void open(int userId) {
         this.userId = userId;

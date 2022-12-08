@@ -7,6 +7,9 @@ import use_cases.homepage_use_cases.OpenHomePageInputBoundary;
 
 import java.util.Date;
 
+/**
+ * Controller used for controlling chat-related use cases
+ */
 public class ChatController {
     private final DeleteMessageInputBoundary deleteMessageInputBoundary;
 

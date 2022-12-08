@@ -10,12 +10,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Repository that stores feed data in json form
+ */
 public class FeedRepository implements FeedDSRepository{
     private final String filePath;
     private int numFeeds;
 
     private Map<String, FeedGatewayRequestModel> feeds = new HashMap<>();
 
+    /**
+     * Initialises feed repository
+     * @param filePath path of file to save feeds
+     * @throws IOException called if file reader has error
+     */
     public FeedRepository(String filePath) throws IOException {
         this.filePath = filePath;
         File JSONFile = new File(filePath);
@@ -32,7 +40,7 @@ public class FeedRepository implements FeedDSRepository{
     /**
      * Saves the feed represented by the request model to the json file.
      * @param requestModel represents a new feed that we want to save to the json file.
-     * @throws IOException
+     * @throws IOException called if filewriter has error
      */
     @Override
     public void save(FeedGatewayRequestModel requestModel) throws IOException {
@@ -89,7 +97,7 @@ public class FeedRepository implements FeedDSRepository{
     public void match(String FeedId) throws IOException {
         if(feeds.containsKey(FeedId)){
             FeedGatewayRequestModel requestModel = feeds.get(FeedId);
-            String snippetId = requestModel.getSnippetIDs().get(requestModel.getCurr());
+            String snippetId = requestModel.getSnippetIDs().get(requestModel.getCurr()+1);
             List<String> newMatched = new ArrayList<>(requestModel.getMatchedIDs());
             newMatched.add(snippetId);
             requestModel.setMatchedIDs(newMatched);

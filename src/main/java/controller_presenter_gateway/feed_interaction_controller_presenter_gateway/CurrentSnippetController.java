@@ -1,10 +1,20 @@
-package use_cases.feed_interaction_use_case;
+package controller_presenter_gateway.feed_interaction_controller_presenter_gateway;
+
+import use_cases.feed_interaction_use_case.CurrentSnippetInputBoundary;
+import use_cases.feed_interaction_use_case.CurrentSnippetRequestModel;
 
 import java.io.IOException;
 
+/**
+ * Controller that controls the current snippet use case
+ */
 public class CurrentSnippetController {
     final CurrentSnippetInputBoundary inputBoundary;
 
+    /**
+     * Creates a new CurrentSnippetController
+     * @param inputBoundary input boundary of the Current snippet use case
+     */
     public CurrentSnippetController(CurrentSnippetInputBoundary inputBoundary) {
         this.inputBoundary = inputBoundary;
     }

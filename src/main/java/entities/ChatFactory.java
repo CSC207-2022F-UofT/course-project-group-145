@@ -2,6 +2,9 @@ package entities;
 
 import java.util.List;
 
+/**
+ * Factory that creates chat entities
+ */
 public class ChatFactory {
 
     /**

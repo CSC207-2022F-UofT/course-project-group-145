@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * ChatRepository that keeps track of all chats along with saving to the JSON file given by filePath
+ */
 public class ChatRepository implements ChatRepoGateway {
 
     private final String filePath;

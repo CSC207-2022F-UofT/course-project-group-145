@@ -54,6 +54,10 @@ public class CreateFeedPresenter implements CreateFeedOutputBoundary{
         }
     }
 
+    /**
+     * Calls view model to trigger fail report to user
+     * @param errDesc error message to show user
+     */
     @Override
     public void failView(String errDesc) {
         viewModel.reportFailure(errDesc);

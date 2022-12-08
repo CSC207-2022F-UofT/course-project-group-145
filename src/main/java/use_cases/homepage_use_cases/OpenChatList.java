@@ -4,6 +4,9 @@ import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatD
 
 import java.io.IOException;
 
+/**
+ * Use case that opens the chat list screen from the home screen
+ */
 public class OpenChatList implements OpenChatListInputBoundary {
 
     private final ChatDeletionOutputBoundary deletionOutputBoundary;

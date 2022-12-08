@@ -4,6 +4,9 @@ import java.util.Date;
 
 enum ActionType {SWIPE, VIEWPROFILE, MATCH}
 
+/**
+ * Action entity used to represent user actions done in app
+ */
 public class Action {
     //can make these final, since they don't need to be changed
     private int userId;

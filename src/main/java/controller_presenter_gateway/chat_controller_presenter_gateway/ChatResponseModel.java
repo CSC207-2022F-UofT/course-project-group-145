@@ -1,7 +1,9 @@
 package controller_presenter_gateway.chat_controller_presenter_gateway;
 
 import java.util.Date;
-
+/**
+ * Response model used to send information to the ChatPresenter
+ */
 public class ChatResponseModel {
 
     private int messageId;
@@ -14,6 +16,14 @@ public class ChatResponseModel {
 
     private Date sendTime;
 
+    /**
+     * Creates a new ChatReponseModel used to send information to the ChatPresenter
+     * @param messageId id of the message being sent
+     * @param content content of the message being sent
+     * @param author user id of sender
+     * @param receiver user id of receiver
+     * @param sendTime send time of message
+     */
     public ChatResponseModel(int messageId, String content, int author, int receiver, Date sendTime) {
         this.messageId = messageId;
         this.content = content;

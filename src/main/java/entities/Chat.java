@@ -2,6 +2,9 @@ package entities;
 
 import java.util.List;
 
+/**
+ * Entity representing a chat between 2 users
+ */
 public class Chat {
 
     private static int numChat = 0;
@@ -12,6 +15,10 @@ public class Chat {
 
     private boolean isDeleted;
 
+    /**
+     * Creates a new chat entity
+     * @param messageIds list of ids of messages in this chat
+     */
     Chat(List<Integer> messageIds) {
         this.chatId = numChat;
         this.messageIds = messageIds;

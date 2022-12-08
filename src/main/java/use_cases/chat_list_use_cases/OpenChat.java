@@ -4,9 +4,16 @@ import controller_presenter_gateway.chat_controller_presenter_gateway.ChatOutput
 
 import java.io.IOException;
 
+/**
+ * Use case for opening a chat and displaying it to user
+ */
 public class OpenChat implements OpenChatInputBoundary {
     private final ChatOutputBoundary chatOutputBoundary;
 
+    /**
+     * Creates a new OpeenChat use case
+     * @param chatOutputBoundary instance of presenter to update
+     */
     public OpenChat (ChatOutputBoundary chatOutputBoundary) {
         this.chatOutputBoundary = chatOutputBoundary;
     }

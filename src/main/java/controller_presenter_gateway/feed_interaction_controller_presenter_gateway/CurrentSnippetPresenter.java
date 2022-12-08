@@ -1,4 +1,4 @@
-package use_cases.feed_interaction_use_case;
+package controller_presenter_gateway.feed_interaction_controller_presenter_gateway;
 
 import ui.DetailedFeedViewModel;
 import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetRepoGateway;
@@ -11,11 +11,20 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class CurrentSnippetPresenter implements CurrentSnippetOutputBoundary{
+/**
+ * Presenter that updates the view with the information on the current snippet in a feed
+ */
+public class CurrentSnippetPresenter implements CurrentSnippetOutputBoundary {
     final FeedDSRepository repository;
     final CodeSnippetRepoGateway codeSnippetGateway;
     final DetailedFeedViewModel viewModel;
 
+    /**
+     * Creates a new CurrentSnippetPresenter
+     * @param feedGateway instance of feed repository
+     * @param codeSnippetGateway  instance of code snippet repo
+     * @param viewModel view model of view to update
+     */
     public CurrentSnippetPresenter(FeedDSRepository feedGateway, CodeSnippetRepoGateway codeSnippetGateway, DetailedFeedViewModel viewModel) {
         this.repository = feedGateway;
         this.codeSnippetGateway = codeSnippetGateway;

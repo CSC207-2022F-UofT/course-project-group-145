@@ -1,10 +1,20 @@
-package use_cases.feed_interaction_use_case;
+package controller_presenter_gateway.feed_interaction_controller_presenter_gateway;
+
+import use_cases.feed_interaction_use_case.NextSnippetInputBoundary;
+import use_cases.feed_interaction_use_case.NextSnippetRequestModel;
 
 import java.io.IOException;
 
+/**
+ * Controller that interfaces with the feed detailed view and the next snippet use case
+ */
 public class NextSnippetController {
     final NextSnippetInputBoundary inputBoundary;
 
+    /**
+     * Creates a new NextSnippetController
+     * @param inputBoundary instance of the next snippet use case that implements the NextSnippetInputBoundary
+     */
     public NextSnippetController(NextSnippetInputBoundary inputBoundary){
         this.inputBoundary = inputBoundary;
     }

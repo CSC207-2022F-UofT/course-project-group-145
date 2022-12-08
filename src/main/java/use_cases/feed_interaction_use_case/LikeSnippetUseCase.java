@@ -19,6 +19,9 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Use case to allow user to like a code snippet. This will also open a chat between the 2 users.
+ */
 public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
     final FeedDSRepository feedDSRepository;
     final ChatRepoGateway chatRepoGateway;
@@ -29,6 +32,16 @@ public class LikeSnippetUseCase implements LikeSnippetInputBoundary{
     final ChatOutputBoundary chatOutputBoundary;
 
 
+    /**
+     * Create a new LikeSnippetUseCase
+     * @param feedDSRepository feed repository
+     * @param chatRepoGateway chat repository
+     * @param codeSnippetRepoGateway code snippet repository
+     * @param userRepoGateway user repository
+     * @param feedFactory instance of feed factory
+     * @param chatFactory instance of chat factory
+     * @param chatOutputBoundary instance of chatOutputBoundary (to open chat view when user likes snippet)
+     */
     public LikeSnippetUseCase(FeedDSRepository feedDSRepository, ChatRepoGateway chatRepoGateway, CodeSnippetRepoGateway codeSnippetRepoGateway, UserRepoGateway userRepoGateway, FeedFactory feedFactory, ChatFactory chatFactory, ChatOutputBoundary chatOutputBoundary) {
         this.feedDSRepository = feedDSRepository;
         this.chatRepoGateway = chatRepoGateway;

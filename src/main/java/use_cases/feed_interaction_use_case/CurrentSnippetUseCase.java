@@ -2,13 +2,23 @@ package use_cases.feed_interaction_use_case;
 
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedDSRepository;
 import controller_presenter_gateway.feed_controller_presenter_gateway.FeedGatewayResponseModel;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.CurrentSnippetOutputBoundary;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.CurrentSnippetResponseModel;
 
 import java.io.IOException;
 
+/**
+ * Use case that returns the info about current code snippet in the current feed
+ */
 public class CurrentSnippetUseCase implements CurrentSnippetInputBoundary{
     final FeedDSRepository feedDSRepository;
     final CurrentSnippetOutputBoundary outputBoundary;
 
+    /**
+     * Creates a new CurrentSnippetUseCase
+     * @param feedDSRepository repository for feed persistence
+     * @param outputBoundary Presenter that implements CurrentSnippetOutputBoundary
+     */
     public CurrentSnippetUseCase(FeedDSRepository feedDSRepository, CurrentSnippetOutputBoundary outputBoundary) {
         this.feedDSRepository = feedDSRepository;
         this.outputBoundary = outputBoundary;

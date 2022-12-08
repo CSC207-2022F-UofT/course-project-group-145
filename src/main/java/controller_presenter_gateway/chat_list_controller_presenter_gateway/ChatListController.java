@@ -6,12 +6,21 @@ import use_cases.homepage_use_cases.OpenHomePageInputBoundary;
 
 import java.io.IOException;
 
+/**
+ * controller that controls the OpenChatUseCase, DeleteChatUseCase amd OpenHomePageUseCase
+ */
 public class ChatListController {
     private final DeleteChatInputBoundary deleteChatInputBoundary;
     private final OpenChatInputBoundary openChatInputBoundary;
 
     private final OpenHomePageInputBoundary openHomePageInputBoundary;
 
+    /**
+     * Creates a new ChatListController
+     * @param deleteChatInputBoundary input boundary for DeleteChat
+     * @param openChatInputBoundary input boundary for OpenChat
+     * @param openHomePageInputBoundary input boundary for OpenHomePage
+     */
     public ChatListController(DeleteChatInputBoundary deleteChatInputBoundary,
                               OpenChatInputBoundary openChatInputBoundary,
                               OpenHomePageInputBoundary openHomePageInputBoundary) {
@@ -20,14 +29,31 @@ public class ChatListController {
         this.openHomePageInputBoundary = openHomePageInputBoundary;
     }
 
+    /**
+     * Calls the OpenChatInputBoundary which calls the use case to open an existing chat in the Chat List View.
+     *
+     * @param chatId the id of the chat being opened
+     * @param userId the id of the user opening the chat
+     * @param otherUserId the id of the other user in the chat
+     */
     public void openChat(int chatId, int userId, int otherUserId) throws IOException {
         this.openChatInputBoundary.openChat(chatId, userId, otherUserId);
     }
 
+    /**
+     * Calls the DeleteChatInputBoundary which calls the DeleteChat use case to delete a chat by chatId.
+     *
+     * @param chatId the id of the chat being deleted
+     */
     public void delete(int chatId) throws IOException {
         this.deleteChatInputBoundary.delete(chatId);
     }
 
+    /**
+     * Opens the homepage
+     *
+     * @param userId of the user logged in.
+     */
     public void openHomePage(int userId) {
         this.openHomePageInputBoundary.openHome(userId);
     }

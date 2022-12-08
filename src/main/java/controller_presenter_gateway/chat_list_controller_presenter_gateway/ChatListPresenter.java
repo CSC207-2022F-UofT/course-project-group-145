@@ -10,13 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Presenter that connects to the ChatListView through ChatListViewInterface
+ * Implements the ChatDeletionOutputBoundary which is used by the DeleteChat use case
+ */
 public class ChatListPresenter implements ChatDeletionOutputBoundary {
+
 
     private final ChatListViewInterface chatListViewInterface;
 
     private final ChatRepoGateway chatRepoGateway;
     private final UserRepoGateway userRepoGateway;
 
+    /**
+     * Constructor for creating a new ChatListPresenter
+     * @param chatListViewInterface instance of ChatListView or another view that implements the ChatListViewInterface
+     * @param chatRepoGateway Gateway for the chatRepository
+     * @param userRepoGateway Gateway for the userRepository
+     */
     public ChatListPresenter(ChatListViewInterface chatListViewInterface, ChatRepoGateway chatRepoGateway,
                              UserRepoGateway userRepoGateway) {
         this.chatListViewInterface = chatListViewInterface;
@@ -24,6 +35,11 @@ public class ChatListPresenter implements ChatDeletionOutputBoundary {
         this.userRepoGateway = userRepoGateway;
     }
 
+    /**
+     * Makes sure the ChatListView is successful.
+     *
+     * @param responseModel is the response model passed in.
+     */
     @Override
     public void successView(ChatDeletionResponseModel responseModel) {
 
@@ -40,9 +56,14 @@ public class ChatListPresenter implements ChatDeletionOutputBoundary {
     }
 
 
+    /**
+     * Opens the list of chats based on the user logged in.
+     *
+     * @param userId is the id of the user logged in.
+     * @throws IOException in case of an error.
+     */
     @Override
     public void openChatList(int userId) throws IOException {
-        //call the User repository
         UserRepoRequestModel u = userRepoGateway.getUser(userId);
         List<Integer> chatIds = new ArrayList<>(u.getListOfChatIds().keySet());
         Map<Integer, Integer> chatToUser = u.getListOfChatIds();

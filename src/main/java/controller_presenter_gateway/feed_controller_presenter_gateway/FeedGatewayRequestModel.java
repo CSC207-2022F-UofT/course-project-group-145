@@ -2,6 +2,9 @@ package controller_presenter_gateway.feed_controller_presenter_gateway;
 
 import java.util.List;
 
+/**
+ * Request model for saving a feed to the feed repository
+ */
 public class FeedGatewayRequestModel {
 
 
@@ -12,6 +15,15 @@ public class FeedGatewayRequestModel {
     private int curr;
     private int userId;
 
+    /**
+     * Create a new FeedGatewayRequestModel
+     * @param snippetIDs List of IDs of snippets in feed
+     * @param matchedIDs List of IDs of snippets matched in the feed
+     * @param tags List of tags of the feed in string representation
+     * @param curr current position on the feed
+     * @param userId id of user who created feed
+     * @param feedId id of feed
+     */
     public FeedGatewayRequestModel(List<String> snippetIDs, List<String> matchedIDs, List<String> tags, int curr,
                                    int userId, String feedId){
 

@@ -1,7 +1,15 @@
 package use_cases.feed_interaction_use_case;
 
+/**
+ * Request model for passing info to CurrentSnippetUseCase
+ */
 public class CurrentSnippetRequestModel {
     private String feedId;
+
+    /**
+     * Creates a new CurrentSnippetRequestModel
+     * @param feedId id of feed currently being examined
+     */
     public CurrentSnippetRequestModel(String feedId){
         this.feedId = feedId;
     }

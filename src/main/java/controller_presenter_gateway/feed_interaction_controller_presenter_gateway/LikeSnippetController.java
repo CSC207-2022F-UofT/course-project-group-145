@@ -1,9 +1,20 @@
-package use_cases.feed_interaction_use_case;
+package controller_presenter_gateway.feed_interaction_controller_presenter_gateway;
+
+import use_cases.feed_interaction_use_case.LikeSnippetInputBoundary;
+import use_cases.feed_interaction_use_case.LikeSnippetRequestModel;
 
 import java.io.IOException;
 
+/**
+ * Controller that controlls the like snippet use case
+ */
 public class LikeSnippetController {
     final LikeSnippetInputBoundary inputBoundary;
+
+    /**
+     * Create a new LikeSnippetController
+     * @param inputBoundary instance of like snippet use case
+     */
     public LikeSnippetController(LikeSnippetInputBoundary inputBoundary){
         this.inputBoundary = inputBoundary;
     }
