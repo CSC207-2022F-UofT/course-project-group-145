@@ -84,7 +84,7 @@ public class CreateFeedUseCase implements CreateFeedUseCaseInputBoundary{
         for (Tag tag: feed.getTags()) {
             tagStrings.add(tag.toString());
         }
-        int feedID = feedRepo.numFeeds();
+        int feedID = feedRepo.numFeeds() + 1;
         FeedGatewayRequestModel fgModel = new FeedGatewayRequestModel(snippetIDs, new ArrayList<String>(), tagStrings, 0, model.getUserID(), String.valueOf(feedID));
         try {
             //Save feed to feedRepo, and save user to userRepo

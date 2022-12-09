@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
     private JTextField tagInput;
     private JFormattedTextField lengthInput;
     private JList<String> feedList;
+    private JButton backButton;
     private int userID;
     private int panelX;
     private int panelY;
@@ -46,6 +48,7 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
         this.controller = controller;
         this.panelX = sizeX;
         this.panelY = sizeY;
+        this.model = model;
         this.setSize(sizeX, sizeY);
         this.setLayout(null);
         draw();
@@ -71,6 +74,10 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
 
             controller.createNewFeed(model);
         }
+        else if (e.getSource() == this.backButton){
+            this.controller.goBack(this.userID);
+            this.setVisible(false);
+        }
     }
 
     /**
@@ -81,7 +88,12 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
     public void valueChanged(ListSelectionEvent e) {
         int index = feedList.getSelectedIndex();
         int feedID = feedIDs.get(index);
-        //TODO: Switch to Angel's screen
+        try {
+            controller.openDetail(this.userID, feedID);
+            this.setVisible(false);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     /**
@@ -92,9 +104,11 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
         this.feedIDs = model.getIdList();
         this.feedTags = model.getTagList();
         this.draw();
+        this.setVisible(true);
     }
 
     private void draw(){
+        this.removeAll();
         this.title = new JLabel();
         this.title.setText("My Feeds:");
         this.title.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -142,6 +156,14 @@ public class FeedView extends JPanel implements ActionListener, ViewInterface, L
         });
         this.feedList.addListSelectionListener(this);
         this.add(feedList);
+
+        this.backButton = new JButton("Back");
+        backButton.addActionListener(this);
+        backButton.setBounds(50,30,100, 30);
+        this.add(this.backButton);
+
+        this.repaint();
+        this.revalidate();
     }
 
     /**

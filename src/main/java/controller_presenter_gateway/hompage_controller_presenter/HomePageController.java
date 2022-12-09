@@ -1,6 +1,8 @@
 package controller_presenter_gateway.hompage_controller_presenter;
 
 import controller_presenter_gateway.user_controller_presenter_gateway.LoginOutputBoundary;
+import use_cases.feed_use_case.OpenFeedListInputBoundary;
+import use_cases.feed_use_case.OpenFeedListUseCase;
 import use_cases.homepage_use_cases.OpenChatListInputBoundary;
 
 import java.io.IOException;
@@ -14,14 +16,17 @@ public class HomePageController {
 
     private final LoginOutputBoundary loginOutputBoundary;
 
+    private final OpenFeedListInputBoundary openFeedListInputBoundary;
+
     /**
      * Create the home page controller with given use cases
      *
      * @param openChatListInputBoundary the open chat list use case input boundary
      */
-    public HomePageController(OpenChatListInputBoundary openChatListInputBoundary, LoginOutputBoundary loginOutputBoundary) {
+    public HomePageController(OpenChatListInputBoundary openChatListInputBoundary, LoginOutputBoundary loginOutputBoundary, OpenFeedListInputBoundary openFeedListInputBoundary) {
         this.openChatListInputBoundary = openChatListInputBoundary;
         this.loginOutputBoundary = loginOutputBoundary;
+        this.openFeedListInputBoundary = openFeedListInputBoundary;
     }
 
     /**
@@ -38,5 +43,9 @@ public class HomePageController {
      */
     public void logOut() {
         this.loginOutputBoundary.open();
+    }
+
+    public void openFeedList(int userID){
+        this.openFeedListInputBoundary.open(userID);
     }
 }

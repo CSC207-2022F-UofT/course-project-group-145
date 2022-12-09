@@ -6,17 +6,13 @@ import controller_presenter_gateway.chat_list_controller_presenter_gateway.ChatL
 import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetRepoGateway;
 import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetRepository;
 import controller_presenter_gateway.codesnippet_controller_presenter_gateway.CodeSnippetResponseModel;
-import controller_presenter_gateway.feed_controller_presenter_gateway.FeedDSRepository;
-import controller_presenter_gateway.feed_controller_presenter_gateway.FeedRepository;
+import controller_presenter_gateway.feed_controller_presenter_gateway.*;
 import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.*;
 import controller_presenter_gateway.hompage_controller_presenter.HomePageController;
 import controller_presenter_gateway.hompage_controller_presenter.HomePageOutputBoundary;
 import controller_presenter_gateway.hompage_controller_presenter.HomePagePresenter;
 import controller_presenter_gateway.user_controller_presenter_gateway.*;
-import entities.ChatFactory;
-import entities.FeedFactory;
-import entities.MessageFactory;
-import entities.UserFactory;
+import entities.*;
 import ui.*;
 import use_cases.chat_list_use_cases.DeleteChat;
 import use_cases.chat_list_use_cases.DeleteChatInputBoundary;
@@ -26,6 +22,10 @@ import use_cases.chat_use_cases.*;
 import use_cases.feed_interaction_use_case.CurrentSnippetUseCase;
 import use_cases.feed_interaction_use_case.LikeSnippetUseCase;
 import use_cases.feed_interaction_use_case.NextSnippetUseCase;
+import use_cases.feed_use_case.CreateFeedUseCase;
+import use_cases.feed_use_case.CreateFeedUseCaseInputBoundary;
+import use_cases.feed_use_case.OpenFeedListInputBoundary;
+import use_cases.feed_use_case.OpenFeedListUseCase;
 import use_cases.homepage_use_cases.OpenChatList;
 import use_cases.homepage_use_cases.OpenChatListInputBoundary;
 import use_cases.homepage_use_cases.OpenHomePage;
@@ -83,13 +83,9 @@ public class Main {
         FeedDSRepository feedGateway = new FeedRepository("feeds.json");
         CodeSnippetRepoGateway codeSnippetRepoGateway = new CodeSnippetRepository("snippets.json");
         codeSnippetRepoGateway.save(new CodeSnippetResponseModel(1, 2, "Code Snippet 1", "Bucket/testPicture.jpeg", new Date()));
-        codeSnippetRepoGateway.save(new CodeSnippetResponseModel(2, 3, "Code Snippet 2", "Bucket/testPicture2.jpeg", new Date()));
-        codeSnippetRepoGateway.save(new CodeSnippetResponseModel(3, 4, "Code Snippet 3", "Bucket/testPicture3.jpeg", new Date()));
-        codeSnippetRepoGateway.save(new CodeSnippetResponseModel(4, 5, "Code Snippet 4", "Bucket/testPicture4.jpeg", new Date()));
-
-        DetailedFeedView detailedFeedView = new DetailedFeedView();
-        DetailedFeedViewModel detailedFeedViewModel = new DetailedFeedViewModel();
-        detailedFeedViewModel.addListener(detailedFeedView);
+        codeSnippetRepoGateway.save(new CodeSnippetResponseModel(2, 1, "Code Snippet 2", "Bucket/testPicture2.jpeg", new Date()));
+        codeSnippetRepoGateway.save(new CodeSnippetResponseModel(3, 0, "Code Snippet 3", "Bucket/testPicture3.jpeg", new Date()));
+        codeSnippetRepoGateway.save(new CodeSnippetResponseModel(4, 2, "Code Snippet 4", "Bucket/testPicture4.jpeg", new Date()));
 
         FeedFactory feedFactory = new FeedFactory();
         ChatFactory chatFactory = new ChatFactory();
@@ -102,46 +98,60 @@ public class Main {
         JPanel screens = new JPanel(cardLayout);
         application.add(screens);
 
-        MessageRepoGateway messageRepoGateway = new MessageRepository("message.json");
-        ChatRepoGateway chatRepoGateway = new ChatRepository("chat.json");
-        UserRepoGateway userRepoGateway = new UserRepository("user.json");
+//        MessageRepoGateway messageRepoGateway = new MessageRepository("message.json");
+//        ChatRepoGateway chatRepoGateway = new ChatRepository("chat.json");
+//        UserRepoGateway userRepoGateway = new UserRepository("user.json");
+
+
+
+
 
         LoginView login = new LoginView();
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(login);
 
+        FeedViewModel feedListViewModel = new FeedViewModel();
+        CreateFeedOutputBoundary createFeedPresenter = new CreateFeedPresenter(feedListViewModel, feedGateway, userRepo);
+
         HomePageView homePage = new HomePageView();
         HomePageOutputBoundary homePagePresenter = new HomePagePresenter(homePage);
         ChatListView chatListView = new ChatListView();
-        ChatDeletionOutputBoundary chatDeletionOutputBoundary = new ChatListPresenter(chatListView, chatRepoGateway, userRepoGateway);
+        ChatDeletionOutputBoundary chatDeletionOutputBoundary = new ChatListPresenter(chatListView, chatRepo, userRepo);
         OpenChatListInputBoundary openChatListInputBoundary = new OpenChatList(chatDeletionOutputBoundary);
-        HomePageController homePageController = new HomePageController(openChatListInputBoundary, loginOutputBoundary);
+        OpenFeedListInputBoundary openFeedListInputBoundary = new OpenFeedListUseCase(createFeedPresenter);
+        HomePageController homePageController = new HomePageController(openChatListInputBoundary, loginOutputBoundary, openFeedListInputBoundary);
+        OpenHomePageInputBoundary openHomePage = new OpenHomePage(homePagePresenter);
         homePage.setController(homePageController);
 
         RegisterView register = new RegisterView();
         RegisterOutputBoundary registerOutputBoundary = new RegisterPresenter(register);
-        LoginInputBoundary loginInputBoundary = new Login(userRepoGateway, homePagePresenter);
+        LoginInputBoundary loginInputBoundary = new Login(userRepo, homePagePresenter);
         LoginController loginController = new LoginController(loginInputBoundary, registerOutputBoundary);
         login.setController(loginController);
         UserFactory userFactory = new UserFactory();
-        AddUserInputBoundary addUserInputBoundary = new AddUser(userFactory, homePagePresenter, userRepoGateway);
+        AddUserInputBoundary addUserInputBoundary = new AddUser(userFactory, homePagePresenter, userRepo);
         UserController userController = new UserController(addUserInputBoundary);
         register.setController(userController);
 
-
         ChatView chat = new ChatView();
-        ChatOutputBoundary chatPresenter = new ChatPresenter(chat, chatRepoGateway, messageRepoGateway);
+        ChatOutputBoundary chatPresenter = new ChatPresenter(chat, chatRepo, messageGateway);
         MessageFactory messageFactory = new MessageFactory();
-        DeleteMessageInputBoundary delete = new DeleteMessage(chatPresenter, messageRepoGateway);
-        SendMessageInputBoundary send = new SendMessage(messageFactory, chatPresenter, messageRepoGateway, chatRepoGateway);
-        EditMessageInputBoundary edit = new EditMessage(chatPresenter, messageRepoGateway);
-        OpenHomePageInputBoundary openHomePage = new OpenHomePage(homePagePresenter);
-        ChatController chatController = new ChatController(delete, edit, send, openHomePage);
-        chat.setController(chatController);
+        DeleteMessageInputBoundary delete = new DeleteMessage(chatPresenter, messageGateway);
+        SendMessageInputBoundary send = new SendMessage(messageFactory, chatPresenter, messageGateway, chatRepo);
+        EditMessageInputBoundary edit = new EditMessage(chatPresenter, messageGateway);
 
-        DeleteChatInputBoundary deleteChat = new DeleteChat(chatDeletionOutputBoundary, chatRepoGateway);
+        ChatController chatController = new ChatController(delete, edit, send, openHomePage);
+
+        DeleteChatInputBoundary deleteChat = new DeleteChat(chatDeletionOutputBoundary, chatRepo);
         OpenChatInputBoundary openChat = new OpenChat(chatPresenter);
         ChatListController chatListController = new ChatListController(deleteChat, openChat, openHomePage);
         chatListView.setListController(chatListController);
+        chat.setController(chatController);
+
+        DetailedFeedView detailedFeedView = new DetailedFeedView();
+        DetailedFeedViewModel detailedFeedViewModel = new DetailedFeedViewModel();
+        detailedFeedView.setViewModel(detailedFeedViewModel);
+        detailedFeedViewModel.addListener(detailedFeedView);
+        detailedFeedView.setHomeController(new FeedInteractionHomeController(openHomePage));
 
         NextSnippetPresenter nextSnippetPresenter = new NextSnippetPresenter(feedGateway, codeSnippetRepoGateway, detailedFeedViewModel);
         CurrentSnippetPresenter currentSnippetPresenter = new CurrentSnippetPresenter(feedGateway, codeSnippetRepoGateway, detailedFeedViewModel);
@@ -155,15 +165,27 @@ public class Main {
         LikeSnippetController likeSnippetController = new LikeSnippetController(likeSnippetUseCase);
         detailedFeedView.setLikeSnippetController(likeSnippetController);
 
+        CreateFeedUseCaseInputBoundary createFeedUseCase = new CreateFeedUseCase(createFeedPresenter, feedGateway, codeSnippetRepoGateway, userRepo, new TagFactory(), feedFactory, new CodeSnippetFactory());
+        FeedControllerInputBoundary createFeedController = new CreateFeedController(createFeedUseCase, openHomePage, currentSnippetUseCase);
+        FeedView feedListView = new FeedView(createFeedController, feedListViewModel, 600, 600);
+        feedListViewModel.addListener(feedListView);
 
 
-        screens.add(chat, "Chat");
+
+
+
+
+
+
         screens.add(homePage, "Home");
         screens.add(chatListView, "Chat List");
         screens.add(register, "Register");
         screens.add(login, "Login");
         screens.add(detailedFeedView, "Detailed Feed View");
+        screens.add(feedListView, "Feed List View");
+        screens.add(chat, "Chat");
         cardLayout.show(screens, "Login");
+
         application.pack();
         application.setVisible(true);
 

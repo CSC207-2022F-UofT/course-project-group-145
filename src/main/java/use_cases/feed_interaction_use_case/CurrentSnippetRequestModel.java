@@ -5,13 +5,23 @@ package use_cases.feed_interaction_use_case;
  */
 public class CurrentSnippetRequestModel {
     private String feedId;
+    private int userID;
 
     /**
      * Creates a new CurrentSnippetRequestModel
      * @param feedId id of feed currently being examined
      */
-    public CurrentSnippetRequestModel(String feedId){
+    public CurrentSnippetRequestModel(int userID, String feedId){
         this.feedId = feedId;
+        this.userID = userID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     /**

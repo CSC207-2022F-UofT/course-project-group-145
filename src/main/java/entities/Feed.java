@@ -81,7 +81,7 @@ public class Feed implements Iterable{
     private class FeedIterator implements Iterator{
         private int curr;
         private FeedIterator(){
-            this.curr = -1;
+            this.curr = 0;
         }
 
         /**

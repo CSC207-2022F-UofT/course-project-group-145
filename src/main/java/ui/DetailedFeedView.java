@@ -1,5 +1,6 @@
 package ui;
 import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.CurrentSnippetController;
+import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.FeedInteractionHomeController;
 import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.LikeSnippetController;
 import controller_presenter_gateway.feed_interaction_controller_presenter_gateway.NextSnippetController;
 
@@ -17,11 +18,14 @@ import java.io.IOException;
 public class DetailedFeedView extends JPanel implements ActionListener, ViewInterface {
     LikeSnippetController likeSnippetController;
     NextSnippetController nextSnippetController;
+    FeedInteractionHomeController homeController;
     public CurrentSnippetController currentSnippetController;
+    private int userID;
     DetailedFeedViewModel viewModel;
     String feedId;
     JButton likeButton;
     JButton nextButton;
+    private JButton homeButton;
     JLabel picture;
     JLabel errorLabel;
 
@@ -36,7 +40,10 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.add(nextButton);
         this.picture = new JLabel();
         this.add(picture);
+        this.homeButton = new JButton("Home");
+        this.add(homeButton);
         picture.setAlignmentX(Component.CENTER_ALIGNMENT);
+        homeButton.addActionListener(this);
         likeButton.addActionListener(this);
         nextButton.addActionListener(this);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -53,6 +60,9 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
     public void setNextSnippetController(NextSnippetController nextSnippetController){
         this.nextSnippetController = nextSnippetController;
     }
+    public void setHomeController(FeedInteractionHomeController homeController){
+        this.homeController = homeController;
+    }
 
     public void setCurrentSnippetController(CurrentSnippetController currentSnippetController){
         this.currentSnippetController = currentSnippetController;
@@ -68,23 +78,26 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton) e.getSource();
-        String label = button.getText();
-        if(label.equals("Like")){
+        if (e.getSource() == this.likeButton){
             try {
                 likeSnippetController.like(this.feedId);
                 this.setVisible(false);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-        }else{
+        }
+        else if (e.getSource() == this.nextButton){
             try {
                 nextSnippetController.next(this.feedId);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-
         }
+        else if (e.getSource() == this.homeButton){
+            this.homeController.goHome(this.userID);
+            this.setVisible(false);
+        }
+
     }
 
     /**
@@ -95,7 +108,9 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.feedId = String.valueOf(viewModel.getFeedId());
         String location = viewModel.getSnippetLocation();
         this.picture.setIcon(new ImageIcon(location));
+        this.repaint();
         this.revalidate();
+        this.setVisible(true);
     }
 
     /**
@@ -109,6 +124,9 @@ public class DetailedFeedView extends JPanel implements ActionListener, ViewInte
         this.repaint();
         errorLabel.setFont(new Font("Serif", Font.PLAIN, 20));
         this.add(errorLabel);
+        this.homeButton = new JButton("Home");
+        homeButton.addActionListener(this);
+        this.add(homeButton);
         this.revalidate();
     }
 

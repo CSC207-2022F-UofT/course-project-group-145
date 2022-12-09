@@ -26,8 +26,8 @@ public class CurrentSnippetController {
      * @param id id of the feed for which we wish to obtain the current snippet.
      * @throws IOException this is thrown in case there does not exist a feed with such id.
      */
-    public void getCurrent(String id) throws IOException {
-        CurrentSnippetRequestModel requestModel = new CurrentSnippetRequestModel(id);
+    public void getCurrent(int userId, String feedId) throws IOException {
+        CurrentSnippetRequestModel requestModel = new CurrentSnippetRequestModel(userId, feedId);
         inputBoundary.current(requestModel);
     }
 }

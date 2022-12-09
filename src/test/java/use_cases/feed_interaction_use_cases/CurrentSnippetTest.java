@@ -62,7 +62,7 @@ public class CurrentSnippetTest {
         CurrentSnippetInputBoundary currentSnippetInputBoundary = new CurrentSnippetUseCase(feedDSRepository, new fakePresenter());
 
         // Check that the feed does not advance, it just sends the location of the current snippet.
-        currentSnippetInputBoundary.current(new CurrentSnippetRequestModel("1"));
+        currentSnippetInputBoundary.current(new CurrentSnippetRequestModel(0, "1"));
         int current = feedDSRepository.load("1").getCurr();
         assertEquals(-1, current);
     }

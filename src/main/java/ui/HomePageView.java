@@ -26,18 +26,27 @@ public class HomePageView extends JPanel implements HomePageViewInterface, Actio
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         JButton chatList = new JButton("Chat List");
         JButton logOut = new JButton("Log Out");
+        JButton feedList = new JButton("Feed List");
+
         JPanel chatListButton = new JPanel();
         chatListButton.add(chatList);
         JPanel logOutButton = new JPanel();
         logOutButton.add(logOut);
+        JPanel feedListButton = new JPanel();
+        feedListButton.add(feedList);
+
         chatList.addActionListener(this);
         chatList.setActionCommand("List");
         logOut.addActionListener(this);
         logOut.setActionCommand("Log Out");
+        feedList.addActionListener(this);
+        feedList.setActionCommand("FeedList");
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
         this.add(chatListButton);
+        this.add(feedListButton);
         this.add(logOutButton);
+
 
     }
 
@@ -51,14 +60,22 @@ public class HomePageView extends JPanel implements HomePageViewInterface, Actio
         if(evt.getActionCommand().equals("List")) {
             try {
                 this.controller.openList(this.userId);
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             this.setVisible(false);
-        } else if (evt.getActionCommand().equals("Log Out")) {
+        }
+        else if (evt.getActionCommand().equals("Log Out")) {
             this.controller.logOut();
             this.setVisible(false);
         }
+        else if (evt.getActionCommand().equals("FeedList")) {
+            System.out.println(this.userId);
+            this.controller.openFeedList(this.userId);
+            this.setVisible(false);
+        }
+
     }
 
     /**

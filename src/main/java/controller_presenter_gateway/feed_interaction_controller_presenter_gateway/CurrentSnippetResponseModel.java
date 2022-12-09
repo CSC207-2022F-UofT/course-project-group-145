@@ -5,13 +5,15 @@ package controller_presenter_gateway.feed_interaction_controller_presenter_gatew
  */
 public class CurrentSnippetResponseModel {
     private final String feedId;
+    private int userID;
 
     /**
      * Create a new CurrentSnippetResponseModel
      * @param feedId id of the current feeds
      */
-    public CurrentSnippetResponseModel(String feedId){
+    public CurrentSnippetResponseModel(int userID, String feedId){
         this.feedId = feedId;
+        this.userID = userID;
     }
 
     /**
@@ -20,5 +22,8 @@ public class CurrentSnippetResponseModel {
      */
     public String getFeedId(){
         return this.feedId;
+    }
+    public int getUserID(){
+        return this.userID;
     }
 }

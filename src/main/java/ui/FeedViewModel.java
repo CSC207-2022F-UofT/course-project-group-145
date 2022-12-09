@@ -1,5 +1,6 @@
 package ui;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,10 +85,16 @@ public class FeedViewModel {
     }
 
     public List<Integer> getIdList() {
+        if (this.idList == null){
+            return new ArrayList<Integer>();
+        }
         return idList;
     }
 
     public List<List<String>> getTagList() {
+        if (this.tagList == null){
+            return new ArrayList<List<String>>();
+        }
         return tagList;
     }
 }

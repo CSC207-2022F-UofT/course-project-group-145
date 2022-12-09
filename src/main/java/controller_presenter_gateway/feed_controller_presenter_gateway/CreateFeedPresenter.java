@@ -41,7 +41,8 @@ public class CreateFeedPresenter implements CreateFeedOutputBoundary{
     private void updateView(int userID){
         //Get list of feed IDs from repo
         try {
-            List<Integer> feedIDs = userRepo.getFeeds(userID);
+            List<Integer> feedIDs = new ArrayList<>();
+            feedIDs.addAll(userRepo.getFeeds(userID));
             List<List<String>> tagsList = new ArrayList<>();
             for (int id : feedIDs){
                 FeedGatewayResponseModel feedModel = feedRepo.load(String.valueOf(id));

@@ -9,6 +9,7 @@ public class DetailedFeedViewModel {
     private ViewInterface listener;
 
     private String snippetLocation;
+    private int userID;
 
     private int feedId;
 
@@ -66,5 +67,13 @@ public class DetailedFeedViewModel {
     }
     public void setFeedId(int id){
         this.feedId = id;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }
