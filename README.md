@@ -1,4 +1,5 @@
 
+**A combined demo for chat and feed features can be found on the branch https://github.com/CSC207-2022F-UofT/course-project-group-145/tree/Connecting-Features **
 
 # CodeR Social Network App
 In this project we created an app that helps CS students find group members by reviewing and swiping on each other's code snippets. The program allows a user to create a profile, upload code snippets, create and view feeds to look at other people's code snippets, and to chat with other users. 
