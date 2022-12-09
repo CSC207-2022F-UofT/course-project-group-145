@@ -90,7 +90,7 @@ public class Feed implements Iterable{
          */
         @Override
         public boolean hasNext() {
-            return curr + 1 < snippets.size();
+            return curr < snippets.size();
         }
 
         /**
